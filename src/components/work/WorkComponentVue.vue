@@ -111,7 +111,7 @@ export default {
   direction: ltr;
   width: 300px;
   height: auto;
-  background-color: $Navy-blue-three;
+  background-color: $Navy-blue-tow;
   margin: 5px;
   cursor: pointer;
   border-radius: 5px;
@@ -163,9 +163,7 @@ export default {
     .date {
       font-size: $small;
       color: $white;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      margin: 5px;
     }
   }
 }
@@ -227,9 +225,7 @@ export default {
     .date {
       font-size: $small;
       color: $black;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      margin: 5px;
     }
   }
 }
@@ -240,7 +236,7 @@ export default {
   direction: ltr;
   width: 98%;
   height: auto;
-  background-color: $Navy-blue-three;
+  background-color: $Navy-blue-tow;
   margin: 5px 1%;
   cursor: pointer;
   border-radius: 5px;
@@ -271,10 +267,13 @@ export default {
     width: 70%;
     height: auto;
     margin: 0px 10px;
-    position: relative;
+
+    @media (max-width: $mobile) {
+      width: 50%;
+    }
 
     h4 {
-      max-width: 50%;
+      width: auto;
       height: auto;
       margin: 10px 5%;
       color: $white;
@@ -287,9 +286,7 @@ export default {
     .date {
       font-size: $small;
       color: $white;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      margin: 5px;
     }
   }
 }
@@ -349,8 +346,12 @@ export default {
     margin: 0px 10px;
     position: relative;
 
+    @media (max-width: $mobile) {
+      width: 50%;
+    }
+
     h4 {
-      max-width: 50%;
+      width: auto;
       height: auto;
       margin: 10px 5%;
       color: $black;
@@ -363,9 +364,7 @@ export default {
     .date {
       font-size: $small;
       color: $black;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      margin: 5px;
     }
   }
 }
@@ -376,7 +375,7 @@ export default {
   direction: rtl;
   width: 300px;
   height: auto;
-  background-color: $Navy-blue-three;
+  background-color: $Navy-blue-tow;
   margin: 5px;
   cursor: pointer;
   border-radius: 5px;
@@ -428,9 +427,7 @@ export default {
     .date {
       font-size: $small;
       color: $white;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      margin: 5px;
     }
   }
 }
@@ -490,11 +487,9 @@ export default {
     }
 
     .date {
-      font-size: $small;
       color: $black;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      font-size: $small;
+      margin: 5px;
     }
   }
 }
@@ -505,7 +500,7 @@ export default {
   direction: rtl;
   width: 98%;
   height: auto;
-  background-color: $Navy-blue-three;
+  background-color: $Navy-blue-tow;
   margin: 5px 1%;
   cursor: pointer;
   border-radius: 5px;
@@ -536,10 +531,13 @@ export default {
     width: 70%;
     height: auto;
     margin: 0px 10px;
-    position: relative;
+
+    @media (max-width: $mobile) {
+      width: 50%;
+    }
 
     h4 {
-      max-width: 50%;
+      width: auto;
       height: auto;
       margin: 10px 5%;
       color: $white;
@@ -552,9 +550,7 @@ export default {
     .date {
       font-size: $small;
       color: $white;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      margin: 5px;
     }
   }
 }
@@ -614,8 +610,12 @@ export default {
     margin: 0px 10px;
     position: relative;
 
+    @media (max-width: $mobile) {
+      width: 50%;
+    }
+
     h4 {
-      max-width: 50%;
+      width: auto;
       height: auto;
       margin: 10px 5%;
       color: $black;
@@ -628,9 +628,7 @@ export default {
     .date {
       font-size: $small;
       color: $black;
-      position: absolute;
-      right: 5%;
-      bottom: 10px;
+      margin: 5px;
     }
   }
 }

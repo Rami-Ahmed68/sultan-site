@@ -57,7 +57,7 @@ export default createStore({
     // works data
     works: [],
     //work data
-    work_data: {},
+    work_data: "",
     // lessons data
     lessonse_data: [],
     // lesson data
@@ -91,6 +91,11 @@ export default createStore({
       messages: {
         about_message_one: "👋 Hi, welcome to designer Mohammed Sultan's site.",
       },
+      work_page: {
+        title: "Work's page",
+        tags_title: "tags",
+        visit_link: "visit the owner",
+      },
       global_message: "Mohamed Sultan",
       not_found_page_message: "Sorry, page not found",
       home_page: "home page",
@@ -120,6 +125,11 @@ export default createStore({
       messages: {
         about_message_one: "👋 مرحبًا بكم في موقع المصمم محمد سلطان.",
       },
+      work_page: {
+        title: "صفحة العمل",
+        tags_title: "التاغات",
+        visit_link: "زُر المالك",
+      },
       global_message: "محمد سلطان",
       not_found_page_message: "عذرا لم يتم العثور على الصفحة",
       home_page: "الصفحة الرئيسية",
@@ -133,7 +143,7 @@ export default createStore({
       },
       works: {
         get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/all",
-        get_one: "https://sultan-wngg.onrender.com/api/v1/sultan/works/one",
+        get_one: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/one",
         update: "https://sultan-wngg.onrender.com/api/v1/sultan/works/update",
         delete: "https://sultan-wngg.onrender.com/api/v1/sultan/works/delete",
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/works/create",

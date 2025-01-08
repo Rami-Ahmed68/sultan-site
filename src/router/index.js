@@ -13,6 +13,8 @@ import SkillsView from "@/views/SkillsView.vue";
 import LogInView from "@/views/LogInView.vue";
 // not found page
 import NotFoundView from "@/views/NotFoundView.vue";
+// work page
+import WorkView from "@/views/WorkView.vue";
 
 const routes = [
   {
@@ -26,9 +28,14 @@ const routes = [
     component: AboutView,
   },
   {
-    path: "/Works",
+    path: "/works",
     name: "works",
     component: WorksView,
+  },
+  {
+    path: "/work/:id",
+    name: "work",
+    component: WorkView,
   },
   {
     path: "/lessons",

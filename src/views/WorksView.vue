@@ -134,7 +134,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   background-color: $Navy-blue-for;
-  padding: 10% 0px;
+  padding: 15% 0px;
   transition-duration: 0.5s;
 
   .cont {
@@ -143,14 +143,13 @@ export default {
     margin: auto;
     transition-duration: 0.5s;
     opacity: 1;
-    // background-color: red;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 
     @media (max-width: $mobile) {
-      width: 100%;
+      width: 90%;
     }
 
     .header {
@@ -195,7 +194,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   background-color: $white-one;
-  padding: 10% 0px;
+  padding: 15% 0px;
   transition-duration: 0.5s;
 
   .cont {
@@ -210,7 +209,7 @@ export default {
     align-items: center;
 
     @media (max-width: $mobile) {
-      width: 100%;
+      width: 90%;
     }
 
     .header {
@@ -256,7 +255,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   background-color: $Navy-blue-for;
-  padding: 10% 0px;
+  padding: 15% 0px;
   transition-duration: 0.5s;
 
   .cont {
@@ -265,14 +264,13 @@ export default {
     margin: auto;
     transition-duration: 0.5s;
     opacity: 1;
-    // background-color: red;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 
     @media (max-width: $mobile) {
-      width: 100%;
+      width: 90%;
     }
 
     .header {
@@ -317,7 +315,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   background-color: $white-one;
-  padding: 10% 0px;
+  padding: 15% 0px;
   transition-duration: 0.5s;
 
   .cont {
@@ -332,7 +330,7 @@ export default {
     align-items: center;
 
     @media (max-width: $mobile) {
-      width: 100%;
+      width: 90%;
     }
 
     .header {

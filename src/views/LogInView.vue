@@ -77,6 +77,7 @@
 
 <script>
 // import axios libbery
+import router from "@/router";
 import axios from "axios";
 
 export default {
@@ -161,7 +162,7 @@ export default {
 
           // send the loged in user (admin) to home
           setTimeout(() => {
-            window.location = "/";
+            router.push("/");
           }, 1500);
         })
         .catch((error) => {
