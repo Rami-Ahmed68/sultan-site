@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 // home page
 import HomeView from "../views/HomeView.vue";
+//about me
+import AboutView from "@/views/AboutView.vue";
 // works page
 import WorksView from "../views/WorksView.vue";
 // lessons page
@@ -9,12 +11,19 @@ import LessonsView from "@/views/LessonsView.vue";
 import SkillsView from "@/views/SkillsView.vue";
 // log in page
 import LogInView from "@/views/LogInView.vue";
+// not found page
+import NotFoundView from "@/views/NotFoundView.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/about",
+    name: "about me",
+    component: AboutView,
   },
   {
     path: "/Works",
@@ -35,6 +44,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: LogInView,
+  },
+  // send the user to note found page
+  {
+    path: "/:pathMatch(.*)*",
+    name: "notfound",
+    component: NotFoundView,
   },
 ];
 

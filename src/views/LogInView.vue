@@ -9,6 +9,10 @@
         }}
       </h1>
 
+      <!-- log in victor art  -->
+      <img src="../assets/login.png" alt="victor art" />
+      <!-- log in victor art  -->
+
       <label for="email">
         {{
           this.$store.state.language == "English"
@@ -123,50 +127,68 @@ export default {
         password: this.password,
       };
 
-      try {
-        await axios
-          .post(this.$store.state.APIS.auth.log_in, body)
-          .then((response) => {
-            // save the admin data in local storage
-            window.localStorage.setItem(
-              "sultan-site",
-              JSON.stringify({
-                admin: response.data.admin_data,
-                token: response.data.token,
-              })
-            );
+      await axios
+        .post(this.$store.state.APIS.auth.log_in, body)
+        .then((response) => {
+          // save the admin data in local storage
+          window.localStorage.setItem(
+            "sultan-site",
+            JSON.stringify({
+              admin: response.data.admin_data,
+              token: response.data.token,
+            })
+          );
 
-            // to close the loading animation
-            this.$store.state.loading_status = "close";
-          })
-          .catch((error) => {
-            // to close the loading animation
-            this.$store.state.loading_status = "close";
+          // to close the loading animation
+          this.$store.state.loading_status = "close";
 
-            // emptying the inputs
-            this.email = "";
-            this.password = "";
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "🥳Welcome Admin🥳",
+              arabic: "🥳أهلا مدير🥳",
+            },
+            type: "Success",
+            messages: response.data.message,
+            status: response.status,
+          };
 
-            // to set the reqeust's error message to error message var in store
-            this.$store.state.error_object = error.response.data.message;
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
 
-            // to open the error form
-            this.$store.state.error_message_status = "open";
-          });
-      } catch (error) {
-        // to close the loading animation
-        this.$store.state.loading_status = "close";
+          // call to change the message form status
+          this.ChangeMEssageFormStatus();
 
-        // emptying the inputs
-        this.email = "";
-        this.password = "";
+          // send the loged in user (admin) to home
+          setTimeout(() => {
+            window.location = "/";
+          }, 1500);
+        })
+        .catch((error) => {
+          // to close the loading animation
+          this.$store.state.loading_status = "close";
 
-        // to set the reqeust's error message to error message var in store
-        this.$store.state.error_message = error.response.data.message;
+          // emptying the inputs
+          this.email = "";
+          this.password = "";
 
-        // to open the error form
-        this.$store.state.error_message_status = "open";
-      }
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "😓Error😓",
+              arabic: "😓خطأ😓",
+            },
+            type: "Error",
+            messages: error.response.data.message,
+            status: error.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        });
     },
   },
 };
@@ -178,16 +200,17 @@ export default {
 .English-darck-page {
   direction: ltr;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $Navy-blue-for;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition-duration: 0.5s;
 
   .cont-close {
     width: 60%;
-    max-height: 70vh;
-    margin-top: 30%;
+    height: auto;
+    margin: 30% 0% 5% 0%;
     background-color: $Navy-blue-one;
     border-radius: 5px;
     opacity: 0;
@@ -203,6 +226,18 @@ export default {
       justify-content: center;
       align-items: center;
       background-color: $Navy-blue-for;
+    }
+
+    img {
+      width: 300px;
+      height: 300px;
+      margin: 10px 30%;
+
+      @media (max-width: $mobile) {
+        width: 250px;
+        height: 250px;
+        margin: 10px 16%;
+      }
     }
 
     label {
@@ -295,17 +330,17 @@ export default {
 .English-light-page {
   direction: ltr;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $white-for;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition-duration: 0.5s;
 
   .cont-close {
     width: 60%;
-    max-height: 70vh;
-    margin-top: 30%;
-    background-color: $white-one;
+    height: auto;
+    margin: 30% 0% 5% 0%;
     border-radius: 5px;
     opacity: 0;
     transition-duration: 0.5s;
@@ -320,6 +355,18 @@ export default {
       justify-content: center;
       align-items: center;
       background-color: $white-for;
+    }
+
+    img {
+      width: 300px;
+      height: 300px;
+      margin: 10px 30%;
+
+      @media (max-width: $mobile) {
+        width: 250px;
+        height: 250px;
+        margin: 10px 16%;
+      }
     }
 
     label {
