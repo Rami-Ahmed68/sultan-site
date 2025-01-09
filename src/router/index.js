@@ -28,7 +28,7 @@ const routes = [
     component: AboutView,
   },
   {
-    path: "/works",
+    path: "/works/:tag_name?",
     name: "works",
     component: WorksView,
   },

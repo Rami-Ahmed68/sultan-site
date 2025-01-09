@@ -68,21 +68,15 @@
               : this.$store.state.Arabic.work_page.tags_title
           }}
         </div>
-        <spam
-          class="tag"
-          v-for="(tag, index) in (this, $store.state.work_data.tags)"
-          :key="index"
-        >
-          {{ tag }}
-        </spam>
 
-        <spam
+        <router-link
+          :to="`/works/tag_name=${tag}`"
           class="tag"
           v-for="(tag, index) in (this, $store.state.work_data.tags)"
           :key="index"
         >
           {{ tag }}
-        </spam>
+        </router-link>
       </div>
 
       <img

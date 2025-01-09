@@ -4,6 +4,7 @@
   <LoadingComponent />
   <MessageComponent />
   <SidBarComponent />
+  <FilterComponentVue />
   <ScrollTopComponent @click="scrollToTop" />
 </template>
 
@@ -13,6 +14,7 @@ import LoadingComponent from "./components/global/LoadingComponent.vue";
 import MessageComponent from "./components/global/MessageComponent.vue";
 import SidBarComponent from "./components/global/SidBarComponent.vue";
 import ScrollTopComponent from "./components/global/ScrollTopComponent.vue";
+import FilterComponentVue from "./components/global/FilterComponentVue.vue";
 import { computed } from "vue";
 import { useHead } from "@vueuse/head";
 import { useRoute } from "vue-router";
@@ -88,6 +90,7 @@ export default {
     MessageComponent,
     SidBarComponent,
     ScrollTopComponent,
+    FilterComponentVue,
   },
   mounted() {
     // call to handel Scroll method on scroll the page (change)

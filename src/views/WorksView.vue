@@ -4,15 +4,32 @@
   >
     <div class="cont">
       <div class="header">
-        <h1>works</h1>
+        <h1>
+          {{
+            this.$store.state.language == "English"
+              ? this.$store.state.English.works_page.title
+              : this.$store.state.Arabic.works_page.title
+          }}
+        </h1>
         <icon :icon="`${this.view_style}`" @click="ChangeIconStyle" />
+        <icon
+          icon="filter"
+          @click="this.$store.commit('chnage_filter_component_status')"
+        />
       </div>
-      <!-- {{ this.$store.state.works }} -->
+
       <WorkComponentVue
         v-for="(work, index) in this.$store.state.works"
         :work_data="work"
         :key="index"
         :view_style="this.view_style"
+      />
+
+      <!-- not found vcto image -->
+      <img
+        v-if="this.$store.state.works_not_found_message_statu == 'open'"
+        src="../assets/notfound.png"
+        alt=""
       />
     </div>
   </div>
@@ -60,12 +77,20 @@ export default {
 
       await axios
         .get(
-          `${this.$store.state.APIS.works.get_all}?page=${this.page}&limit=${this.limit}`
+          `${this.$store.state.APIS.works.get_all}?page=${this.page}&limit=${this.limit}`,
+          {
+            tag: JSON.stringify([this.$route.params.tag_name]),
+          }
         )
         .then((response) => {
+          // to open the cont slowly
           this.cont_status = "open";
+
           // to close the loading animation
           this.$store.state.loading_status = "close";
+
+          // close the no results image message
+          this.$store.state.works_not_found_message_statu = "close";
 
           //check if the works arry in store is empty or not
           if (this.$store.state.works.length == 0) {
@@ -78,9 +103,6 @@ export default {
               ...response.data.works_data,
             ];
           }
-
-          // for (let i = 0; i < this.$store.state.works.length; i++) {
-          // }
         })
         .catch((error) => {
           // to close the loading animation
@@ -138,7 +160,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 70%;
+    width: 80%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -147,9 +169,12 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    position: relative;
+    padding-top: 10%;
 
     @media (max-width: $mobile) {
       width: 90%;
+      padding-top: 15%;
     }
 
     .header {
@@ -160,12 +185,18 @@ export default {
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      // background-color: blue;
       border: 1px solid;
       border-color: transparent transparent $white transparent;
+      position: absolute;
+      top: 0%;
 
       h1 {
         color: $white;
+        width: 90%;
+
+        @media (max-width: $mobile) {
+          width: 80%;
+        }
       }
 
       svg {
@@ -176,6 +207,11 @@ export default {
         color: $white;
         border: 1px solid $white;
       }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 }
@@ -198,7 +234,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 70%;
+    width: 80%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -207,9 +243,12 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    position: relative;
+    padding-top: 10%;
 
     @media (max-width: $mobile) {
       width: 90%;
+      padding-top: 15%;
     }
 
     .header {
@@ -222,9 +261,16 @@ export default {
       align-items: center;
       border: 1px solid;
       border-color: transparent transparent $black transparent;
+      position: absolute;
+      top: 0%;
 
       h1 {
         color: $black;
+        width: 90%;
+
+        @media (max-width: $mobile) {
+          width: 80%;
+        }
       }
 
       svg {
@@ -235,6 +281,11 @@ export default {
         color: $black;
         border: 1px solid $black;
       }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 }
@@ -259,7 +310,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 70%;
+    width: 80%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -268,9 +319,12 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    position: relative;
+    padding-top: 10%;
 
     @media (max-width: $mobile) {
       width: 90%;
+      padding-top: 15%;
     }
 
     .header {
@@ -281,12 +335,16 @@ export default {
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      // background-color: blue;
       border: 1px solid;
       border-color: transparent transparent $white transparent;
-
+      position: absolute;
+      top: 0%;
       h1 {
+        @media (max-width: $mobile) {
+          width: 80%;
+        }
         color: $white;
+        width: 90%;
       }
 
       svg {
@@ -297,6 +355,11 @@ export default {
         color: $white;
         border: 1px solid $white;
       }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 }
@@ -319,7 +382,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 70%;
+    width: 80%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -328,9 +391,12 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    position: relative;
+    padding-top: 10%;
 
     @media (max-width: $mobile) {
       width: 90%;
+      padding-top: 15%;
     }
 
     .header {
@@ -343,8 +409,15 @@ export default {
       align-items: center;
       border: 1px solid;
       border-color: transparent transparent $black transparent;
+      position: absolute;
+      top: 0%;
 
       h1 {
+        @media (max-width: $mobile) {
+          width: 80%;
+        }
+
+        width: 90%;
         color: $black;
       }
 
@@ -356,6 +429,11 @@ export default {
         color: $black;
         border: 1px solid $black;
       }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 }

@@ -44,12 +44,16 @@ export default createStore({
     scroll_top_status: "close",
     // Cinema lights
     Cinema_lights: "open",
+    // works not found messaeg status
+    works_not_found_message_statu: "close",
     // admin_saved_data
     admin_data: window.localStorage.getItem("sultan-site")
       ? JSON.parse(window.localStorage.getItem("sultan-site"))
       : "",
     // sid bars status
     sid_bar_status: "close",
+    // filter component status
+    filter_status: "close",
     // admin info to show it in the home page
     admin_info: {},
     // sulta links
@@ -96,6 +100,13 @@ export default createStore({
         tags_title: "tags",
         visit_link: "visit the owner",
       },
+      works_page: {
+        title: "Works page",
+      },
+      filter_component: {
+        title: "Filter",
+        button: "Filter the works",
+      },
       global_message: "Mohamed Sultan",
       not_found_page_message: "Sorry, page not found",
       home_page: "home page",
@@ -130,6 +141,13 @@ export default createStore({
         tags_title: "التاغات",
         visit_link: "زُر المالك",
       },
+      works_page: {
+        title: "صفحة الأعمال",
+      },
+      filter_component: {
+        title: "فلتر",
+        button: "فلتر الأعمال",
+      },
       global_message: "محمد سلطان",
       not_found_page_message: "عذرا لم يتم العثور على الصفحة",
       home_page: "الصفحة الرئيسية",
@@ -149,6 +167,78 @@ export default createStore({
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/works/create",
       },
     },
+    tags: [
+      {
+        arabic_title: "أدوبي فوتوشوب",
+        english_title: "Adobe Photoshop",
+        image_path: "logo.png",
+      },
+      {
+        arabic_title: "ادوبي إلستريتر",
+        english_title: "Adobe Illustrator",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "أدوبي أكس دي",
+        english_title: "Adobe xd",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "أدوبي أفتر إفكت",
+        english_title: "Adobe After Effects",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "أدوبي برميير",
+        english_title: "Adobe Premiere",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "ادوبي أوديشن",
+        english_title: "Adobe Audition",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "فيغما",
+        english_title: "Figma",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "دمج",
+        english_title: "Manipulation",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "تصميم برندات",
+        english_title: "Brand Design",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "تصميم لوغو",
+        english_title: "Logo Design",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "تصميم سوشيال ميديا",
+        english_title: "Social Media Design",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "واجهة المستخدم / تجربة المستخدم",
+        english_title: "UI/UX",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "موشن غرافيك",
+        english_title: "Motion Graphic",
+        image_path: "../../assets/logo.png",
+      },
+      {
+        arabic_title: "مونتاج",
+        english_title: "Montage",
+        image_path: "../../assets/logo.png",
+      },
+    ],
   },
   getters: {},
   mutations: {
@@ -191,6 +281,11 @@ export default createStore({
     // change the sid bar status
     chnage_sid_bar_status(state) {
       state.sid_bar_status = state.sid_bar_status == "close" ? "open" : "close";
+    },
+
+    // open or close filter component
+    chnage_filter_component_status(state) {
+      state.filter_status = state.filter_status == "close" ? "open" : "close";
     },
   },
   actions: {},

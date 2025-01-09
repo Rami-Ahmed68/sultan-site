@@ -70,6 +70,10 @@
       </p>
       <!-- description  -->
 
+      <p class="tag" v-for="(tag, index) in this.work_data.tags" :key="index">
+        {{ tag }}
+      </p>
+
       <!-- create at  -->
       <p class="date">
         {{ this.work_data.created_at }}
@@ -148,6 +152,8 @@ export default {
     width: auto;
     height: auto;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 
     h4 {
       width: 90%;
@@ -160,10 +166,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $white;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $Navy-blue-one;
+      margin: 3px;
+    }
+
     .date {
       font-size: $small;
       color: $white;
       margin: 5px;
+      width: 100%;
     }
   }
 }
@@ -210,6 +227,8 @@ export default {
     width: auto;
     height: auto;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 
     h4 {
       width: 90%;
@@ -222,10 +241,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $black;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $white-three;
+      margin: 3px;
+    }
+
     .date {
       font-size: $small;
       color: $black;
       margin: 5px;
+      width: 100%;
     }
   }
 }
@@ -267,15 +297,17 @@ export default {
     width: 70%;
     height: auto;
     margin: 0px 10px;
+    display: flex;
+    flex-wrap: wrap;
 
     @media (max-width: $mobile) {
       width: 50%;
     }
 
     h4 {
-      width: auto;
+      width: 100%;
       height: auto;
-      margin: 10px 5%;
+      margin: 5px 0%;
       color: $white;
     }
 
@@ -283,10 +315,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $white;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $Navy-blue-one;
+      margin: 3px;
+    }
+
     .date {
       font-size: $small;
       color: $white;
       margin: 5px;
+      width: 100%;
     }
   }
 }
@@ -345,15 +388,17 @@ export default {
     height: auto;
     margin: 0px 10px;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 
     @media (max-width: $mobile) {
       width: 50%;
     }
 
     h4 {
-      width: auto;
+      width: 100%;
       height: auto;
-      margin: 10px 5%;
+      margin: 5px 0%;
       color: $black;
     }
 
@@ -361,10 +406,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $black;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $white-three;
+      margin: 3px;
+    }
+
     .date {
       font-size: $small;
       color: $black;
       margin: 5px;
+      width: 100%;
     }
   }
 }
@@ -412,6 +468,8 @@ export default {
     width: auto;
     height: auto;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 
     h4 {
       width: 90%;
@@ -424,10 +482,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $white;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $Navy-blue-one;
+      margin: 3px;
+    }
+
     .date {
       font-size: $small;
       color: $white;
       margin: 5px;
+      width: 100%;
     }
   }
 }
@@ -474,6 +543,8 @@ export default {
     width: auto;
     height: auto;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 
     h4 {
       width: 90%;
@@ -486,10 +557,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $black;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $white-three;
+      margin: 3px;
+    }
+
     .date {
       color: $black;
       font-size: $small;
       margin: 5px;
+      width: 100%;
     }
   }
 }
@@ -531,15 +613,17 @@ export default {
     width: 70%;
     height: auto;
     margin: 0px 10px;
+    display: flex;
+    flex-wrap: wrap;
 
     @media (max-width: $mobile) {
       width: 50%;
     }
 
     h4 {
-      width: auto;
+      width: 100%;
       height: auto;
-      margin: 10px 5%;
+      margin: 5px 0%;
       color: $white;
     }
 
@@ -547,10 +631,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $white;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $Navy-blue-one;
+      margin: 3px;
+    }
+
     .date {
       font-size: $small;
       color: $white;
       margin: 5px;
+      width: 100%;
     }
   }
 }
@@ -609,15 +704,17 @@ export default {
     height: auto;
     margin: 0px 10px;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 
     @media (max-width: $mobile) {
       width: 50%;
     }
 
     h4 {
-      width: auto;
+      width: 100%;
       height: auto;
-      margin: 10px 5%;
+      margin: 5px 0%;
       color: $black;
     }
 
@@ -625,10 +722,21 @@ export default {
       @extend h4;
     }
 
+    .tag {
+      width: auto;
+      font-size: 8px;
+      color: $black;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $white-three;
+      margin: 3px;
+    }
+
     .date {
       font-size: $small;
       color: $black;
       margin: 5px;
+      width: 100%;
     }
   }
 }
