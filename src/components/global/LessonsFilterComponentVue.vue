@@ -161,7 +161,7 @@ export default {
       ) {
         // to start the loading animation
         this.$store.state.loading_status = "open";
-        console.log("sended the request  ....");
+
         await axios
           .get(this.$store.state.APIS.lessons.get_all, {
             params: {
@@ -176,7 +176,7 @@ export default {
 
             // check if the works's data in response is empty or not to open the no result image
             if (response.data.lessons_data.length == 0) {
-              this.$store.state.works_not_found_message_statu = "open";
+              this.$store.state.lessons_not_found_message_status = "open";
             }
 
             // set the works from response to works array in store
@@ -437,7 +437,7 @@ export default {
 
 .lessosn-filter-cont-light-English-close {
   @extend .lessosn-filter-cont-light-English-open;
-  top: -20%;
+  top: -50%;
   opacity: 0;
 }
 // darck and light English Style
@@ -539,7 +539,7 @@ export default {
 
 .lessosn-filter-cont-darck-Arabic-close {
   @extend .lessosn-filter-cont-darck-Arabic-open;
-  top: -20%;
+  top: -50%;
   opacity: 0;
 }
 
@@ -639,7 +639,7 @@ export default {
 
 .lessosn-filter-cont-light-Arabic-close {
   @extend .lessosn-filter-cont-light-Arabic-open;
-  top: -20%;
+  top: -50%;
   opacity: 0;
 }
 // darck and light Arabic Style

@@ -238,6 +238,9 @@ export default {
         padding: 5px;
         color: $white;
         font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         margin: 5px;
         border-radius: 3px;
         background-color: $Navy-blue-tow;
@@ -346,6 +349,9 @@ export default {
         padding: 5px;
         color: $black;
         font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         margin: 5px;
         border-radius: 3px;
         background-color: $white-for;
@@ -456,6 +462,9 @@ export default {
         padding: 5px;
         color: $white;
         font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         margin: 5px;
         border-radius: 3px;
         background-color: $Navy-blue-tow;
@@ -564,6 +573,9 @@ export default {
         padding: 5px;
         color: $black;
         font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         margin: 5px;
         border-radius: 3px;
         background-color: $white-for;

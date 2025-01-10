@@ -87,7 +87,7 @@ export default {
 
             // check if the works's data in response is empty or not to open the no result image
             if (response.data.works_data.length == 0) {
-              this.$store.state.works_not_found_message_statu = "open";
+              this.$store.state.works_not_found_message_status = "open";
             }
 
             // set the works from response to works array in store

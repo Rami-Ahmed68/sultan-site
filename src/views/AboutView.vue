@@ -99,7 +99,6 @@ export default {
       await axios
         .get(`${this.$store.state.APIS.auth.get_admin_info}/user`)
         .then((response) => {
-          console.log(response.data.admin_data);
           // change the page_status
           this.page_status = "open";
 

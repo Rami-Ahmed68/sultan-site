@@ -25,7 +25,6 @@ export default {
   name: "app-page",
   setup() {
     const route = useRoute();
-    console.log(route);
     // const siteData = reactive({
     //   title: "sultan home page",
     //   description: "this is Sultan's home page ...",
@@ -43,6 +42,8 @@ export default {
             return "Sultan site-lessons";
           case "lesson":
             return "Sultan site-lesson";
+          case "cv":
+            return "Sultan site-cv";
           case "login":
             return "Sultan site-login";
           case "dashboard":
@@ -101,7 +102,6 @@ export default {
   },
   methods: {
     scrollToTop() {
-      console.log("sdasdasd");
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
 

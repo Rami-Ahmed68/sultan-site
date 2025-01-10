@@ -4,6 +4,10 @@
   >
     <div class="cont">
       <h2>
+        <span :class="`span-${this.$store.state.lesson_data.level}`">
+          {{ this.$store.state.lesson_data.level }}
+        </span>
+
         {{
           this.$store.state.language == "English"
             ? this.$store.state.English.lesson_page.title
@@ -49,6 +53,16 @@
         }}
       </p>
 
+      <p class="program">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.lesson_page.program_name
+            : this.$store.state.Arabic.lesson_page.program_name
+        }}
+        :
+        {{ this.$store.state.lesson_data.program }}
+      </p>
+
       <a
         v-if="
           this.$store.state.lesson_data && this.$store.state.lesson_data.link
@@ -58,8 +72,8 @@
       >
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.lesson_page.visit_link
-            : this.$store.state.Arabic.lesson_page.visit_link
+            ? this.$store.state.English.lesson_page.see_more
+            : this.$store.state.Arabic.lesson_page.see_more
         }}
         <icon icon="arrow-right" />
       </a>
@@ -191,6 +205,29 @@ export default {
       color: $white;
       border: 1px solid;
       border-color: transparent transparent $white transparent;
+      position: relative;
+
+      .span-advanced {
+        padding: 4px;
+        border-radius: 4px;
+        background-color: $error-red-tow;
+        border: 1px solid $error-red-one;
+        font-size: $small;
+        position: absolute;
+        right: 0%;
+      }
+
+      .span-professional {
+        @extend .span-advanced;
+        background-color: $error-orange-tow;
+        border: 1px solid $error-orange-one;
+      }
+
+      .span-essential {
+        @extend .span-advanced;
+        background-color: $error-green-tow;
+        border: 1px solid $error-green-one;
+      }
     }
 
     video {
@@ -229,6 +266,7 @@ export default {
       justify-content: start;
       align-items: center;
       margin: 10px 0px;
+      transition-duration: 0.5s;
 
       .tags-section-title {
         width: 100%;
@@ -241,10 +279,24 @@ export default {
       .tag {
         padding: 5px;
         color: $white;
-        font-size: $small;
         margin: 5px;
         border-radius: 3px;
+        font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         background-color: $Navy-blue-tow;
+      }
+    }
+
+    .program {
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $Navy-blue-tow;
+      transition-duration: 0.5s;
+      font-size: $small;
+      @media (max-width: $mobile) {
+        font-size: $x-small;
       }
     }
 
@@ -299,6 +351,29 @@ export default {
       color: $black;
       border: 1px solid;
       border-color: transparent transparent $black transparent;
+      position: relative;
+
+      .span-advanced {
+        padding: 4px;
+        border-radius: 4px;
+        background-color: $error-red-tow;
+        border: 1px solid $error-red-one;
+        font-size: $small;
+        position: absolute;
+        right: 0%;
+      }
+
+      .span-professional {
+        @extend .span-advanced;
+        background-color: $error-orange-tow;
+        border: 1px solid $error-orange-one;
+      }
+
+      .span-essential {
+        @extend .span-advanced;
+        background-color: $error-green-tow;
+        border: 1px solid $error-green-one;
+      }
     }
 
     video {
@@ -337,6 +412,7 @@ export default {
       justify-content: start;
       align-items: center;
       margin: 10px 0px;
+      transition-duration: 0.5s;
 
       .tags-section-title {
         width: 100%;
@@ -349,10 +425,25 @@ export default {
       .tag {
         padding: 5px;
         color: $black;
-        font-size: $small;
         margin: 5px;
         border-radius: 3px;
+        font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         background-color: $white-for;
+      }
+    }
+
+    .program {
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $white-tow;
+      color: $black;
+      transition-duration: 0.5s;
+      font-size: $small;
+      @media (max-width: $mobile) {
+        font-size: $x-small;
       }
     }
 
@@ -409,6 +500,29 @@ export default {
       color: $white;
       border: 1px solid;
       border-color: transparent transparent $white transparent;
+      position: relative;
+
+      .span-advanced {
+        padding: 4px;
+        border-radius: 4px;
+        background-color: $error-red-tow;
+        border: 1px solid $error-red-one;
+        font-size: $small;
+        position: absolute;
+        left: 0%;
+      }
+
+      .span-professional {
+        @extend .span-advanced;
+        background-color: $error-orange-tow;
+        border: 1px solid $error-orange-one;
+      }
+
+      .span-essential {
+        @extend .span-advanced;
+        background-color: $error-green-tow;
+        border: 1px solid $error-green-one;
+      }
     }
 
     video {
@@ -436,6 +550,17 @@ export default {
       height: auto;
     }
 
+    .program {
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $Navy-blue-tow;
+      transition-duration: 0.5s;
+      font-size: $small;
+      @media (max-width: $mobile) {
+        font-size: $x-small;
+      }
+    }
+
     .tags-cont {
       width: 100%;
       height: auto;
@@ -447,6 +572,7 @@ export default {
       justify-content: start;
       align-items: center;
       margin: 10px 0px;
+      transition-duration: 0.5s;
 
       .tags-section-title {
         width: 100%;
@@ -459,9 +585,12 @@ export default {
       .tag {
         padding: 5px;
         color: $white;
-        font-size: $small;
         margin: 5px;
         border-radius: 3px;
+        font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         background-color: $Navy-blue-tow;
       }
     }
@@ -517,6 +646,29 @@ export default {
       color: $black;
       border: 1px solid;
       border-color: transparent transparent $black transparent;
+      position: relative;
+
+      .span-advanced {
+        padding: 4px;
+        border-radius: 4px;
+        background-color: $error-red-tow;
+        border: 1px solid $error-red-one;
+        font-size: $small;
+        position: absolute;
+        left: 0%;
+      }
+
+      .span-professional {
+        @extend .span-advanced;
+        background-color: $error-orange-tow;
+        border: 1px solid $error-orange-one;
+      }
+
+      .span-essential {
+        @extend .span-advanced;
+        background-color: $error-green-tow;
+        border: 1px solid $error-green-one;
+      }
     }
 
     video {
@@ -544,6 +696,17 @@ export default {
       height: auto;
     }
 
+    .program {
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $white-tow;
+      transition-duration: 0.5s;
+      font-size: $small;
+      @media (max-width: $mobile) {
+        font-size: $x-small;
+      }
+    }
+
     .tags-cont {
       width: 100%;
       height: auto;
@@ -555,6 +718,7 @@ export default {
       justify-content: start;
       align-items: center;
       margin: 10px 0px;
+      transition-duration: 0.5s;
 
       .tags-section-title {
         width: 100%;
@@ -567,9 +731,12 @@ export default {
       .tag {
         padding: 5px;
         color: $black;
-        font-size: $small;
         margin: 5px;
         border-radius: 3px;
+        font-size: $small;
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
         background-color: $white-for;
       }
     }

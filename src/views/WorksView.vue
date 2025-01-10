@@ -27,7 +27,7 @@
 
       <!-- not found vcto image -->
       <img
-        v-if="this.$store.state.works_not_found_message_statu == 'open'"
+        v-if="this.$store.state.works_not_found_message_status == 'open'"
         src="../assets/notfound.png"
         alt=""
       />
@@ -139,6 +139,9 @@ export default {
         this.page += 1;
         // call the get_works method
         await this.get_works();
+
+        // to hidden the not found victor at message
+        this.$store.state.works_not_found_message_status = "close";
       }
     },
   },

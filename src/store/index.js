@@ -14,8 +14,9 @@ export default createStore({
       { english: "About", arabic: "عني", path: "/about" },
       { english: "Works", arabic: "الأعمال", path: "/works" },
       { english: "Lessons", arabic: "الدروس", path: "/lessons" },
-      { english: "Skills", arabic: "المهارات", path: "/skills" }, // (true) to use it when the page is loading to show or hidd the skills link
-      { english: "Install App", arabic: "تنزيل التطبيق", path: "/install" }, // (true) to use it when the page is loading to show or hidd the skills link
+      { english: "Skills", arabic: "المهارات", path: "/skills" },
+      { english: "Cv", arabic: "السيرة الذاتية", path: "/cv" },
+      { english: "Install App", arabic: "تنزيل التطبيق", path: "/install" },
       {
         english: "Login",
         arabic: "تسجيل الدخول",
@@ -44,12 +45,16 @@ export default createStore({
     scroll_top_status: "close",
     // Cinema lights
     Cinema_lights: "open",
-    // works not found messaeg status
-    works_not_found_message_statu: "close",
+    // works not found message status
+    works_not_found_message_status: "close",
+    // lessons not found message status
+    lessons_not_found_message_status: "close",
     // admin_saved_data
     admin_data: window.localStorage.getItem("sultan-site")
       ? JSON.parse(window.localStorage.getItem("sultan-site"))
       : "",
+    // sultan's cv
+    cv: "",
     // sid bars status
     sid_bar_status: "close",
     // works filter component status
@@ -111,19 +116,30 @@ export default createStore({
       lesson_page: {
         title: "Lesson's page",
         tags_title: "tags",
-        visit_link: "Learn moor",
+        see_more: "See moor",
+        program_name: "Program",
       },
       works_filter_component: {
-        title: "Filter the works by tags",
+        title: "Filter the works",
         button: "Filter the works",
       },
       lessosn_filter_component: {
-        title: "Filter the lessons by tags & level & program",
+        title: "Filter the lessons",
         tags_section: "select the tags",
         program_section: "select the program",
         level_section: "select the level",
         button: "Filter the lessosn",
       },
+      cv_page: {
+        title: "Cv page",
+      },
+      install_page: {
+        title: "Install app page",
+        button: "install app",
+        message:
+          "Hi 👋 designer, you can download designer Mohamed Sultan's website as a mobile or desktop application to quickly check his latest works.",
+      },
+      loading: "Wait please",
       global_message: "Mohamed Sultan",
       not_found_page_message: "Sorry, page not found",
       home_page: "home page",
@@ -167,19 +183,30 @@ export default createStore({
       lesson_page: {
         title: "صفحة الدرس",
         tags_title: "التاغات",
-        visit_link: "تعم المزيد",
+        see_more: "شاهد المزيد",
+        program_name: "البرنامج",
       },
       works_filter_component: {
-        title: "فلتر الأعمال باستخدام التاغات",
-        button: "فلتر الأعمال",
+        title: "تصفية الأعمال",
+        button: "تصفية الأعمال",
       },
       lessosn_filter_component: {
-        title: "فلتر الدروس باستخدام التاغات و المستوى والبرنامج",
+        title: "تصفية الدروس",
         tags_section: "اختر التاغات",
         program_section: "اختر البرنامج",
         level_section: "اختر المستوى",
-        button: "فلتر الأعمال",
+        button: "تصفية الأعمال",
       },
+      cv_page: {
+        title: "صفحة السيرة الذاتية",
+      },
+      install_page: {
+        title: "صفحة تنزيل التطبيق",
+        button: "تنيزل التطبيق",
+        message:
+          "مرحبا ايها المصمم يمكنك تنزيل موقع المصمم محمد سلطان كتطبيق موبايل او ديسكتوب للتفقد آخر أعماله بسرعة",
+      },
+      loading: "انتظر رجاء",
       global_message: "محمد سلطان",
       not_found_page_message: "عذرا لم يتم العثور على الصفحة",
       home_page: "الصفحة الرئيسية",
@@ -189,7 +216,8 @@ export default createStore({
         log_in: "https://sultan-wngg.onrender.com/api/v1/sultan/login",
         get_admin_info: "https://sultan-wngg.onrender.com/api/v1/sultan/get",
         get_admin_links:
-          "https://sultan-wngg.onrender.com/api/v1/sultan/get/links",
+          "https://sultan-wngg.onrender.com/api/v1/sultan/links/get",
+        get_admin_cv: "https://sultan-wngg.onrender.com/api/v1/sultan/cv/get",
       },
       works: {
         get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/all",

@@ -17,7 +17,10 @@ import NotFoundView from "@/views/NotFoundView.vue";
 import WorkView from "@/views/WorkView.vue";
 // Lesson view
 import LessonView from "@/views/LessonView.vue";
-
+// Cv view
+import CvView from "@/views/CvView.vue";
+// install app page
+import InstallAppView from "@/views/InstallAppView.vue";
 const routes = [
   {
     path: "/",
@@ -53,6 +56,16 @@ const routes = [
     path: "/skills",
     name: "skills",
     component: SkillsView,
+  },
+  {
+    path: "/cv",
+    name: "cv",
+    component: CvView,
+  },
+  {
+    path: "/install",
+    name: "install",
+    component: InstallAppView,
   },
   {
     path: "/login",

@@ -6,7 +6,6 @@
       <div class="center"></div>
     </div>
     <p>
-      asas
       {{
         this.$store.state.language == "English"
           ? this.$store.state.English.loading
@@ -66,7 +65,7 @@ export default {
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background-color: $white-for;
+      background-color: $Navy-blue-tow;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -206,7 +205,7 @@ export default {
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background-color: $white-for;
+      background-color: $Navy-blue-tow;
       display: flex;
       justify-content: center;
       align-items: center;
