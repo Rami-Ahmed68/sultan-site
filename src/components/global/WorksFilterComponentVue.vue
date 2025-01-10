@@ -1,19 +1,19 @@
 <template>
   <div
-    :class="`filter-cont-${this.$store.state.mood}-${this.$store.state.language}-${this.$store.state.filter_status}`"
+    :class="`works-filter-cont-${this.$store.state.mood}-${this.$store.state.language}-${this.$store.state.works_filter_status}`"
   >
     <div class="header">
       <h2>
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.filter_component.title
-            : this.$store.state.Arabic.filter_component.title
+            ? this.$store.state.English.works_filter_component.title
+            : this.$store.state.Arabic.works_filter_component.title
         }}
       </h2>
 
       <icon
         icon="xmark"
-        @click="this.$store.commit('chnage_filter_component_status')"
+        @click="this.$store.commit('change_works__filter_component_status')"
       />
     </div>
 
@@ -39,8 +39,8 @@
     <button @click="get_filterd_works">
       {{
         this.$store.state.language == "English"
-          ? this.$store.state.English.filter_component.button
-          : this.$store.state.Arabic.filter_component.button
+          ? this.$store.state.English.works_filter_component.button
+          : this.$store.state.Arabic.works_filter_component.button
       }}
     </button>
   </div>
@@ -70,54 +70,77 @@ export default {
     },
 
     async get_filterd_works() {
-      // to start the loading animation
-      this.$store.state.loading_status = "open";
+      // check if the selected tags array in not empty
+      if (this.selected_tags.length > 0) {
+        // to start the loading animation
+        this.$store.state.loading_status = "open";
 
-      await axios
-        .get(this.$store.state.APIS.works.get_all, {
-          params: {
-            tags: JSON.stringify(this.selected_tags),
-          },
-        })
-        .then((response) => {
-          // to stop the loading animation
-          this.$store.state.loading_status = "close";
-
-          // check if the works's data in response is empty or not to open the no result image
-          if (response.data.works_data.length == 0) {
-            this.$store.state.works_not_found_message_statu = "open";
-          }
-
-          // set the works from response to works array in store
-          this.$store.state.works = response.data.works_data;
-
-          // close the filter form
-          this.$store.commit("chnage_filter_component_status");
-        })
-        .catch((error) => {
-          // to stop the loading animation
-          this.$store.state.loading_status = "close";
-
-          // close the filter form
-          this.$store.commit("chnage_filter_component_status");
-
-          // set the error to the error_object in store
-          this.$store.state.error_object = {
-            title: {
-              english: "😓Error😓",
-              arabic: "😓خطأ😓",
+        await axios
+          .get(this.$store.state.APIS.works.get_all, {
+            params: {
+              tags: JSON.stringify(this.selected_tags),
             },
-            type: "Error",
-            messages: error.response.data.message,
-            status: error.status,
-          };
+          })
+          .then((response) => {
+            // to stop the loading animation
+            this.$store.state.loading_status = "close";
 
-          // to open the message form
-          this.$store.commit("OpenOrCloseMessageForm");
+            // check if the works's data in response is empty or not to open the no result image
+            if (response.data.works_data.length == 0) {
+              this.$store.state.works_not_found_message_statu = "open";
+            }
 
-          // call to change the message form status
-          this.$store.commit("ChangeMEssageFormStatus");
-        });
+            // set the works from response to works array in store
+            this.$store.state.works = response.data.works_data;
+
+            // close the filter form
+            this.$store.commit("change_works__filter_component_status");
+          })
+          .catch((error) => {
+            // to stop the loading animation
+            this.$store.state.loading_status = "close";
+
+            // close the filter form
+            this.$store.commit("change_works__filter_component_status");
+
+            // set the error to the error_object in store
+            this.$store.state.error_object = {
+              title: {
+                english: "😓Error😓",
+                arabic: "😓خطأ😓",
+              },
+              type: "Error",
+              messages: error.response.data.message,
+              status: error.status,
+            };
+
+            // to open the message form
+            this.$store.commit("OpenOrCloseMessageForm");
+
+            // call to change the message form status
+            this.$store.commit("ChangeMEssageFormStatus");
+          });
+      } else {
+        // set the error to the error_object in store
+        this.$store.state.error_object = {
+          title: {
+            english: "😓Error😓",
+            arabic: "😓خطأ😓",
+          },
+          type: "Error",
+          messages: {
+            english: "Sorry, you should select any tag to filter ...",
+            arabic: "... عذرا يجب ان تختار اي تاغ للفلترة",
+          },
+          status: 403,
+        };
+
+        // to open the message form
+        this.$store.commit("OpenOrCloseMessageForm");
+
+        // call to change the message form status
+        this.$store.commit("ChangeMEssageFormStatus");
+      }
     },
   },
 };
@@ -127,7 +150,7 @@ export default {
 @import "../../sass/varibels";
 
 // darck and light English Style
-.filter-cont-darck-English-open {
+.works-filter-cont-darck-English-open {
   direction: ltr;
   width: 70%;
   height: auto;
@@ -170,14 +193,19 @@ export default {
     justify-content: start;
     align-items: center;
     margin-top: 10px;
+
     .un_selected {
       padding: 4px;
       margin: 3px;
       cursor: pointer;
       color: $white;
       border-radius: 4px;
-      font-size: $x-small;
+      font-size: $small;
       background-color: $Navy-blue-tow;
+
+      @media (max-width: $mobile) {
+        font-size: $x-small;
+      }
     }
 
     .selected {
@@ -199,13 +227,13 @@ export default {
   }
 }
 
-.filter-cont-darck-English-close {
-  @extend .filter-cont-darck-English-open;
+.works-filter-cont-darck-English-close {
+  @extend .works-filter-cont-darck-English-open;
   top: -20%;
   opacity: 0;
 }
 
-.filter-cont-light-English-open {
+.works-filter-cont-light-English-open {
   direction: ltr;
   width: 70%;
   height: auto;
@@ -255,8 +283,12 @@ export default {
       cursor: pointer;
       color: $black;
       border-radius: 4px;
-      font-size: $x-small;
+      font-size: $small;
       background-color: $white-one;
+
+      @media (max-width: $mobile) {
+        font-size: $x-small;
+      }
     }
 
     .selected {
@@ -278,15 +310,15 @@ export default {
   }
 }
 
-.filter-cont-light-English-close {
-  @extend .filter-cont-light-English-open;
+.works-filter-cont-light-English-close {
+  @extend .works-filter-cont-light-English-open;
   top: -20%;
   opacity: 0;
 }
 // darck and light English Style
 
 // darck and light Arabic Style
-.filter-cont-darck-Arabic-open {
+.works-filter-cont-darck-Arabic-open {
   direction: rtl;
   width: 70%;
   height: auto;
@@ -329,14 +361,19 @@ export default {
     justify-content: start;
     align-items: center;
     margin-top: 10px;
+
     .un_selected {
       padding: 4px;
       margin: 3px;
       cursor: pointer;
       color: $white;
       border-radius: 4px;
-      font-size: $x-small;
+      font-size: $small;
       background-color: $Navy-blue-tow;
+
+      @media (max-width: $mobile) {
+        font-size: $x-small;
+      }
     }
 
     .selected {
@@ -358,13 +395,13 @@ export default {
   }
 }
 
-.filter-cont-darck-Arabic-close {
-  @extend .filter-cont-darck-Arabic-open;
+.works-filter-cont-darck-Arabic-close {
+  @extend .works-filter-cont-darck-Arabic-open;
   top: -20%;
   opacity: 0;
 }
 
-.filter-cont-light-Arabic-open {
+.works-filter-cont-light-Arabic-open {
   direction: rtl;
   width: 70%;
   height: auto;
@@ -414,8 +451,12 @@ export default {
       cursor: pointer;
       color: $black;
       border-radius: 4px;
-      font-size: $x-small;
+      font-size: $small;
       background-color: $white-one;
+
+      @media (max-width: $mobile) {
+        font-size: $x-small;
+      }
     }
 
     .selected {
@@ -437,8 +478,8 @@ export default {
   }
 }
 
-.filter-cont-light-Arabic-close {
-  @extend .filter-cont-light-Arabic-open;
+.works-filter-cont-light-Arabic-close {
+  @extend .works-filter-cont-light-Arabic-open;
   top: -20%;
   opacity: 0;
 }

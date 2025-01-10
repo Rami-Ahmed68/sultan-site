@@ -43,6 +43,7 @@ export default {
   width: 50%;
   height: auto;
   position: fixed;
+  z-index: 10;
   right: 20px;
   top: 70px;
   border-radius: 5px;
@@ -101,6 +102,7 @@ export default {
   width: 50%;
   height: auto;
   position: fixed;
+  z-index: 10;
   right: 20px;
   top: 70px;
   border-radius: 5px;
@@ -161,6 +163,7 @@ export default {
   width: 50%;
   height: auto;
   position: fixed;
+  z-index: 10;
   left: 20px;
   top: 70px;
   border-radius: 5px;
@@ -219,6 +222,7 @@ export default {
   width: 50%;
   height: auto;
   position: fixed;
+  z-index: 10;
   left: 20px;
   top: 70px;
   border-radius: 5px;

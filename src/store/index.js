@@ -52,8 +52,10 @@ export default createStore({
       : "",
     // sid bars status
     sid_bar_status: "close",
+    // works filter component status
+    works_filter_status: "close",
     // filter component status
-    filter_status: "close",
+    lessons_filter_status: "close",
     // admin info to show it in the home page
     admin_info: {},
     // sulta links
@@ -63,7 +65,7 @@ export default createStore({
     //work data
     work_data: "",
     // lessons data
-    lessonse_data: [],
+    lessons_data: [],
     // lesson data
     lesson_data: {},
     // skills data
@@ -103,9 +105,24 @@ export default createStore({
       works_page: {
         title: "Works page",
       },
-      filter_component: {
-        title: "Filter",
+      lessons_page: {
+        title: "Lessons page",
+      },
+      lesson_page: {
+        title: "Lesson's page",
+        tags_title: "tags",
+        visit_link: "Learn moor",
+      },
+      works_filter_component: {
+        title: "Filter the works by tags",
         button: "Filter the works",
+      },
+      lessosn_filter_component: {
+        title: "Filter the lessons by tags & level & program",
+        tags_section: "select the tags",
+        program_section: "select the program",
+        level_section: "select the level",
+        button: "Filter the lessosn",
       },
       global_message: "Mohamed Sultan",
       not_found_page_message: "Sorry, page not found",
@@ -144,8 +161,23 @@ export default createStore({
       works_page: {
         title: "صفحة الأعمال",
       },
-      filter_component: {
-        title: "فلتر",
+      lessons_page: {
+        title: "صفحة الدروس",
+      },
+      lesson_page: {
+        title: "صفحة الدرس",
+        tags_title: "التاغات",
+        visit_link: "تعم المزيد",
+      },
+      works_filter_component: {
+        title: "فلتر الأعمال باستخدام التاغات",
+        button: "فلتر الأعمال",
+      },
+      lessosn_filter_component: {
+        title: "فلتر الدروس باستخدام التاغات و المستوى والبرنامج",
+        tags_section: "اختر التاغات",
+        program_section: "اختر البرنامج",
+        level_section: "اختر المستوى",
         button: "فلتر الأعمال",
       },
       global_message: "محمد سلطان",
@@ -165,6 +197,15 @@ export default createStore({
         update: "https://sultan-wngg.onrender.com/api/v1/sultan/works/update",
         delete: "https://sultan-wngg.onrender.com/api/v1/sultan/works/delete",
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/works/create",
+      },
+      lessons: {
+        get_all:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/get/all",
+        get_one:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/get/one",
+        update: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/update",
+        delete: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/delete",
+        create: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/create",
       },
     },
     tags: [
@@ -239,6 +280,69 @@ export default createStore({
         image_path: "../../assets/logo.png",
       },
     ],
+    programs: [
+      {
+        arabic_title: "أدوبي فوتوشوب",
+        english_title: "Adobe Photoshop",
+      },
+      {
+        arabic_title: "ادوبي إلستريتر",
+        english_title: "Adobe Illustrator",
+      },
+      {
+        arabic_title: "أدوبي أكس دي",
+        english_title: "Adobe xd",
+      },
+      {
+        arabic_title: "أدوبي أفتر إفكت",
+        english_title: "Adobe After Effects",
+      },
+      {
+        arabic_title: "أدوبي برميير",
+        english_title: "Adobe Premiere",
+      },
+      {
+        arabic_title: "ادوبي أوديشن",
+        english_title: "Adobe Audition",
+      },
+      {
+        arabic_title: "فيغما",
+        english_title: "Figma",
+      },
+      {
+        arabic_title: "دمج",
+        english_title: "Manipulation",
+      },
+      {
+        arabic_title: "تصميم برندات",
+        english_title: "Brand Design",
+      },
+      {
+        arabic_title: "تصميم لوغو",
+        english_title: "Logo Design",
+      },
+      {
+        arabic_title: "تصميم سوشيال ميديا",
+        english_title: "Social Media Design",
+      },
+      {
+        arabic_title: "واجهة المستخدم / تجربة المستخدم",
+        english_title: "UI/UX",
+      },
+      {
+        arabic_title: "موشن غرافيك",
+        english_title: "Motion Graphic",
+      },
+      {
+        arabic_title: "مونتاج",
+        english_title: "Montage",
+      },
+    ],
+    levels: [
+      { english_title: "essential", arabic_title: "سهل" },
+      { english_title: "professional", arabic_title: "احترافي" },
+      { english_title: "advanced", arabic_title: "متقدم" },
+    ],
   },
   getters: {},
   mutations: {
@@ -284,8 +388,15 @@ export default createStore({
     },
 
     // open or close filter component
-    chnage_filter_component_status(state) {
-      state.filter_status = state.filter_status == "close" ? "open" : "close";
+    change_works__filter_component_status(state) {
+      state.works_filter_status =
+        state.works_filter_status == "close" ? "open" : "close";
+    },
+
+    // open or close filter component
+    change_lessons__filter_component_status(state) {
+      state.lessons_filter_status =
+        state.lessons_filter_status == "close" ? "open" : "close";
     },
   },
   actions: {},

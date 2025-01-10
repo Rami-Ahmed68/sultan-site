@@ -14,7 +14,7 @@
         <icon :icon="`${this.view_style}`" @click="ChangeIconStyle" />
         <icon
           icon="filter"
-          @click="this.$store.commit('chnage_filter_component_status')"
+          @click="this.$store.commit('change_works__filter_component_status')"
         />
       </div>
 
@@ -62,9 +62,6 @@ export default {
 
     // call to get works method
     this.get_works();
-    setTimeout(() => {
-      // this.cont_status = "open";
-    }, 500);
   },
   methods: {
     // get works method
@@ -160,7 +157,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 80%;
+    width: 70%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -174,7 +171,7 @@ export default {
 
     @media (max-width: $mobile) {
       width: 90%;
-      padding-top: 15%;
+      padding-top: 20%;
     }
 
     .header {
@@ -195,7 +192,7 @@ export default {
         width: 90%;
 
         @media (max-width: $mobile) {
-          width: 80%;
+          width: 70%;
         }
       }
 
@@ -234,7 +231,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 80%;
+    width: 70%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -248,7 +245,7 @@ export default {
 
     @media (max-width: $mobile) {
       width: 90%;
-      padding-top: 15%;
+      padding-top: 20%;
     }
 
     .header {
@@ -269,7 +266,7 @@ export default {
         width: 90%;
 
         @media (max-width: $mobile) {
-          width: 80%;
+          width: 70%;
         }
       }
 
@@ -310,7 +307,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 80%;
+    width: 70%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -324,7 +321,7 @@ export default {
 
     @media (max-width: $mobile) {
       width: 90%;
-      padding-top: 15%;
+      padding-top: 20%;
     }
 
     .header {
@@ -341,7 +338,7 @@ export default {
       top: 0%;
       h1 {
         @media (max-width: $mobile) {
-          width: 80%;
+          width: 70%;
         }
         color: $white;
         width: 90%;
@@ -382,7 +379,7 @@ export default {
   transition-duration: 0.5s;
 
   .cont {
-    width: 80%;
+    width: 70%;
     min-height: 100vh;
     margin: auto;
     transition-duration: 0.5s;
@@ -396,7 +393,7 @@ export default {
 
     @media (max-width: $mobile) {
       width: 90%;
-      padding-top: 15%;
+      padding-top: 20%;
     }
 
     .header {
@@ -414,7 +411,7 @@ export default {
 
       h1 {
         @media (max-width: $mobile) {
-          width: 80%;
+          width: 70%;
         }
 
         width: 90%;

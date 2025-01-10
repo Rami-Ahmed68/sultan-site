@@ -87,12 +87,12 @@ export default {
   direction: ltr;
   width: 100%;
   height: 60px;
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(10px);
   position: fixed;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 1;
+  z-index: 8;
   @media (max-width: $mobile) {
     justify-content: space-between;
     padding: 0px 10px;
@@ -281,12 +281,12 @@ export default {
   direction: rtl;
   width: 100%;
   height: 60px;
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(10px);
   position: fixed;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 1;
+  z-index: 8;
 
   @media (max-width: $mobile) {
     justify-content: space-between;

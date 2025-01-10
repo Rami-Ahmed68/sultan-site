@@ -15,6 +15,8 @@ import LogInView from "@/views/LogInView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 // work page
 import WorkView from "@/views/WorkView.vue";
+// Lesson view
+import LessonView from "@/views/LessonView.vue";
 
 const routes = [
   {
@@ -38,9 +40,14 @@ const routes = [
     component: WorkView,
   },
   {
-    path: "/lessons",
+    path: "/lessons/:tag_name?",
     name: "lessons",
     component: LessonsView,
+  },
+  {
+    path: "/lesson/:id",
+    name: "lesson",
+    component: LessonView,
   },
   {
     path: "/skills",
