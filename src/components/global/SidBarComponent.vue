@@ -14,6 +14,17 @@
         }}</router-link
       >
 
+      <router-link
+        v-if="this.$store.state.skills_page_status"
+        :to="this.$store.state.skills_link.path"
+        @click="this.$store.commit('chnage_sid_bar_status')"
+        >{{
+          this.$store.state.language == "English"
+            ? this.$store.state.skills_link.english
+            : this.$store.state.skills_link.arabic
+        }}</router-link
+      >
+
       <a :href="`${this.$store.state.developer.href}`" target="_blank"
         >{{
           this.$store.state.language == "English"

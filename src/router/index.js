@@ -21,6 +21,16 @@ import LessonView from "@/views/LessonView.vue";
 import CvView from "@/views/CvView.vue";
 // install app page
 import InstallAppView from "@/views/InstallAppView.vue";
+// Skill page
+import SkillView from "@/views/SkillView.vue";
+// dash board page
+import DashBoaredview from "@/views/DashBoaredview.vue";
+// import test
+import TestComponent from "@/components/global/TestComponent.vue";
+// import create work
+import dashCraeteWorksView from "@/views/dash/dashCreateWorksView.vue";
+// import dash home page
+import dashinfoView from "@/views/dash/dashinfoView.vue";
 const routes = [
   {
     path: "/",
@@ -58,6 +68,11 @@ const routes = [
     component: SkillsView,
   },
   {
+    path: "/skill/:id",
+    name: "skill",
+    component: SkillView,
+  },
+  {
     path: "/cv",
     name: "cv",
     component: CvView,
@@ -71,6 +86,38 @@ const routes = [
     path: "/login",
     name: "login",
     component: LogInView,
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashBoaredview,
+    children: [
+      {
+        path: "",
+        name: "indo",
+        component: dashinfoView,
+      },
+      {
+        path: "work/create",
+        name: "create-work",
+        component: dashCraeteWorksView,
+      },
+      {
+        path: "lesson/create",
+        name: "test",
+        component: TestComponent,
+      },
+      {
+        path: "skill/create",
+        name: "test",
+        component: TestComponent,
+      },
+      {
+        path: "cv/update",
+        name: "test",
+        component: TestComponent,
+      },
+    ],
   },
   // send the user to note found page
   {

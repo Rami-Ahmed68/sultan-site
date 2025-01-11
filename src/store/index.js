@@ -14,7 +14,6 @@ export default createStore({
       { english: "About", arabic: "عني", path: "/about" },
       { english: "Works", arabic: "الأعمال", path: "/works" },
       { english: "Lessons", arabic: "الدروس", path: "/lessons" },
-      { english: "Skills", arabic: "المهارات", path: "/skills" },
       { english: "Cv", arabic: "السيرة الذاتية", path: "/cv" },
       { english: "Install App", arabic: "تنزيل التطبيق", path: "/install" },
       {
@@ -28,6 +27,35 @@ export default createStore({
         path: "/dashboard",
       },
     ],
+    dash_board_links: [
+      { english: "Home", arabic: "الصفحة الرئيسية", path: "/" },
+      {
+        english: "Update Info",
+        arabic: "تعديل البيانات",
+        path: "dashboard/info/update",
+      },
+      {
+        english: "Craete Work",
+        arabic: "إنشاء عمل",
+        path: "dashboard/work/create",
+      },
+      {
+        english: "Craete Lesson",
+        arabic: "إنشاء درس",
+        path: "dashboard/lesson/create",
+      },
+      {
+        english: "Craete Skill",
+        arabic: "إنشاء مهارة",
+        path: "dashboard/skill/create",
+      },
+      {
+        english: "update Cv",
+        arabic: "تعديل السيرة الذاتية",
+        path: "dashboard/cv/update",
+      },
+    ],
+    skills_link: { english: "Skills", arabic: "المهارات", path: "/skills" },
     developer: {
       english: "Developer",
       arabic: "المبرمج",
@@ -55,6 +83,8 @@ export default createStore({
       : "",
     // sultan's cv
     cv: "",
+    // skills page status
+    skills_page_status: false,
     // sid bars status
     sid_bar_status: "close",
     // works filter component status
@@ -62,11 +92,13 @@ export default createStore({
     // filter component status
     lessons_filter_status: "close",
     // admin info to show it in the home page
-    admin_info: {},
+    admin_info: "",
     // sulta links
     sulta_links: "",
     // works data
     works: [],
+    // selectd_avatar
+    selectd_avatar: [],
     //work data
     work_data: "",
     // lessons data
@@ -76,7 +108,7 @@ export default createStore({
     // skills data
     skills_data: [],
     // skill data
-    skill_data: {},
+    skill_data: "",
     English: {
       name: "MUHAMED SULTAN",
       Login_page: {
@@ -139,9 +171,35 @@ export default createStore({
         message:
           "Hi 👋 designer, you can download designer Mohamed Sultan's website as a mobile or desktop application to quickly check his latest works.",
       },
+      skills_page: {
+        title: "Skills page",
+      },
+      skill_page: {
+        title: "Skill's page",
+      },
+      not_found_page: {
+        message: "The page you're looking for was not found.",
+        button: "Go to home",
+      },
+      update_info_page: {
+        title: "Update info",
+        avatar_btn: "Update Avatar",
+        english_name_label: "Name in English",
+        arabic_name_label: "Name in Arabic",
+        english_description_label: "Description in English",
+        arabic_description_label: "Description in Arabic",
+        whatsApp_label: "WhatsApp number",
+        phone_label: "Phone number",
+        telegram_label: "Telegram link",
+        facebook_label: "facebook link",
+        instgram_label: "Instgram link",
+        linkedIn_label: "linked In link",
+        behance_label: "Behance link",
+        email_address_label: "Email address",
+        update_btn: "Update",
+      },
       loading: "Wait please",
       global_message: "Mohamed Sultan",
-      not_found_page_message: "Sorry, page not found",
       home_page: "home page",
     },
     Arabic: {
@@ -206,9 +264,35 @@ export default createStore({
         message:
           "مرحبا ايها المصمم يمكنك تنزيل موقع المصمم محمد سلطان كتطبيق موبايل او ديسكتوب للتفقد آخر أعماله بسرعة",
       },
+      skills_page: {
+        title: "صفحة المهارات",
+      },
+      skill_page: {
+        title: "صفحة المهارة",
+      },
+      not_found_page: {
+        message: "الصفحة التي تبحث عنها غير موجودة",
+        button: "اذهب للصفحة الرئيسية",
+      },
+      update_info_page: {
+        title: "تعديل البيانات",
+        avatar_btn: "تعديل الافاتار",
+        english_name_label: "الاسم بالإنكليزي",
+        arabic_name_label: "الاسم بالعربي",
+        english_description_label: "الوصف بالإنكليزي",
+        arabic_description_label: "الوصف بالعربي",
+        whatsApp_label: "رقم الواتس اب",
+        phone_label: "رقم الهاتف",
+        telegram_label: "رابط التلغرام",
+        facebook_label: "رابط الفسبوك",
+        instgram_label: "رابط الانستغرام",
+        linkedIn_label: "رابط اللينكد إن",
+        behance_label: "رابط البيهانس",
+        email_address_label: "عنوان البريد الالكتروني",
+        update_btn: "تعديل",
+      },
       loading: "انتظر رجاء",
       global_message: "محمد سلطان",
-      not_found_page_message: "عذرا لم يتم العثور على الصفحة",
       home_page: "الصفحة الرئيسية",
     },
     APIS: {
@@ -218,6 +302,11 @@ export default createStore({
         get_admin_links:
           "https://sultan-wngg.onrender.com/api/v1/sultan/links/get",
         get_admin_cv: "https://sultan-wngg.onrender.com/api/v1/sultan/cv/get",
+        update_avatar: "https://sultan-wngg.onrender.com/api/v1/sultan/avatar",
+      },
+      skills_page_status: {
+        get_status:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/skills/page/get/status",
       },
       works: {
         get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/all",
@@ -234,6 +323,13 @@ export default createStore({
         update: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/update",
         delete: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/delete",
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/create",
+      },
+      skills: {
+        get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/get/all",
+        get_one: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/get/one",
+        update: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/update",
+        delete: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/delete",
+        create: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/create",
       },
     },
     tags: [

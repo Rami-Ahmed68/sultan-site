@@ -16,6 +16,16 @@
           this.$store.state.language == "English" ? link.english : link.arabic
         }}</router-link
       >
+
+      <router-link
+        v-if="this.$store.state.skills_page_status"
+        :to="this.$store.state.skills_link.path"
+        >{{
+          this.$store.state.language == "English"
+            ? this.$store.state.skills_link.english
+            : this.$store.state.skills_link.arabic
+        }}</router-link
+      >
     </div>
     <!-- links  -->
 

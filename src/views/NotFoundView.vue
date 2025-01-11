@@ -5,15 +5,15 @@
       <h4>
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.not_found_page_message
-            : this.$store.state.Arabic.not_found_page_message
+            ? this.$store.state.English.not_found_page.message
+            : this.$store.state.Arabic.not_found_page.message
         }}
       </h4>
       <router-link to="/">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.home_page
-            : this.$store.state.Arabic.home_page
+            ? this.$store.state.English.not_found_page.button
+            : this.$store.state.Arabic.not_found_page.button
         }}
         <icon icon="arrow-right" />
       </router-link>
@@ -88,6 +88,7 @@ export default {
       color: $white;
       background-color: $Navy-blue-one;
       box-shadow: 0 0 5px $black;
+      text-align: center;
 
       @media (min-width: $mobile) {
         width: 80%;
@@ -98,7 +99,7 @@ export default {
     a {
       padding: 10px 20px;
       border-radius: 5px;
-      background: linear-gradient(to right, $gold-for, $gold-tow, $gold-three);
+      background: linear-gradient(to top, $gold-for, $gold-tow, $gold-three);
       text-decoration: none;
       color: $white;
       box-shadow: 0 0 5px $black;
@@ -172,7 +173,7 @@ export default {
     a {
       padding: 10px 20px;
       border-radius: 5px;
-      background: linear-gradient(to right, $gold-for, $gold-tow, $gold-three);
+      background: linear-gradient(to top, $gold-for, $gold-tow, $gold-three);
       text-decoration: none;
       color: $white;
       box-shadow: 0 0 5px $black;

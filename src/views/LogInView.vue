@@ -158,7 +158,7 @@ export default {
           this.$store.commit("OpenOrCloseMessageForm");
 
           // call to change the message form status
-          this.ChangeMEssageFormStatus();
+          this.$store.commit("ChangeMEssageFormStatus");
 
           // send the loged in user (admin) to home
           setTimeout(() => {
@@ -166,6 +166,7 @@ export default {
           }, 1500);
         })
         .catch((error) => {
+          console.log(error);
           // to close the loading animation
           this.$store.state.loading_status = "close";
 
