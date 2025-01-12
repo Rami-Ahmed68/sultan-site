@@ -1,0 +1,726 @@
+<template>
+  <div
+    :class="`dash-work-update-${this.$store.state.mood}-${this.$store.state.language}-${this.page_status}`"
+  >
+    <div class="cont">
+      <h1>
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.title
+            : this.$store.state.Arabic.dash_work_update_page.title
+        }}
+      </h1>
+
+      <label for="video">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.video
+            : this.$store.state.Arabic.dash_work_update_page.video
+        }}
+      </label>
+      <!-- video  -->
+      <video
+        v-if="
+          this.$store.state.work_data &&
+          this.$store.state.work_data.video &&
+          !this.selected_video
+        "
+        class="video"
+        type="video/mp4"
+        @loadedmetadata="onVideoLoaded"
+        controls
+      >
+        <source
+          play
+          :src="this.$store.state.work_data.video"
+          type="video/mp4"
+        />
+        <source
+          play
+          :src="this.$store.state.work_data.video"
+          type="video/ogg"
+        />
+      </video>
+
+      <video
+        v-if="this.selected_video"
+        class="video"
+        type="video/mp4"
+        @loadedmetadata="onVideoLoaded"
+        controls
+      >
+        <source play :src="this.selected_video" type="video/mp4" />
+        <source play :src="this.selected_vide" type="video/ogg" />
+      </video>
+      <!-- video  -->
+
+      <label for="upload_video" class="video_label">
+        <p class="video_btn">
+          {{
+            this.$store.state.language == "English"
+              ? this.$store.state.English.dash_work_update_page.video_btn
+              : this.$store.state.Arabic.dash_work_update_page.video_btn
+          }}
+        </p>
+      </label>
+
+      <input
+        type="file"
+        id="upload_video"
+        ref="selected_video"
+        accept="video/*"
+      />
+
+      <!-- english title  -->
+      <label for="english_title">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.english_title
+            : this.$store.state.Arabic.dash_work_update_page.english_title
+        }}
+
+        <span>{{ this.english_title.length }}</span>
+      </label>
+
+      <input type="text" id="english_title" v-model="this.english_title" />
+      <!-- english title  -->
+
+      <!-- arabic title  -->
+      <label for="arabic_title">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.arabic_title
+            : this.$store.state.Arabic.dash_work_update_page.arabic_title
+        }}
+
+        <span>{{ this.arabic_title.length }}</span>
+      </label>
+
+      <input type="text" id="arabic_title" v-model="this.arabic_title" />
+      <!-- arabic title  -->
+
+      <!-- english description  -->
+      <label for="english_description">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page
+                .english_description
+            : this.$store.state.Arabic.dash_work_update_page.english_description
+        }}
+
+        <span>{{ this.english_description.length }}</span>
+      </label>
+
+      <textarea
+        id="english_description"
+        v-model="this.english_description"
+      ></textarea>
+      <!-- english description  -->
+
+      <!-- arabic description  -->
+      <label for="arabic_description">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.arabic_description
+            : this.$store.state.Arabic.dash_work_update_page.arabic_description
+        }}
+
+        <span>{{ this.arabic_description.length }}</span>
+      </label>
+
+      <textarea
+        id="arabic_description"
+        v-model="this.arabic_description"
+      ></textarea>
+      <!-- arabic description  -->
+
+      <!-- link  -->
+      <label for="link">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.link
+            : this.$store.state.Arabic.dash_work_update_page.link
+        }}
+
+        <span>{{ this.link.length }}</span>
+      </label>
+
+      <input type="text" id="link" v-model="this.link" />
+      <!-- link  -->
+
+      <!-- tags  -->
+      <label
+        >{{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.tags
+            : this.$store.state.Arabic.dash_work_update_page.tags
+        }}
+        <span>{{ this.tags.length }}</span>
+      </label>
+
+      <div class="tags-cont">
+        <p
+          v-for="(tag, index) in this.$store.state.tags"
+          :key="index"
+          @click="select_tag(tag.english_title)"
+          :class="
+            !this.tags.includes(tag.english_title) ? 'un_selected' : 'selected'
+          "
+        >
+          {{
+            this.$store.state.language == "English"
+              ? tag.english_title
+              : tag.arabic_title
+          }}
+        </p>
+      </div>
+      <!-- tags  -->
+
+      <!-- images  -->
+      <label
+        >{{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.image_label
+            : this.$store.state.Arabic.dash_work_update_page.image_label
+        }}
+        <span>{{ this.images.length + this.selected_images.length }}</span>
+      </label>
+
+      <div class="images-cont">
+        <label for="select_images" class="select_images">
+          <icon icon="plus" />
+        </label>
+
+        <input
+          type="file"
+          id="select_images"
+          multiple
+          ref="selected_images"
+          accept="image/*"
+        />
+
+        <img
+          v-for="(url, index) in this.$store.state.work_data.images"
+          :key="index"
+          :src="url"
+          @click="delete_image_url(index, path)"
+          alt=""
+        />
+
+        <img
+          v-for="(url, index) in this.selected_images"
+          :key="index"
+          :src="url"
+          @click="remove_seletced_images(index)"
+          alt="new_image"
+        />
+      </div>
+      <!-- images  -->
+
+      <button :class="this.update_btn_status ? 'checked' : 'un-checked'">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.update_btn
+            : this.$store.state.Arabic.dash_work_update_page.update_btn
+        }}
+      </button>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      // page's name
+      name: "update-work-page",
+
+      // page status
+      page_status: "close",
+
+      // update_btn_status
+      update_btn_status: false,
+
+      // work's data
+      english_title: "",
+      arabic_title: "",
+      english_description: "",
+      arabic_description: "",
+      link: "",
+      tags: [],
+      images: [],
+      selected_images: [],
+      images_for_delete: [],
+
+      selected_video: "",
+
+      video_reaction: "",
+
+      // create form data
+      formData: "",
+    };
+  },
+  mounted() {
+    //  call to the handleFileChange method on select any image
+    this.$refs.selected_images.addEventListener(
+      "change",
+      this.handleFileChange
+    );
+
+    this.$refs.selected_video.addEventListener(
+      "change",
+      this.handleFileChangeVideo
+    );
+
+    // call to get work data method
+    this.get_work_data();
+  },
+  methods: {
+    // handel selected files
+    handleFileChange(event) {
+      // call to reader files method
+      this.readerFiles(Array.from(event.target.files));
+    },
+
+    // handel selected file (video)
+    handleFileChangeVideo(event) {
+      // empty the selected_video
+      this.selected_video = "";
+
+      // call to reader files method
+      this.readerFileVideo(event.target.files[0]);
+    },
+
+    // to reade the selected images
+    async readerFiles(images_array) {
+      // looping to read all selecetd images
+      for (const image of images_array) {
+        const reader = new FileReader();
+
+        const promise = new Promise((resolve) => {
+          reader.onload = (e) => {
+            resolve(e.target.result);
+          };
+
+          reader.readAsDataURL(image);
+        });
+
+        // add the promise results to images array
+        this.selected_images.push(await promise);
+      }
+    },
+
+    // reader selecetd video
+    readerFileVideo(video) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.selected_video = e.target.result;
+      };
+
+      reader.readAsDataURL(video);
+    },
+
+    // remove the seletced image from selected images array method
+    remove_seletced_images(index) {
+      this.selected_images.splice(index, 1);
+    },
+
+    // add the old image's url to images_for_delete array and delete it from images array
+    delete_image_url(index, path) {
+      // delete the image's url from work's images array
+      this.$store.state.work_data.images.splice(index, 1);
+
+      // add the deleted imag's url to images fro delete
+      this.images_for_delete.push(path);
+    },
+
+    // select the tags method
+    select_tag(tag_title) {
+      // check if the selected tags ahs the clicked tag
+      !this.tags.includes(tag_title)
+        ? // push the tag
+          this.tags.push(tag_title)
+        : // filter the selected tags and return the tags
+          (this.tags = this.tags.filter((tag) => {
+            return tag != tag_title;
+          }));
+    },
+
+    // get work data
+    async get_work_data() {
+      // start the laoding
+      this.$store.state.loading_status = "open";
+
+      await axios
+        .get(this.$store.state.APIS.works.get_one, {
+          params: {
+            work_id: this.$route.params.id,
+          },
+        })
+        .then((response) => {
+          // change the page status
+          this.page_status = "open";
+
+          // ste the work data to the work's filed in data section
+          this.english_title = response.data.work_data.english_title;
+          this.arabic_title = response.data.work_data.arabic_title;
+          this.english_description =
+            response.data.work_data.english_description;
+          this.arabic_description = response.data.work_data.arabic_description;
+          this.tags = response.data.work_data.tags;
+          this.link = response.data.work_data.link;
+          this.images = response.data.work_data.images;
+
+          // stop the laoding
+          this.$store.state.loading_status = "close";
+
+          // set teh geted work data to work var in store
+          this.$store.state.work_data = response.data.work_data;
+        })
+        .catch((error) => {
+          // stop the laoding
+          this.$store.state.loading_status = "close";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "😓Error😓",
+              arabic: "😓خطأ😓",
+            },
+            type: "Error",
+            messages: error.response.data.message,
+            status: error.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        });
+    },
+
+    // update the work
+    async update_work() {
+      // start the loading
+      this.$store.state.loading_status = "open";
+
+      // create headers
+      const headers = {
+        Authorization: `Bearer ${this.$store.state.admin_data.token}`,
+      };
+
+      // create a new form data
+      this.formData = new FormData();
+
+      // check if the english title is change or not and add it to form data
+      if (this.english_title != this.$store.state.work_data.english_title) {
+        this.formData.append("english_title", this.english_title);
+      }
+
+      // check if the arabic title is change or not and add it to form data
+      if (this.arabic_title != this.$store.state.work_data.arabic_title) {
+        this.formData.append("arabic_title", this.arabic_title);
+      }
+
+      // check if the english description is change or not and add it to form data
+      if (
+        this.english_description !=
+        this.$store.state.work_data.english_description
+      ) {
+        this.formData.append("english_description", this.english_description);
+      }
+
+      // check if the arabic description is change or not and add it to form data
+      if (
+        this.arabic_description !=
+        this.$store.state.work_data.arabic_description
+      ) {
+        this.formData.append("arabic_description", this.arabic_description);
+      }
+
+      // add the images
+      if (this.selected_images.length > 0) {
+        for (const file in this.selected_images) {
+          this.formData.append("images", file, file.name);
+        }
+      }
+
+      // check if the video reaction is not delete
+      if (this.video_reaction != "delete") {
+        for (const file in this.selecetd_video) {
+          this.formData.append("video", file, file.name);
+        }
+      } else {
+        this.formData.append("video_reaction", this.video_reaction);
+      }
+
+      await axios
+        .put(this.$store.state.APIS.works.update, this.formData, headers)
+        .then((response) => {
+          // stop the loading
+          this.$store.state.loading_status = "close";
+          console.log(response);
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "🥳Welcome Admin🥳",
+              arabic: "🥳أهلا مدير🥳",
+            },
+            type: "Success",
+            messages: response.data.message,
+            status: response.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        })
+        .catch((error) => {
+          // stop the loading
+          this.$store.state.loading_status = "close";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "😓Error😓",
+              arabic: "😓خطأ😓",
+            },
+            type: "Error",
+            messages: error.response.data.message,
+            status: error.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        });
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+@import "../../sass/varibels";
+// darck and light English style
+.dash-work-update-darck-English-open {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $Navy-blue-for;
+  padding: 15% 0px 10px 0px;
+  transition-duration: 0.5s;
+
+  .cont {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    transition-duration: 0.5s;
+    opacity: 1;
+
+    @media (max-width: $mobile) {
+      width: 90%;
+    }
+
+    h1 {
+      width: 100%;
+      height: auto;
+      margin: 20px 0px;
+      color: $white;
+      border: 1px solid;
+      border-color: transparent transparent $white transparent;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      margin: 5px 0px;
+      color: $white;
+      border: 1px solid;
+      border-color: transparent transparent $white transparent;
+    }
+
+    .video_label {
+      @extend label;
+      border: none;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+    }
+
+    .video_btn {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
+    .video_btn:hover {
+      background-color: $error-green-one;
+    }
+
+    #upload_video {
+      display: none;
+    }
+
+    textarea {
+      resize: none;
+      width: 100%;
+      min-height: 200px;
+      margin: 5px 0px;
+      border-radius: 5px;
+      padding: 5px;
+      color: $white;
+      outline: none;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      outline: none;
+      padding: 0px 5px;
+      border-radius: 5px;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+      color: $white;
+    }
+
+    .tags-cont {
+      width: 100%;
+      height: auto;
+      padding: 5px;
+      background-color: $inputs-back-black;
+      border: 1px solid $inputs-border-black;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+      align-items: center;
+
+      .un_selected {
+        padding: 4px;
+        margin: 3px;
+        cursor: pointer;
+        color: $white;
+        border-radius: 4px;
+        font-size: $small;
+        background-color: $Navy-blue-tow;
+
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
+      }
+
+      .selected {
+        @extend .un_selected;
+        background-color: $Navy-blue-one;
+        border: 1px solid $white;
+      }
+    }
+
+    .images-cont {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 5px;
+      background-color: $inputs-back-black;
+      border: 1px solid $inputs-border-black;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding-top: 20px;
+
+      .select_images {
+        border: none;
+        width: auto;
+        height: auto;
+        cursor: pointer;
+        position: absolute;
+        right: 3px;
+        top: 0%;
+
+        svg {
+          color: $white;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid $inputs-border-black;
+          background-color: $inputs-back-black;
+        }
+      }
+
+      #select_images {
+        display: none;
+      }
+
+      img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+
+        @media (max-width: $mobile) {
+          max-width: 150px;
+          height: auto;
+        }
+      }
+    }
+
+    .checked {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      border: none;
+      border-radius: 5px;
+      color: $white;
+      outline: none;
+      border: 1px solid $error-green-one;
+      background-color: $error-green-tow;
+      cursor: pointer;
+    }
+
+    .un-checked {
+      @extend .checked;
+      border: 1px solid $error-red-one;
+      background-color: $error-red-tow;
+      pointer-events: none;
+    }
+  }
+}
+
+.dash-work-update-darck-English-close {
+  @extend .dash-work-update-darck-English-open;
+  padding: 30% 0px 0px 0px;
+
+  .cont {
+    opacity: 0;
+  }
+}
+// darck and light English style
+</style>

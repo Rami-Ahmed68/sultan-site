@@ -40,6 +40,11 @@ export default createStore({
         path: "dashboard/work/create",
       },
       {
+        english: "Works",
+        arabic: "الأعمال",
+        path: "dashboard/works",
+      },
+      {
         english: "Craete Lesson",
         arabic: "إنشاء درس",
         path: "dashboard/lesson/create",
@@ -91,8 +96,12 @@ export default createStore({
     works_filter_status: "close",
     // filter component status
     lessons_filter_status: "close",
+    // delete_work_form_status
+    delete_work_form_status: "close",
     // admin info to show it in the home page
     admin_info: "",
+    // selected_images
+    selected_images: [],
     // sulta links
     sulta_links: "",
     // works data
@@ -109,6 +118,12 @@ export default createStore({
     skills_data: [],
     // skill data
     skill_data: "",
+    // work_id_for_delete
+    work_id_for_delete: "",
+    // lesson_id_for_delete
+    lesson_id_for_delete: "",
+    // skills_id_for_delete
+    skills_id_for_delete: "",
     English: {
       name: "MUHAMED SULTAN",
       Login_page: {
@@ -197,6 +212,37 @@ export default createStore({
         behance_label: "Behance link",
         email_address_label: "Email address",
         update_btn: "Update",
+      },
+      dash_works_page: {
+        title: "Works events",
+      },
+      dash_work_update_page: {
+        title: "Update Work",
+        video: "Video",
+        video_btn: "Upload new video",
+        video_cover_label: "Video cover",
+        image_label: "image",
+        english_title: "Title in english",
+        arabic_title: "Title in arabic",
+        english_description: "Description in english",
+        arabic_description: "Description in arabic",
+        link: "Linke",
+        created_at: "Created at",
+        tags: "Tags",
+        update_btn: "Update",
+      },
+      dash_work_component: {
+        options: {
+          delete: "Delete",
+          update: "Update",
+        },
+      },
+      delete_work_form: {
+        title: "Delete Work",
+        message:
+          "Are you sure that the work will be deleted with all its contents of photos and videos permanently?",
+        yes: "Yes",
+        no: "No",
       },
       loading: "Wait please",
       global_message: "Mohamed Sultan",
@@ -291,6 +337,37 @@ export default createStore({
         email_address_label: "عنوان البريد الالكتروني",
         update_btn: "تعديل",
       },
+      dash_works_page: {
+        title: "أحداث الأعمال",
+      },
+      dash_work_update_page: {
+        title: "تعديل العمل",
+        video: "الفيديو",
+        video_btn: "تحميل فيديو جديدة",
+        video_cover_label: "صورة الفيديو المصغر",
+        image_label: "الصور",
+        english_title: "العنوان بالإنكليزي",
+        arabic_title: "العنوان بالعربي",
+        english_description: "الوصف بالإنكليزي",
+        arabic_description: "الوصف بالعربي",
+        link: "رابط",
+        created_at: "تاريخ الإنشاء",
+        tags: "التاغات",
+        update_btn: "تعديل",
+      },
+      dash_work_component: {
+        options: {
+          delete: "حذف",
+          update: "تعديل",
+        },
+      },
+      delete_work_form: {
+        title: "حذف العمل",
+        message:
+          "هل انت متأكد سيتم حذف العمل بكامل محتوياته من صور وفيديوهات بشكل نهائي",
+        yes: "نعم",
+        no: "لا",
+      },
       loading: "انتظر رجاء",
       global_message: "محمد سلطان",
       home_page: "الصفحة الرئيسية",
@@ -303,6 +380,7 @@ export default createStore({
           "https://sultan-wngg.onrender.com/api/v1/sultan/links/get",
         get_admin_cv: "https://sultan-wngg.onrender.com/api/v1/sultan/cv/get",
         update_avatar: "https://sultan-wngg.onrender.com/api/v1/sultan/avatar",
+        update_info: "https://sultan-wngg.onrender.com/api/v1/sultan/update",
       },
       skills_page_status: {
         get_status:
@@ -311,9 +389,9 @@ export default createStore({
       works: {
         get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/all",
         get_one: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/one",
-        update: "https://sultan-wngg.onrender.com/api/v1/sultan/works/update",
-        delete: "https://sultan-wngg.onrender.com/api/v1/sultan/works/delete",
-        create: "https://sultan-wngg.onrender.com/api/v1/sultan/works/create",
+        update: "https://sultan-wngg.onrender.com/api/v1/sultan/work/update",
+        delete: "https://sultan-wngg.onrender.com/api/v1/sultan/work/delete",
+        create: "https://sultan-wngg.onrender.com/api/v1/sultan/work/create",
       },
       lessons: {
         get_all:
@@ -521,6 +599,12 @@ export default createStore({
     change_lessons__filter_component_status(state) {
       state.lessons_filter_status =
         state.lessons_filter_status == "close" ? "open" : "close";
+    },
+
+    // chage delete work's form status
+    OpenOrCloseDeleteWorkForm(state) {
+      state.delete_work_form_status =
+        state.delete_work_form_status == "close" ? "open" : "close";
     },
   },
   actions: {},

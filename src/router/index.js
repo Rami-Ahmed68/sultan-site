@@ -31,6 +31,11 @@ import TestComponent from "@/components/global/TestComponent.vue";
 import dashCraeteWorksView from "@/views/dash/dashCreateWorksView.vue";
 // import dash home page
 import dashinfoView from "@/views/dash/dashinfoView.vue";
+// dash's works page
+import dashWorksView from "@/views/dash/dashWorksView.vue";
+// dash's update work page
+import dashWorkUpdateView from "@/views/dash/dashWorkUpdateView.vue";
+
 const routes = [
   {
     path: "/",
@@ -98,9 +103,19 @@ const routes = [
         component: dashinfoView,
       },
       {
+        path: "works",
+        name: "works",
+        component: dashWorksView,
+      },
+      {
         path: "work/create",
         name: "create-work",
         component: dashCraeteWorksView,
+      },
+      {
+        path: "work/update:id",
+        name: "update-work",
+        component: dashWorkUpdateView,
       },
       {
         path: "lesson/create",

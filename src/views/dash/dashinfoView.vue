@@ -38,6 +38,7 @@
               ? this.$store.state.English.update_info_page.english_name_label
               : this.$store.state.Arabic.update_info_page.english_name_label
           }}
+          <span>{{ this.english_name.length }}</span>
         </label>
         <input name="" id="english_name" v-model="this.english_name" />
 
@@ -47,6 +48,7 @@
               ? this.$store.state.English.update_info_page.arabic_name_label
               : this.$store.state.Arabic.update_info_page.arabic_name_label
           }}
+          <span>{{ this.arabic_name.length }}</span>
         </label>
         <input id="arabic_name" v-model="this.arabic_name" />
         <!-- name  -->
@@ -60,6 +62,7 @@
               : this.$store.state.Arabic.update_info_page
                   .english_description_label
           }}
+          <span>{{ this.english_description.length }}</span>
         </label>
         <textarea
           english_description=""
@@ -75,6 +78,7 @@
               : this.$store.state.Arabic.update_info_page
                   .arabic_description_label
           }}
+          <span>{{ this.arabic_description.length }}</span>
         </label>
         <textarea
           id="arabic_description"
@@ -89,6 +93,7 @@
               ? this.$store.state.English.update_info_page.whatsApp_label
               : this.$store.state.Arabic.update_info_page.whatsApp_label
           }}
+          <span>{{ this.whatsapp_number.length }}</span>
         </label>
         <input
           name=""
@@ -105,6 +110,7 @@
               ? this.$store.state.English.update_info_page.phone_label
               : this.$store.state.Arabic.update_info_page.phone_label
           }}
+          <span>{{ this.phone_number.length }}</span>
         </label>
         <input id="phone" type="number" v-model="this.phone_number" />
         <!-- phone  -->
@@ -116,6 +122,7 @@
               ? this.$store.state.English.update_info_page.telegram_label
               : this.$store.state.Arabic.update_info_page.telegram_label
           }}
+          <span>{{ this.telegram_link.length }}</span>
         </label>
         <input id="telegram" v-model="this.telegram_link" />
         <!-- telegram  -->
@@ -127,6 +134,7 @@
               ? this.$store.state.English.update_info_page.facebook_label
               : this.$store.state.Arabic.update_info_page.facebook_label
           }}
+          <span>{{ this.facebook_link.length }}</span>
         </label>
         <input name="" id="facebook" v-model="this.facebook_link" />
         <!-- facebook  -->
@@ -138,6 +146,7 @@
               ? this.$store.state.English.update_info_page.instgram_label
               : this.$store.state.Arabic.update_info_page.instgram_label
           }}
+          <span>{{ this.instagram_link.length }}</span>
         </label>
         <input id="instgram" v-model="this.instagram_link" />
         <!-- instgram  -->
@@ -149,6 +158,7 @@
               ? this.$store.state.English.update_info_page.linkedIn_label
               : this.$store.state.Arabic.update_info_page.linkedIn_label
           }}
+          <span>{{ this.linked_in_link.length }}</span>
         </label>
         <input name="" id="linkedIn" v-model="this.linked_in_link" />
         <!-- linkedIn  -->
@@ -160,6 +170,7 @@
               ? this.$store.state.English.update_info_page.behance_label
               : this.$store.state.Arabic.update_info_page.behance_label
           }}
+          <span>{{ this.behance_link.length }}</span>
         </label>
         <input id="behance" v-model="this.behance_link" />
         <!-- behance  -->
@@ -171,6 +182,7 @@
               ? this.$store.state.English.update_info_page.email_address_label
               : this.$store.state.Arabic.update_info_page.email_address_label
           }}
+          <span>{{ this.email_address.length }}</span>
         </label>
         <input
           name=""
@@ -179,7 +191,7 @@
           v-model="this.email_address"
         />
         <!-- email_address  -->
-        <button>
+        <button @click="update_info">
           {{
             this.$store.state.language == "English"
               ? this.$store.state.English.update_info_page.update_btn
@@ -203,6 +215,9 @@ export default {
 
       // avatar_btn_status
       avatar_btn_status: false,
+
+      // info_btn_status
+      info_btn_status: false,
 
       // english name
       english_name: "",
@@ -357,14 +372,18 @@ export default {
           // stop the loading animation
           this.$store.state.loading_status = "close";
 
-          // update admin's avatar url
-          this.$store.state.admin_data.admin.avatar = response.data.avatar_path;
+          // check if the admin data is exists
+          if (this.$store.state.admin_data) {
+            // update admin's avatar url
+            this.$store.state.admin_data.admin.avatar =
+              response.data.avatar_path;
 
-          // save the new avatar's url in local storage
-          window.localStorage.setItem(
-            "sultan-site",
-            JSON.stringify(this.$store.state.admin_data)
-          );
+            // save the new avatar's url in local storage
+            window.localStorage.setItem(
+              "sultan-site",
+              JSON.stringify(this.$store.state.admin_data)
+            );
+          }
 
           // update the avatar_btn_status
           this.avatar_btn_status = false;
@@ -376,7 +395,7 @@ export default {
               arabic: "🥳أهلا مدير🥳",
             },
             type: "Success",
-            messages: response.data.message,
+            messages: JSON.parse(response.data.messgae),
             status: response.status,
           };
 
@@ -410,6 +429,153 @@ export default {
           // call to change the message form status
           this.$store.commit("ChangeMEssageFormStatus");
         });
+    },
+
+    // update admin's info
+    async update_info() {
+      // start the loading
+      this.$store.state.loading_status = "open";
+
+      // craete headers
+      const headers = {
+        Authorization: `Bearer ${this.$store.state.admin_data.token}`,
+      };
+
+      // craete the body
+      let all_data = {
+        english_name:
+          this.english_name != this.$store.state.admin_info.english_name
+            ? this.english_name
+            : null,
+        arabic_name:
+          this.arabic_name != this.$store.state.admin_info.arabic_name
+            ? this.arabic_name
+            : null,
+        english_description:
+          this.english_description !=
+          this.$store.state.admin_info.english_description
+            ? this.english_description
+            : null,
+        arabic_description:
+          this.arabic_description !=
+          this.$store.state.admin_info.arabic_description
+            ? this.arabic_description
+            : null,
+        whatsapp:
+          this.whatsapp_number != this.$store.state.admin_info.whatsapp
+            ? this.whatsapp_number
+            : null,
+        telegram:
+          this.telegram_number != this.$store.state.admin_info.telegram
+            ? this.telegram_number
+            : null,
+        facebook:
+          this.facebook_link != this.$store.state.admin_info.facebook
+            ? this.facebook_link
+            : null,
+        instgram:
+          this.instagram_link != this.$store.state.admin_info.instgram
+            ? this.instagram_link
+            : null,
+        linkedIn:
+          this.linked_in_link != this.$store.state.admin_info.linkedIn
+            ? this.linked_in_link
+            : null,
+        behance:
+          this.behance_link != this.$store.state.admin_info.behance
+            ? this.behance_link
+            : null,
+        phone:
+          this.phone_number != this.$store.state.admin_info.phone
+            ? this.phone_number
+            : null,
+        email_address:
+          this.email_address != this.$store.state.admin_info.email_address
+            ? this.email_address
+            : null,
+      };
+
+      // bod_data
+      let body_data = {};
+
+      // loop to all all-data's and check if her value is null or not
+      for (const key in all_data) {
+        // check if line value is null add to body data object
+        if (all_data[key] != null) {
+          body_data[key] = all_data[key];
+        }
+      }
+
+      // check if the body_data object has any var or not
+      if (Object.keys(body_data).length > 0) {
+        await axios
+          .put(this.$store.state.APIS.auth.update_info, body_data, { headers })
+          .then((response) => {
+            // stop the loading animation
+            this.$store.state.loading_status = "close";
+
+            // set the error to the error_object in store
+            this.$store.state.error_object = {
+              title: {
+                english: "🥳Welcome Admin🥳",
+                arabic: "🥳أهلا مدير🥳",
+              },
+              type: "Success",
+              messages: response.data.messages,
+              status: response.status,
+            };
+
+            // to open the message form
+            this.$store.commit("OpenOrCloseMessageForm");
+
+            // call to change the message form status
+            this.$store.commit("ChangeMEssageFormStatus");
+          })
+          .catch((error) => {
+            // stop the loading animation
+            this.$store.state.loading_status = "close";
+
+            // set the error to the error_object in store
+            this.$store.state.error_object = {
+              title: {
+                english: "😓Error😓",
+                arabic: "😓خطأ😓",
+              },
+              type: "Error",
+              messages: error.response.data.message,
+              status: error.status,
+            };
+
+            // to open the message form
+            this.$store.commit("OpenOrCloseMessageForm");
+
+            // call to change the message form status
+            this.$store.commit("ChangeMEssageFormStatus");
+          });
+      } else {
+        // stop the loading animation
+        this.$store.state.loading_status = "close";
+
+        // set the error to the error_object in store
+        this.$store.state.error_object = {
+          title: {
+            english: "😓Error😓",
+            arabic: "😓خطأ😓",
+          },
+          type: "Error",
+          messages: {
+            english: "Sorry, you should update any data to send request",
+            arabic: "عذرا يجب عليك تحديث اي خانة لإرسال الطلب",
+          },
+          status: 403,
+        };
+
+        // to open the message form
+        this.$store.commit("OpenOrCloseMessageForm");
+
+        // call to change the message form status
+        this.$store.commit("ChangeMEssageFormStatus");
+      }
     },
   },
 };
@@ -460,6 +626,9 @@ export default {
       position: relative;
 
       .avatar_label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         display: flex;
@@ -506,6 +675,9 @@ export default {
       flex-wrap: wrap;
 
       label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         margin: 5px 0px;
@@ -604,6 +776,9 @@ export default {
       position: relative;
 
       .avatar_label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         display: flex;
@@ -651,6 +826,9 @@ export default {
       flex-wrap: wrap;
 
       label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         margin: 5px 0px;
@@ -751,6 +929,9 @@ export default {
       position: relative;
 
       .avatar_label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         display: flex;
@@ -799,6 +980,9 @@ export default {
       flex-wrap: wrap;
 
       label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         margin: 5px 0px;
@@ -897,6 +1081,9 @@ export default {
       position: relative;
 
       .avatar_label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         display: flex;
@@ -944,6 +1131,9 @@ export default {
       flex-wrap: wrap;
 
       label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: auto;
         margin: 5px 0px;

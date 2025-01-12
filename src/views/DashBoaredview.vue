@@ -9,6 +9,7 @@
         <router-link
           v-for="(link, index) in this.$store.state.dash_board_links"
           :key="index"
+          @click="OpenOrClose"
           :to="`/${link.path}`"
         >
           {{
@@ -40,7 +41,6 @@ export default {
       page_status: "close",
     };
   },
-  componenets: {},
   mounted() {},
   methods: {
     // open or close sid bar method
