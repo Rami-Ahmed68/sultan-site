@@ -35,14 +35,19 @@ export default createStore({
         path: "dashboard/info/update",
       },
       {
+        english: "Works",
+        arabic: "الأعمال",
+        path: "dashboard/works",
+      },
+      {
         english: "Craete Work",
         arabic: "إنشاء عمل",
         path: "dashboard/work/create",
       },
       {
-        english: "Works",
-        arabic: "الأعمال",
-        path: "dashboard/works",
+        english: "Lessons",
+        arabic: "الدروس",
+        path: "dashboard/lessons",
       },
       {
         english: "Craete Lesson",
@@ -74,6 +79,8 @@ export default createStore({
     error_message_status: "close",
     // loading animation status
     loading_status: "close",
+    // Download rate
+    uploaded_rate: "",
     // scroll_top_status
     scroll_top_status: "close",
     // Cinema lights
@@ -98,6 +105,8 @@ export default createStore({
     lessons_filter_status: "close",
     // delete_work_form_status
     delete_work_form_status: "close",
+    // delete_lesson_form_status
+    delete_lesson_form_status: "close",
     // admin info to show it in the home page
     admin_info: "",
     // selected_images
@@ -220,6 +229,8 @@ export default createStore({
         title: "Update Work",
         video: "Video",
         video_btn: "Upload new video",
+        video_cover_btn: "Update video's cover",
+        delete_video_btn: "Delete video",
         video_cover_label: "Video cover",
         image_label: "image",
         english_title: "Title in english",
@@ -231,7 +242,67 @@ export default createStore({
         tags: "Tags",
         update_btn: "Update",
       },
+      dash_lessons_page: {
+        title: "Lessons events",
+      },
+      dash_lesson_update_page: {
+        title: "Update Lesson",
+        video: "Video",
+        video_btn: "Upload new video",
+        video_cover_btn: "Update video's cover",
+        delete_video_btn: "Delete video",
+        video_cover_label: "Video cover",
+        image_label: "image",
+        english_title: "Title in english",
+        arabic_title: "Title in arabic",
+        english_description: "Description in english",
+        arabic_description: "Description in arabic",
+        link: "Linke",
+        program: "Program",
+        level: "Level",
+        created_at: "Created at",
+        tags: "Tags",
+        update_btn: "Update",
+      },
+      dash_work_create_page: {
+        title: "Create Work",
+        video: "Video",
+        video_btn: "Upload new video",
+        delete_video_btn: "Delete video",
+        image_label: "image",
+        english_title: "Title in english",
+        arabic_title: "Title in arabic",
+        english_description: "Description in english",
+        arabic_description: "Description in arabic",
+        link: "Linke",
+        created_at: "Created at",
+        tags: "Tags",
+        create_btn: "Create",
+      },
+      dash_lesson_create_page: {
+        title: "Create Lesson",
+        video: "Video",
+        video_btn: "Upload new video",
+        delete_video_btn: "Delete video",
+        image_label: "image",
+        english_title: "Title in english",
+        arabic_title: "Title in arabic",
+        english_description: "Description in english",
+        arabic_description: "Description in arabic",
+        link: "Linke",
+        program: "Program",
+        level: "Level",
+        created_at: "Created at",
+        tags: "Tags",
+        create_btn: "Create",
+      },
       dash_work_component: {
+        options: {
+          delete: "Delete",
+          update: "Update",
+        },
+      },
+      dash_lessons_component: {
         options: {
           delete: "Delete",
           update: "Update",
@@ -241,6 +312,13 @@ export default createStore({
         title: "Delete Work",
         message:
           "Are you sure that the work will be deleted with all its contents of photos and videos permanently?",
+        yes: "Yes",
+        no: "No",
+      },
+      delete_lesson_form: {
+        title: "Delete Lesson",
+        message:
+          "Are you sure that the lesson will be deleted with all its contents of photos and videos permanently?",
         yes: "Yes",
         no: "No",
       },
@@ -343,7 +421,9 @@ export default createStore({
       dash_work_update_page: {
         title: "تعديل العمل",
         video: "الفيديو",
+        video_cover_btn: "تعديل غلاف الفيديو",
         video_btn: "تحميل فيديو جديدة",
+        delete_video_btn: "حذف الفيديو",
         video_cover_label: "صورة الفيديو المصغر",
         image_label: "الصور",
         english_title: "العنوان بالإنكليزي",
@@ -355,7 +435,67 @@ export default createStore({
         tags: "التاغات",
         update_btn: "تعديل",
       },
+      dash_lessons_page: {
+        title: "أحداث الدروس",
+      },
+      dash_lesson_update_page: {
+        title: "تعديل الدرس",
+        video: "الفيديو",
+        video_cover_btn: "تعديل غلاف الفيديو",
+        video_btn: "تحميل فيديو جديدة",
+        delete_video_btn: "حذف الفيديو",
+        video_cover_label: "صورة الفيديو المصغر",
+        image_label: "الصور",
+        english_title: "العنوان بالإنكليزي",
+        arabic_title: "العنوان بالعربي",
+        english_description: "الوصف بالإنكليزي",
+        arabic_description: "الوصف بالعربي",
+        link: "رابط",
+        created_at: "تاريخ الإنشاء",
+        program: "البرنامج",
+        level: "المستوى",
+        tags: "التاغات",
+        update_btn: "تعديل",
+      },
+      dash_work_create_page: {
+        title: "إنشاء العمل",
+        video: "الفيديو",
+        video_btn: "تحميل فيديو",
+        delete_video_btn: "حذف الفيديو",
+        image_label: "الصور",
+        english_title: "العنوان بالإنكليزي",
+        arabic_title: "العنوان بالعربي",
+        english_description: "الوصف بالإنكليزي",
+        arabic_description: "الوصف بالعربي",
+        link: "رابط",
+        created_at: "تاريخ الإنشاء",
+        tags: "التاغات",
+        create_btn: "إنشاء",
+      },
+      dash_lesson_create_page: {
+        title: "إنشاء الدرس",
+        video: "الفيديو",
+        video_btn: "تحميل فيديو",
+        delete_video_btn: "حذف الفيديو",
+        image_label: "الصور",
+        english_title: "العنوان بالإنكليزي",
+        arabic_title: "العنوان بالعربي",
+        english_description: "الوصف بالإنكليزي",
+        arabic_description: "الوصف بالعربي",
+        link: "رابط",
+        program: "البرنامج",
+        level: "المستوى",
+        created_at: "تاريخ الإنشاء",
+        tags: "التاغات",
+        create_btn: "إنشاء",
+      },
       dash_work_component: {
+        options: {
+          delete: "حذف",
+          update: "تعديل",
+        },
+      },
+      dash_lesson_component: {
         options: {
           delete: "حذف",
           update: "تعديل",
@@ -365,6 +505,13 @@ export default createStore({
         title: "حذف العمل",
         message:
           "هل انت متأكد سيتم حذف العمل بكامل محتوياته من صور وفيديوهات بشكل نهائي",
+        yes: "نعم",
+        no: "لا",
+      },
+      delete_lesson_form: {
+        title: "حذف الدرس",
+        message:
+          "هل انت متأكد سيتم حذف الدرس بكامل محتوياته من صور وفيديوهات بشكل نهائي",
         yes: "نعم",
         no: "لا",
       },
@@ -390,6 +537,8 @@ export default createStore({
         get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/all",
         get_one: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/one",
         update: "https://sultan-wngg.onrender.com/api/v1/sultan/work/update",
+        change_cover:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/work/cover/update",
         delete: "https://sultan-wngg.onrender.com/api/v1/sultan/work/delete",
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/work/create",
       },
@@ -398,6 +547,8 @@ export default createStore({
           "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/get/all",
         get_one:
           "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/get/one",
+        change_cover:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/cover/update",
         update: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/update",
         delete: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/delete",
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/lesson/create",
@@ -605,6 +756,12 @@ export default createStore({
     OpenOrCloseDeleteWorkForm(state) {
       state.delete_work_form_status =
         state.delete_work_form_status == "close" ? "open" : "close";
+    },
+
+    // chage delete lesson's form status
+    OpenOrCloseDeleteLessonForm(state) {
+      state.delete_lesson_form_status =
+        state.delete_lesson_form_status == "close" ? "open" : "close";
     },
   },
   actions: {},

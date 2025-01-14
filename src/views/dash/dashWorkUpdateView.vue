@@ -17,13 +17,25 @@
             ? this.$store.state.English.dash_work_update_page.video
             : this.$store.state.Arabic.dash_work_update_page.video
         }}
+
+        <label for="cover" class="cover_label">
+          <icon icon="plus" />
+        </label>
       </label>
+
+      <input type="file" id="cover" accept="image/*" ref="cover" />
+
       <!-- video  -->
       <video
         v-if="
           this.$store.state.work_data &&
           this.$store.state.work_data.video &&
           !this.selected_video
+        "
+        :poster="
+          this.video_cover_show != ''
+            ? this.video_cover_show
+            : this.$store.state.work_data.video_cover
         "
         class="video"
         type="video/mp4"
@@ -46,13 +58,56 @@
         v-if="this.selected_video"
         class="video"
         type="video/mp4"
+        :poster="
+          this.video_cover_show != ''
+            ? this.video_cover_show
+            : this.$store.state.work_data.video_cover
+        "
         @loadedmetadata="onVideoLoaded"
         controls
       >
         <source play :src="this.selected_video" type="video/mp4" />
         <source play :src="this.selected_vide" type="video/ogg" />
       </video>
+
+      <img
+        :src="
+          this.video_cover_show
+            ? this.video_cover_show
+            : this.$store.state.work_data.video_cover
+        "
+        class="video_cover_image"
+        alt="video_cover"
+        v-if="
+          this.selected_video == '' && this.$store.state.work_data.video == ''
+        "
+      />
       <!-- video  -->
+
+      <!-- update video_cover btn  -->
+      <button
+        :class="`update_video_btn_cover_${
+          this.video_cover_show != '' ? 'show' : 'hidden'
+        }`"
+        @click="update_video_cover"
+      >
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.video_cover_btn
+            : this.$store.state.Arabic.dash_work_update_page.video_cover_btn
+        }}
+      </button>
+      <!-- update video_cover btn  -->
+
+      <!-- delete video btn  -->
+      <button class="delete_video_btn" @click="delete_video">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_update_page.delete_video_btn
+            : this.$store.state.Arabic.dash_work_update_page.delete_video_btn
+        }}
+      </button>
+      <!-- delete video btn  -->
 
       <label for="upload_video" class="video_label">
         <p class="video_btn">
@@ -148,6 +203,20 @@
       <input type="text" id="link" v-model="this.link" />
       <!-- link  -->
 
+      <!-- created_at  -->
+      <label for="created_at">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_create_page.created_at
+            : this.$store.state.Arabic.dash_work_create_page.created_at
+        }}
+
+        <span>{{ this.created_at.length }}</span>
+      </label>
+
+      <input type="text" id="created_at" v-model="this.created_at" />
+      <!-- created_at  -->
+
       <!-- tags  -->
       <label
         >{{
@@ -183,7 +252,7 @@
             ? this.$store.state.English.dash_work_update_page.image_label
             : this.$store.state.Arabic.dash_work_update_page.image_label
         }}
-        <span>{{ this.images.length + this.selected_images.length }}</span>
+        <span>{{ this.images.length + this.selected_images_show.length }}</span>
       </label>
 
       <div class="images-cont">
@@ -203,12 +272,12 @@
           v-for="(url, index) in this.$store.state.work_data.images"
           :key="index"
           :src="url"
-          @click="delete_image_url(index, path)"
+          @click="delete_image_url(index, url)"
           alt=""
         />
 
         <img
-          v-for="(url, index) in this.selected_images"
+          v-for="(url, index) in this.selected_images_show"
           :key="index"
           :src="url"
           @click="remove_seletced_images(index)"
@@ -217,7 +286,7 @@
       </div>
       <!-- images  -->
 
-      <button :class="this.update_btn_status ? 'checked' : 'un-checked'">
+      <button class="update_btn" @click="update_work">
         {{
           this.$store.state.language == "English"
             ? this.$store.state.English.dash_work_update_page.update_btn
@@ -251,12 +320,19 @@ export default {
       link: "",
       tags: [],
       images: [],
-      selected_images: [],
+      selected_images_show: [],
+      selected_images_send: [],
       images_for_delete: [],
+      created_at: "",
 
       selected_video: "",
 
+      selected_video_send: [],
+
       video_reaction: "",
+
+      video_cover_send: "",
+      video_cover_show: "",
 
       // create form data
       formData: "",
@@ -274,6 +350,12 @@ export default {
       this.handleFileChangeVideo
     );
 
+    // call to the handelFileChange method on select video cover
+    this.$refs.cover.addEventListener(
+      "change",
+      this.handleFileChangeVideoCover
+    );
+
     // call to get work data method
     this.get_work_data();
   },
@@ -282,6 +364,8 @@ export default {
     handleFileChange(event) {
       // call to reader files method
       this.readerFiles(Array.from(event.target.files));
+
+      this.selected_images_send = Array.from(event.target.files);
     },
 
     // handel selected file (video)
@@ -291,6 +375,17 @@ export default {
 
       // call to reader files method
       this.readerFileVideo(event.target.files[0]);
+
+      // set the selcted video to the selected_video_send
+      this.selected_video_send.push(event.target.files[0]);
+    },
+
+    // handel selected file (video)
+    handleFileChangeVideoCover(event) {
+      // call to reader files method
+      this.readerFileVideoCover(event.target.files[0]);
+      // set the selcted video's cover to the video_cover_send
+      this.video_cover_send = event.target.files[0];
     },
 
     // to reade the selected images
@@ -308,7 +403,7 @@ export default {
         });
 
         // add the promise results to images array
-        this.selected_images.push(await promise);
+        this.selected_images_show.push(await promise);
       }
     },
 
@@ -321,20 +416,38 @@ export default {
       };
 
       reader.readAsDataURL(video);
+
+      // change the video reaction
+      this.video_reaction = "";
+    },
+
+    // reader selecetd video
+    readerFileVideoCover(video_cover) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.video_cover_show = e.target.result;
+      };
+
+      reader.readAsDataURL(video_cover);
     },
 
     // remove the seletced image from selected images array method
     remove_seletced_images(index) {
-      this.selected_images.splice(index, 1);
+      // delete the clicked image from selcted images to show
+      this.selected_images_show.splice(index, 1);
+
+      // delete the clicked image from selcted images to show
+      this.selected_images_send.splice(index, 1);
     },
 
     // add the old image's url to images_for_delete array and delete it from images array
-    delete_image_url(index, path) {
+    delete_image_url(index, url) {
       // delete the image's url from work's images array
       this.$store.state.work_data.images.splice(index, 1);
 
       // add the deleted imag's url to images fro delete
-      this.images_for_delete.push(path);
+      this.images_for_delete.push(url);
     },
 
     // select the tags method
@@ -347,6 +460,21 @@ export default {
           (this.tags = this.tags.filter((tag) => {
             return tag != tag_title;
           }));
+    },
+
+    // delete the video method
+    delete_video() {
+      // update the video reaction
+      this.video_reaction = "delete";
+
+      // rmpty the selected_video
+      this.selected_video = "";
+
+      // empty the work_data's video
+      this.$store.state.work_data.video = "";
+
+      // empty the selcted video to send
+      this.selected_video_send = [];
     },
 
     // get work data
@@ -373,6 +501,7 @@ export default {
           this.tags = response.data.work_data.tags;
           this.link = response.data.work_data.link;
           this.images = response.data.work_data.images;
+          this.created_at = response.data.work_data.created_at;
 
           // stop the laoding
           this.$store.state.loading_status = "close";
@@ -405,6 +534,9 @@ export default {
 
     // update the work
     async update_work() {
+      // change the uploaded_rate in store
+      this.$store.state.uploaded_rate = 0;
+
       // start the loading
       this.$store.state.loading_status = "open";
 
@@ -415,6 +547,12 @@ export default {
 
       // create a new form data
       this.formData = new FormData();
+
+      // add the admin id to form data
+      this.formData.append("admin_id", this.$store.state.admin_data.admin._id);
+
+      // add the work id to form data
+      this.formData.append("work_id", this.$store.state.work_data._id);
 
       // check if the english title is change or not and add it to form data
       if (this.english_title != this.$store.state.work_data.english_title) {
@@ -442,28 +580,76 @@ export default {
         this.formData.append("arabic_description", this.arabic_description);
       }
 
+      // check if the linke is change or not
+      if (this.link != this.$store.state.work_data.link) {
+        this.formData.append("link", this.link);
+      }
+
+      // check if the creatd at date is change or not
+      if (this.created_at != this.$store.state.work_data.created_at) {
+        this.formData.append("created_at", this.created_at);
+      }
+
       // add the images
-      if (this.selected_images.length > 0) {
-        for (const file in this.selected_images) {
-          this.formData.append("images", file, file.name);
+      if (this.selected_images_send.length > 0) {
+        for (const file of this.selected_images_send) {
+          this.formData.append("files", file, file.name);
         }
       }
 
       // check if the video reaction is not delete
       if (this.video_reaction != "delete") {
-        for (const file in this.selecetd_video) {
-          this.formData.append("video", file, file.name);
+        for (const file of this.selected_video_send) {
+          this.formData.append("files", file, file.name);
         }
       } else {
         this.formData.append("video_reaction", this.video_reaction);
       }
 
+      // chaneg the images_for_delete's length is more than 0
+      if (this.images_for_delete.length > 0) {
+        // covaert it to staring and add it to formData
+        this.formData.append(
+          "images_for_delete",
+          this.images_for_delete.join("split_here")
+        );
+      }
+
+      // add the tags
+      this.formData.append("tags", this.tags.join("."));
+
       await axios
-        .put(this.$store.state.APIS.works.update, this.formData, headers)
+        .put(this.$store.state.APIS.works.update, this.formData, {
+          headers,
+          onUploadProgress: (progressEvent) => {
+            // update the upload rate
+            this.$store.state.uploaded_rate = `${Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            )}%`;
+          },
+        })
         .then((response) => {
+          // change the uploaded_rate in store to "" to hidden it
+          this.$store.state.uploaded_rate = "";
+
           // stop the loading
           this.$store.state.loading_status = "close";
-          console.log(response);
+
+          // update the work's data in store
+          this.$store.state.work_data = response.data.work_data;
+
+          // empty the selected_images_send
+          this.selected_images_send = [];
+
+          // empty the selected_images_show
+          this.selected_images_show = [];
+
+          // empty the selected video
+          this.selected_video = "";
+
+          // empty the selected_video_send
+          this.selected_video_send = [];
+
           // set the error to the error_object in store
           this.$store.state.error_object = {
             title: {
@@ -482,6 +668,107 @@ export default {
           this.$store.commit("ChangeMEssageFormStatus");
         })
         .catch((error) => {
+          // change the uploaded_rate in store to "" to hidden it
+          this.$store.state.uploaded_rate = "";
+
+          // stop the loading
+          this.$store.state.loading_status = "close";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "😓Error😓",
+              arabic: "😓خطأ😓",
+            },
+            type: "Error",
+            messages: error.response.data.message,
+            status: error.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        });
+    },
+
+    //update cover
+    async update_video_cover() {
+      // change the uploaded_rate in store
+      this.$store.state.uploaded_rate = 0;
+
+      // start teh loading
+      this.$store.state.loading_status = "open";
+
+      // create a new form data
+      this.formData = new FormData();
+
+      // create headers
+      const headers = {
+        Authorization: `Bearer ${this.$store.state.admin_data.token}`,
+      };
+
+      // add the admin id to fom data
+      this.formData.append("admin_id", this.$store.state.admin_data.admin._id);
+
+      // add the work id to form data
+      this.formData.append("work_id", this.$store.state.work_data._id);
+
+      // add the cover to form data
+      this.formData.append(
+        "cover",
+        this.video_cover_send,
+        this.video_cover_send.name
+      );
+
+      await axios
+        .put(this.$store.state.APIS.works.change_cover, this.formData, {
+          headers,
+          onUploadProgress: (progressEvent) => {
+            // update the upload rate
+            this.$store.state.uploaded_rate = `${Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            )}%`;
+          },
+        })
+        .then((response) => {
+          // change the uploaded_rate in store to "" to hidden it
+          this.$store.state.uploaded_rate = "";
+
+          // stop the loading
+          this.$store.state.loading_status = "close";
+
+          // set the work's data from response to work_data in store
+          this.$store.state.work_data = response.data.work_data;
+
+          // empty the video_cover_send
+          this.video_cover_send = "";
+
+          // empty the video_cover_show
+          this.video_cover_show = "";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "🥳Welcome Admin🥳",
+              arabic: "🥳أهلا مدير🥳",
+            },
+            type: "Success",
+            messages: response.data.message,
+            status: response.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        })
+        .catch((error) => {
+          // change the uploaded_rate in store to "" to hidden it
+          this.$store.state.uploaded_rate = "";
+
           // stop the loading
           this.$store.state.loading_status = "close";
 
@@ -511,6 +798,7 @@ export default {
 @import "../../sass/varibels";
 // darck and light English style
 .dash-work-update-darck-English-open {
+  direction: ltr;
   width: 100%;
   min-height: 100vh;
   background-color: $Navy-blue-for;
@@ -547,6 +835,20 @@ export default {
       color: $white;
       border: 1px solid;
       border-color: transparent transparent $white transparent;
+
+      .cover_label {
+        width: auto;
+        height: auto;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid $inputs-border-black;
+        background-color: $inputs-back-black;
+      }
+    }
+
+    #cover {
+      display: none;
     }
 
     .video_label {
@@ -559,7 +861,13 @@ export default {
       height: auto;
     }
 
-    .video_btn {
+    .video_cover_image {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .update_video_btn_cover_show {
       width: 100%;
       height: 40px;
       margin: 10px 0px;
@@ -577,8 +885,51 @@ export default {
       transition-duration: 0.5s;
     }
 
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
+      display: none;
+    }
+
+    .update_video_btn_cover_show:hover {
+      background-color: $error-green-one;
+    }
+
+    .video_btn {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      font-size: $small;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
     .video_btn:hover {
       background-color: $error-green-one;
+    }
+
+    .delete_video_btn {
+      width: 100%;
+      height: 40px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $white;
+      background-color: $error-red-tow;
+      border: 1px solid $error-red-one;
+      transition-duration: 0.5s;
+    }
+
+    .delete_video_btn:hover {
+      background-color: $error-red-one;
     }
 
     #upload_video {
@@ -692,7 +1043,7 @@ export default {
       }
     }
 
-    .checked {
+    .update_btn {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -703,13 +1054,11 @@ export default {
       border: 1px solid $error-green-one;
       background-color: $error-green-tow;
       cursor: pointer;
+      transition-duration: 0.5s;
     }
 
-    .un-checked {
-      @extend .checked;
-      border: 1px solid $error-red-one;
-      background-color: $error-red-tow;
-      pointer-events: none;
+    .update_btn:hover {
+      background-color: $error-green-one;
     }
   }
 }
@@ -722,5 +1071,832 @@ export default {
     opacity: 0;
   }
 }
+
+.dash-work-update-light-English-open {
+  direction: ltr;
+  width: 100%;
+  min-height: 100vh;
+  background-color: $white;
+  padding: 15% 0px 10px 0px;
+  transition-duration: 0.5s;
+
+  .cont {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    transition-duration: 0.5s;
+    opacity: 1;
+
+    @media (max-width: $mobile) {
+      width: 90%;
+    }
+
+    h1 {
+      width: 100%;
+      height: auto;
+      margin: 20px 0px;
+      color: $black;
+      border: 1px solid;
+      border-color: transparent transparent $black transparent;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      margin: 5px 0px;
+      color: $black;
+      border: 1px solid;
+      border-color: transparent transparent $black transparent;
+
+      .cover_label {
+        width: auto;
+        height: auto;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid $inputs-border-white;
+        background-color: $inputs-back-white;
+      }
+    }
+
+    #cover {
+      display: none;
+    }
+
+    .video_label {
+      @extend label;
+      border: none;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+    }
+
+    .video_cover_image {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .update_video_btn_cover_show {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
+      display: none;
+    }
+
+    .update_video_btn_cover_show:hover {
+      background-color: $error-green-one;
+    }
+
+    .video_btn {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      font-size: $small;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
+    .video_btn:hover {
+      background-color: $error-green-one;
+    }
+
+    .delete_video_btn {
+      width: 100%;
+      height: 40px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $white;
+      background-color: $error-red-tow;
+      border: 1px solid $error-red-one;
+      transition-duration: 0.5s;
+    }
+
+    .delete_video_btn:hover {
+      background-color: $error-red-one;
+    }
+
+    #upload_video {
+      display: none;
+    }
+
+    textarea {
+      resize: none;
+      width: 100%;
+      min-height: 200px;
+      margin: 5px 0px;
+      border-radius: 5px;
+      padding: 5px;
+      color: $black;
+      outline: none;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      outline: none;
+      padding: 0px 5px;
+      border-radius: 5px;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+      color: $black;
+    }
+
+    .tags-cont {
+      width: 100%;
+      height: auto;
+      padding: 5px;
+      background-color: $inputs-back-white;
+      border: 1px solid $inputs-border-white;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+      align-items: center;
+
+      .un_selected {
+        padding: 4px;
+        margin: 3px;
+        cursor: pointer;
+        color: $black;
+        border-radius: 4px;
+        font-size: $small;
+        background-color: $white-one;
+
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
+      }
+
+      .selected {
+        @extend .un_selected;
+        background-color: $white-tow;
+        border: 1px solid $black;
+      }
+    }
+
+    .images-cont {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 5px;
+      background-color: $inputs-back-white;
+      border: 1px solid $inputs-border-white;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding-top: 20px;
+
+      .select_images {
+        border: none;
+        width: auto;
+        height: auto;
+        cursor: pointer;
+        position: absolute;
+        right: 3px;
+        top: 0%;
+
+        svg {
+          color: $black;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid $inputs-border-white;
+          background-color: $inputs-back-white;
+        }
+      }
+
+      #select_images {
+        display: none;
+      }
+
+      img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+
+        @media (max-width: $mobile) {
+          max-width: 150px;
+          height: auto;
+        }
+      }
+    }
+
+    .update_btn {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      border: none;
+      border-radius: 5px;
+      color: $white;
+      outline: none;
+      border: 1px solid $error-green-one;
+      background-color: $error-green-tow;
+      cursor: pointer;
+      transition-duration: 0.5s;
+    }
+
+    .update_btn:hover {
+      background-color: $error-green-one;
+    }
+  }
+}
+
+.dash-work-update-light-English-close {
+  @extend .dash-work-update-light-English-open;
+  padding: 30% 0px 0px 0px;
+
+  .cont {
+    opacity: 0;
+  }
+}
 // darck and light English style
+
+// darck and light Arabic style
+.dash-work-update-darck-Arabic-open {
+  direction: rtl;
+  width: 100%;
+  min-height: 100vh;
+  background-color: $Navy-blue-for;
+  padding: 15% 0px 10px 0px;
+  transition-duration: 0.5s;
+
+  .cont {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    transition-duration: 0.5s;
+    opacity: 1;
+
+    @media (max-width: $mobile) {
+      width: 90%;
+    }
+
+    h1 {
+      width: 100%;
+      height: auto;
+      margin: 20px 0px;
+      color: $white;
+      border: 1px solid;
+      border-color: transparent transparent $white transparent;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      margin: 5px 0px;
+      color: $white;
+      border: 1px solid;
+      border-color: transparent transparent $white transparent;
+
+      .cover_label {
+        width: auto;
+        height: auto;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid $inputs-border-black;
+        background-color: $inputs-back-black;
+      }
+    }
+
+    #cover {
+      display: none;
+    }
+
+    .video_label {
+      @extend label;
+      border: none;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+    }
+
+    .video_cover_image {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .update_video_btn_cover_show {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
+      display: none;
+    }
+
+    .update_video_btn_cover_show:hover {
+      background-color: $error-green-one;
+    }
+
+    .video_btn {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      font-size: $small;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
+    .video_btn:hover {
+      background-color: $error-green-one;
+    }
+
+    .delete_video_btn {
+      width: 100%;
+      height: 40px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $white;
+      background-color: $error-red-tow;
+      border: 1px solid $error-red-one;
+      transition-duration: 0.5s;
+    }
+
+    .delete_video_btn:hover {
+      background-color: $error-red-one;
+    }
+
+    #upload_video {
+      display: none;
+    }
+
+    textarea {
+      resize: none;
+      width: 100%;
+      min-height: 200px;
+      margin: 5px 0px;
+      border-radius: 5px;
+      padding: 5px;
+      color: $white;
+      outline: none;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      outline: none;
+      padding: 0px 5px;
+      border-radius: 5px;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+      color: $white;
+    }
+
+    .tags-cont {
+      width: 100%;
+      height: auto;
+      padding: 5px;
+      background-color: $inputs-back-black;
+      border: 1px solid $inputs-border-black;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+      align-items: center;
+
+      .un_selected {
+        padding: 4px;
+        margin: 3px;
+        cursor: pointer;
+        color: $white;
+        border-radius: 4px;
+        font-size: $small;
+        background-color: $Navy-blue-tow;
+
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
+      }
+
+      .selected {
+        @extend .un_selected;
+        background-color: $Navy-blue-one;
+        border: 1px solid $white;
+      }
+    }
+
+    .images-cont {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 5px;
+      background-color: $inputs-back-black;
+      border: 1px solid $inputs-border-black;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding-top: 20px;
+
+      .select_images {
+        border: none;
+        width: auto;
+        height: auto;
+        cursor: pointer;
+        position: absolute;
+        left: 3px;
+        top: 0%;
+
+        svg {
+          color: $white;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid $inputs-border-black;
+          background-color: $inputs-back-black;
+        }
+      }
+
+      #select_images {
+        display: none;
+      }
+
+      img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+
+        @media (max-width: $mobile) {
+          max-width: 150px;
+          height: auto;
+        }
+      }
+    }
+
+    .update_btn {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      border: none;
+      border-radius: 5px;
+      color: $white;
+      outline: none;
+      border: 1px solid $error-green-one;
+      background-color: $error-green-tow;
+      cursor: pointer;
+      transition-duration: 0.5s;
+    }
+
+    .update_btn:hover {
+      background-color: $error-green-one;
+    }
+  }
+}
+
+.dash-work-update-darck-Arabic-close {
+  @extend .dash-work-update-darck-Arabic-open;
+  padding: 30% 0px 0px 0px;
+
+  .cont {
+    opacity: 0;
+  }
+}
+
+.dash-work-update-light-Arabic-open {
+  direction: rtl;
+  width: 100%;
+  min-height: 100vh;
+  background-color: $white;
+  padding: 15% 0px 10px 0px;
+  transition-duration: 0.5s;
+
+  .cont {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    transition-duration: 0.5s;
+    opacity: 1;
+
+    @media (max-width: $mobile) {
+      width: 90%;
+    }
+
+    h1 {
+      width: 100%;
+      height: auto;
+      margin: 20px 0px;
+      color: $black;
+      border: 1px solid;
+      border-color: transparent transparent $black transparent;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      margin: 5px 0px;
+      color: $black;
+      border: 1px solid;
+      border-color: transparent transparent $black transparent;
+
+      .cover_label {
+        width: auto;
+        height: auto;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid $inputs-border-white;
+        background-color: $inputs-back-white;
+      }
+    }
+
+    #cover {
+      display: none;
+    }
+
+    .video_label {
+      @extend label;
+      border: none;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+    }
+
+    .video_cover_image {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .update_video_btn_cover_show {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
+      display: none;
+    }
+
+    .update_video_btn_cover_show:hover {
+      background-color: $error-green-one;
+    }
+
+    .video_btn {
+      width: 100%;
+      height: 40px;
+      margin: 10px 0px;
+      border-radius: 5px;
+      font-size: $small;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
+      color: $white;
+      transition-duration: 0.5s;
+    }
+
+    .video_btn:hover {
+      background-color: $error-green-one;
+    }
+
+    .delete_video_btn {
+      width: 100%;
+      height: 40px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $white;
+      background-color: $error-red-tow;
+      border: 1px solid $error-red-one;
+      transition-duration: 0.5s;
+    }
+
+    .delete_video_btn:hover {
+      background-color: $error-red-one;
+    }
+
+    #upload_video {
+      display: none;
+    }
+
+    textarea {
+      resize: none;
+      width: 100%;
+      min-height: 200px;
+      margin: 5px 0px;
+      border-radius: 5px;
+      padding: 5px;
+      color: $black;
+      outline: none;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      outline: none;
+      padding: 0px 5px;
+      border-radius: 5px;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+      color: $black;
+    }
+
+    .tags-cont {
+      width: 100%;
+      height: auto;
+      padding: 5px;
+      background-color: $inputs-back-white;
+      border: 1px solid $inputs-border-white;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+      align-items: center;
+
+      .un_selected {
+        padding: 4px;
+        margin: 3px;
+        cursor: pointer;
+        color: $black;
+        border-radius: 4px;
+        font-size: $small;
+        background-color: $white-one;
+
+        @media (max-width: $mobile) {
+          font-size: $x-small;
+        }
+      }
+
+      .selected {
+        @extend .un_selected;
+        background-color: $white-tow;
+        border: 1px solid $black;
+      }
+    }
+
+    .images-cont {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 5px;
+      background-color: $inputs-back-white;
+      border: 1px solid $inputs-border-white;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding-top: 20px;
+
+      .select_images {
+        border: none;
+        width: auto;
+        height: auto;
+        cursor: pointer;
+        position: absolute;
+        left: 3px;
+        top: 0%;
+
+        svg {
+          color: $black;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid $inputs-border-white;
+          background-color: $inputs-back-white;
+        }
+      }
+
+      #select_images {
+        display: none;
+      }
+
+      img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+
+        @media (max-width: $mobile) {
+          max-width: 150px;
+          height: auto;
+        }
+      }
+    }
+
+    .update_btn {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px;
+      border: none;
+      border-radius: 5px;
+      color: $white;
+      outline: none;
+      border: 1px solid $error-green-one;
+      background-color: $error-green-tow;
+      cursor: pointer;
+      transition-duration: 0.5s;
+    }
+
+    .update_btn:hover {
+      background-color: $error-green-one;
+    }
+  }
+}
+
+.dash-work-update-light-Arabic-close {
+  @extend .dash-work-update-light-Arabic-open;
+  padding: 30% 0px 0px 0px;
+
+  .cont {
+    opacity: 0;
+  }
+}
+// darck and light Arabic style
 </style>

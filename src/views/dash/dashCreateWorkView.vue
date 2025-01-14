@@ -1,36 +1,29 @@
 <template>
   <div
-    :class="`dash-lesson-create-${this.$store.state.mood}-${this.$store.state.language}-${this.page_status}`"
+    :class="`dash-work-create-${this.$store.state.mood}-${this.$store.state.language}-${this.page_status}`"
   >
     <div class="cont">
       <h1>
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.title
-            : this.$store.state.Arabic.dash_lesson_create_page.title
+            ? this.$store.state.English.dash_work_create_page.title
+            : this.$store.state.Arabic.dash_work_create_page.title
         }}
       </h1>
 
       <label for="video">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.video
-            : this.$store.state.Arabic.dash_lesson_create_page.video
+            ? this.$store.state.English.dash_work_create_page.video
+            : this.$store.state.Arabic.dash_work_create_page.video
         }}
       </label>
-
-      <input type="file" id="cover" accept="image/*" ref="cover" />
 
       <!-- video  -->
       <video
         v-if="this.selected_video"
         class="video"
         type="video/mp4"
-        :poster="
-          this.video_cover_show != ''
-            ? this.video_cover_show
-            : this.$store.state.lesson_data.video_cover
-        "
         @loadedmetadata="onVideoLoaded"
         controls
       >
@@ -39,12 +32,26 @@
       </video>
       <!-- video  -->
 
+      <!-- delete video btn  -->
+      <button
+        class="delete_video_btn"
+        @click="delete_video"
+        v-if="this.selected_video"
+      >
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_work_create_page.delete_video_btn
+            : this.$store.state.Arabic.dash_work_create_page.delete_video_btn
+        }}
+      </button>
+      <!-- delete video btn  -->
+
       <label for="upload_video" class="video_label">
         <p class="video_btn">
           {{
             this.$store.state.language == "English"
-              ? this.$store.state.English.dash_lesson_create_page.video_btn
-              : this.$store.state.Arabic.dash_lesson_create_page.video_btn
+              ? this.$store.state.English.dash_work_create_page.video_btn
+              : this.$store.state.Arabic.dash_work_create_page.video_btn
           }}
         </p>
       </label>
@@ -60,8 +67,8 @@
       <label for="english_title">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.english_title
-            : this.$store.state.Arabic.dash_lesson_create_page.english_title
+            ? this.$store.state.English.dash_work_create_page.english_title
+            : this.$store.state.Arabic.dash_work_create_page.english_title
         }}
 
         <span>{{ this.english_title.length }}</span>
@@ -74,8 +81,8 @@
       <label for="arabic_title">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.arabic_title
-            : this.$store.state.Arabic.dash_lesson_create_page.arabic_title
+            ? this.$store.state.English.dash_work_create_page.arabic_title
+            : this.$store.state.Arabic.dash_work_create_page.arabic_title
         }}
 
         <span>{{ this.arabic_title.length }}</span>
@@ -88,10 +95,9 @@
       <label for="english_description">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page
+            ? this.$store.state.English.dash_work_create_page
                 .english_description
-            : this.$store.state.Arabic.dash_lesson_create_page
-                .english_description
+            : this.$store.state.Arabic.dash_work_create_page.english_description
         }}
 
         <span>{{ this.english_description.length }}</span>
@@ -107,10 +113,8 @@
       <label for="arabic_description">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page
-                .arabic_description
-            : this.$store.state.Arabic.dash_lesson_create_page
-                .arabic_description
+            ? this.$store.state.English.dash_work_create_page.arabic_description
+            : this.$store.state.Arabic.dash_work_create_page.arabic_description
         }}
 
         <span>{{ this.arabic_description.length }}</span>
@@ -126,8 +130,8 @@
       <label for="link">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.link
-            : this.$store.state.Arabic.dash_lesson_create_page.link
+            ? this.$store.state.English.dash_work_create_page.link
+            : this.$store.state.Arabic.dash_work_create_page.link
         }}
 
         <span>{{ this.link.length }}</span>
@@ -136,64 +140,12 @@
       <input type="text" id="link" v-model="this.link" />
       <!-- link  -->
 
-      <!-- program  -->
-      <label for="program">
-        {{
-          this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.program
-            : this.$store.state.Arabic.dash_lesson_create_page.program
-        }}
-
-        <span>{{ this.program.length }}</span>
-      </label>
-
-      <select id="program" v-model="this.program">
-        <option
-          v-for="(program, index) in this.$store.state.programs"
-          :key="index"
-          :value="program.english_title"
-        >
-          {{
-            this.$store.state.language == "English"
-              ? program.english_title
-              : program.arabic_title
-          }}
-        </option>
-      </select>
-      <!-- program  -->
-
-      <!-- level  -->
-      <label for="level">
-        {{
-          this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.level
-            : this.$store.state.Arabic.dash_lesson_create_page.level
-        }}
-
-        <span>{{ this.level.length }}</span>
-      </label>
-
-      <select id="level" v-model="this.level">
-        <option
-          v-for="(level, index) in this.$store.state.levels"
-          :key="index"
-          :value="level.english_title"
-        >
-          {{
-            this.$store.state.language == "English"
-              ? level.english_title
-              : level.arabic_title
-          }}
-        </option>
-      </select>
-      <!-- level  -->
-
       <!-- created_at  -->
       <label for="created_at">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.created_at
-            : this.$store.state.Arabic.dash_lesson_create_page.created_at
+            ? this.$store.state.English.dash_work_create_page.created_at
+            : this.$store.state.Arabic.dash_work_create_page.created_at
         }}
 
         <span>{{ this.created_at.length }}</span>
@@ -206,8 +158,8 @@
       <label
         >{{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.tags
-            : this.$store.state.Arabic.dash_lesson_create_page.tags
+            ? this.$store.state.English.dash_work_create_page.tags
+            : this.$store.state.Arabic.dash_work_create_page.tags
         }}
         <span>{{ this.tags.length }}</span>
       </label>
@@ -234,8 +186,8 @@
       <label
         >{{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.image_label
-            : this.$store.state.Arabic.dash_lesson_create_page.image_label
+            ? this.$store.state.English.dash_work_create_page.image_label
+            : this.$store.state.Arabic.dash_work_create_page.image_label
         }}
         <span>{{ this.images.length + this.selected_images_show.length }}</span>
       </label>
@@ -263,11 +215,11 @@
       </div>
       <!-- images  -->
 
-      <button class="create_btn" @click="create_lesson">
+      <button class="create_btn" @click="create_work">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.create_btn
-            : this.$store.state.Arabic.dash_lesson_create_page.create_btn
+            ? this.$store.state.English.dash_work_create_page.create_btn
+            : this.$store.state.Arabic.dash_work_create_page.create_btn
         }}
       </button>
     </div>
@@ -281,7 +233,7 @@ export default {
   data() {
     return {
       // page's name
-      name: "create-lesson-page",
+      name: "create-work-page",
 
       // page status
       page_status: "close",
@@ -289,7 +241,7 @@ export default {
       // create_btn_status
       create_btn_status: false,
 
-      // lesson's data
+      // work's data
       english_title: "",
       arabic_title: "",
       english_description: "",
@@ -300,15 +252,10 @@ export default {
       selected_images_show: [],
       selected_images_send: [],
       images_for_delete: [],
-      program: "",
-      level: "",
       created_at: "",
-
       selected_video: "",
 
       selected_video_send: [],
-
-      video_reaction: "",
 
       video_cover_send: "",
       video_cover_show: "",
@@ -318,7 +265,7 @@ export default {
     };
   },
   mounted() {
-    // chaneg the page's state after 5000 ms
+    // / change the page status after 500 ms
     setTimeout(() => {
       this.page_status = "open";
     }, 500);
@@ -355,6 +302,14 @@ export default {
       this.selected_video_send.push(event.target.files[0]);
     },
 
+    // handel selected file (video)
+    handleFileChangeVideoCover(event) {
+      // call to reader files method
+      this.readerFileVideoCover(event.target.files[0]);
+      // set the selcted video's cover to the video_cover_send
+      this.video_cover_send = event.target.files[0];
+    },
+
     // to reade the selected images
     async readerFiles(images_array) {
       // looping to read all selecetd images
@@ -383,9 +338,17 @@ export default {
       };
 
       reader.readAsDataURL(video);
+    },
 
-      // change the video reaction
-      this.video_reaction = "";
+    // reader selecetd video
+    readerFileVideoCover(video_cover) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.video_cover_show = e.target.result;
+      };
+
+      reader.readAsDataURL(video_cover);
     },
 
     // remove the seletced image from selected images array method
@@ -414,13 +377,14 @@ export default {
       // rmpty the selected_video
       this.selected_video = "";
 
+      // empty the work_data's video
+
       // empty the selcted video to send
       this.selected_video_send = [];
     },
 
-    // create the lesson
-    async create_lesson() {
-      console.log("sended");
+    // create the work
+    async create_work() {
       // change the uploaded_rate in store
       this.$store.state.uploaded_rate = 0;
 
@@ -435,13 +399,16 @@ export default {
       // create a new form data
       this.formData = new FormData();
 
-      // add thre english title
+      // add the admin id to form data
+      // this.formData.append("admin_id", this.$store.state.admin_data.admin._id);
+
+      // add the english title
       this.formData.append("english_title", this.english_title);
 
-      // add thre arabic title
+      // add the arabic tite
       this.formData.append("arabic_title", this.arabic_title);
 
-      // add teh english description
+      // add the english description
       this.formData.append("english_description", this.english_description);
 
       // add the arabic description
@@ -449,12 +416,6 @@ export default {
 
       // add the link
       this.formData.append("link", this.link);
-
-      // add the program
-      this.formData.append("program", this.program);
-
-      // add the level
-      this.formData.append("level", this.level);
 
       // add the created at date
       this.formData.append("created_at", this.created_at);
@@ -476,11 +437,13 @@ export default {
       // add the tags
       this.formData.append("tags", this.tags.join("."));
 
+      console.log(this.formData);
+
       await axios
-        .post(this.$store.state.APIS.lessons.create, this.formData, {
+        .post(this.$store.state.APIS.works.create, this.formData, {
           headers,
           onUploadProgress: (progressEvent) => {
-            // create the upload rate
+            // update the upload rate
             this.$store.state.uploaded_rate = `${Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             )}%`;
@@ -555,7 +518,7 @@ export default {
 <style lang="scss">
 @import "../../sass/varibels";
 // darck and light English style
-.dash-lesson-create-darck-English-open {
+.dash-work-create-darck-English-open {
   direction: ltr;
   width: 100%;
   min-height: 100vh;
@@ -619,39 +582,6 @@ export default {
       height: auto;
     }
 
-    .video_cover_image {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-
-    .create_video_btn_cover_show {
-      width: 100%;
-      height: 40px;
-      margin: 10px 0px;
-      border-radius: 5px;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      background-color: $error-green-tow;
-      border: 1px solid $error-green-one;
-      color: $white;
-      transition-duration: 0.5s;
-    }
-
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
-      display: none;
-    }
-
-    .create_video_btn_cover_show:hover {
-      background-color: $error-green-one;
-    }
-
     .video_btn {
       width: 100%;
       height: 40px;
@@ -707,8 +637,7 @@ export default {
       background-color: $inputs-back-white;
     }
 
-    input,
-    select {
+    input {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -718,10 +647,6 @@ export default {
       border: 1px solid $inputs-border-white;
       background-color: $inputs-back-white;
       color: $white;
-    }
-
-    select > option {
-      background-color: $Navy-blue-one;
     }
 
     .tags-cont {
@@ -826,8 +751,8 @@ export default {
   }
 }
 
-.dash-lesson-create-darck-English-close {
-  @extend .dash-lesson-create-darck-English-open;
+.dash-work-create-darck-English-close {
+  @extend .dash-work-create-darck-English-open;
   padding: 30% 0px 0px 0px;
 
   .cont {
@@ -835,7 +760,7 @@ export default {
   }
 }
 
-.dash-lesson-create-light-English-open {
+.dash-work-create-light-English-open {
   direction: ltr;
   width: 100%;
   min-height: 100vh;
@@ -899,39 +824,6 @@ export default {
       height: auto;
     }
 
-    .video_cover_image {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-
-    .create_video_btn_cover_show {
-      width: 100%;
-      height: 40px;
-      margin: 10px 0px;
-      border-radius: 5px;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      background-color: $error-green-tow;
-      border: 1px solid $error-green-one;
-      color: $white;
-      transition-duration: 0.5s;
-    }
-
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
-      display: none;
-    }
-
-    .create_video_btn_cover_show:hover {
-      background-color: $error-green-one;
-    }
-
     .video_btn {
       width: 100%;
       height: 40px;
@@ -987,8 +879,7 @@ export default {
       background-color: $inputs-back-white;
     }
 
-    input,
-    select {
+    input {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -998,10 +889,6 @@ export default {
       border: 1px solid $inputs-border-white;
       background-color: $inputs-back-white;
       color: $black;
-    }
-
-    select > option {
-      background-color: $white-tow;
     }
 
     .tags-cont {
@@ -1106,8 +993,8 @@ export default {
   }
 }
 
-.dash-lesson-create-light-English-close {
-  @extend .dash-lesson-create-light-English-open;
+.dash-work-create-light-English-close {
+  @extend .dash-work-create-light-English-open;
   padding: 30% 0px 0px 0px;
 
   .cont {
@@ -1117,7 +1004,7 @@ export default {
 // darck and light English style
 
 // darck and light Arabic style
-.dash-lesson-create-darck-Arabic-open {
+.dash-work-create-darck-Arabic-open {
   direction: rtl;
   width: 100%;
   min-height: 100vh;
@@ -1181,39 +1068,6 @@ export default {
       height: auto;
     }
 
-    .video_cover_image {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-
-    .create_video_btn_cover_show {
-      width: 100%;
-      height: 40px;
-      margin: 10px 0px;
-      border-radius: 5px;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      background-color: $error-green-tow;
-      border: 1px solid $error-green-one;
-      color: $white;
-      transition-duration: 0.5s;
-    }
-
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
-      display: none;
-    }
-
-    .create_video_btn_cover_show:hover {
-      background-color: $error-green-one;
-    }
-
     .video_btn {
       width: 100%;
       height: 40px;
@@ -1269,8 +1123,7 @@ export default {
       background-color: $inputs-back-white;
     }
 
-    input,
-    select {
+    input {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -1280,10 +1133,6 @@ export default {
       border: 1px solid $inputs-border-white;
       background-color: $inputs-back-white;
       color: $white;
-    }
-
-    select > option {
-      background-color: $Navy-blue-one;
     }
 
     .tags-cont {
@@ -1388,8 +1237,8 @@ export default {
   }
 }
 
-.dash-lesson-create-darck-Arabic-close {
-  @extend .dash-lesson-create-darck-Arabic-open;
+.dash-work-create-darck-Arabic-close {
+  @extend .dash-work-create-darck-Arabic-open;
   padding: 30% 0px 0px 0px;
 
   .cont {
@@ -1397,7 +1246,7 @@ export default {
   }
 }
 
-.dash-lesson-create-light-Arabic-open {
+.dash-work-create-light-Arabic-open {
   direction: rtl;
   width: 100%;
   min-height: 100vh;
@@ -1461,39 +1310,6 @@ export default {
       height: auto;
     }
 
-    .video_cover_image {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-
-    .create_video_btn_cover_show {
-      width: 100%;
-      height: 40px;
-      margin: 10px 0px;
-      border-radius: 5px;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      background-color: $error-green-tow;
-      border: 1px solid $error-green-one;
-      color: $white;
-      transition-duration: 0.5s;
-    }
-
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
-      display: none;
-    }
-
-    .create_video_btn_cover_show:hover {
-      background-color: $error-green-one;
-    }
-
     .video_btn {
       width: 100%;
       height: 40px;
@@ -1549,8 +1365,7 @@ export default {
       background-color: $inputs-back-white;
     }
 
-    input,
-    select {
+    input {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -1560,10 +1375,6 @@ export default {
       border: 1px solid $inputs-border-white;
       background-color: $inputs-back-white;
       color: $black;
-    }
-
-    select > option {
-      background-color: $white-tow;
     }
 
     .tags-cont {
@@ -1668,8 +1479,8 @@ export default {
   }
 }
 
-.dash-lesson-create-light-Arabic-close {
-  @extend .dash-lesson-create-light-Arabic-open;
+.dash-work-create-light-Arabic-close {
+  @extend .dash-work-create-light-Arabic-open;
   padding: 30% 0px 0px 0px;
 
   .cont {

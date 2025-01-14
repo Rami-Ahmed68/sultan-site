@@ -1,27 +1,59 @@
 <template>
   <div
-    :class="`dash-lesson-create-${this.$store.state.mood}-${this.$store.state.language}-${this.page_status}`"
+    :class="`dash-lesson-update-${this.$store.state.mood}-${this.$store.state.language}-${this.page_status}`"
   >
     <div class="cont">
       <h1>
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.title
-            : this.$store.state.Arabic.dash_lesson_create_page.title
+            ? this.$store.state.English.dash_lesson_update_page.title
+            : this.$store.state.Arabic.dash_lesson_update_page.title
         }}
       </h1>
 
       <label for="video">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.video
-            : this.$store.state.Arabic.dash_lesson_create_page.video
+            ? this.$store.state.English.dash_lesson_update_page.video
+            : this.$store.state.Arabic.dash_lesson_update_page.video
         }}
+
+        <label for="cover" class="cover_label">
+          <icon icon="plus" />
+        </label>
       </label>
 
       <input type="file" id="cover" accept="image/*" ref="cover" />
 
       <!-- video  -->
+      <video
+        v-if="
+          this.$store.state.lesson_data &&
+          this.$store.state.lesson_data.video &&
+          !this.selected_video
+        "
+        :poster="
+          this.video_cover_show != ''
+            ? this.video_cover_show
+            : this.$store.state.lesson_data.video_cover
+        "
+        class="video"
+        type="video/mp4"
+        @loadedmetadata="onVideoLoaded"
+        controls
+      >
+        <source
+          play
+          :src="this.$store.state.lesson_data.video"
+          type="video/mp4"
+        />
+        <source
+          play
+          :src="this.$store.state.lesson_data.video"
+          type="video/ogg"
+        />
+      </video>
+
       <video
         v-if="this.selected_video"
         class="video"
@@ -37,14 +69,52 @@
         <source play :src="this.selected_video" type="video/mp4" />
         <source play :src="this.selected_vide" type="video/ogg" />
       </video>
+
+      <img
+        :src="
+          this.video_cover_show
+            ? this.video_cover_show
+            : this.$store.state.lesson_data.video_cover
+        "
+        class="video_cover_image"
+        alt="video_cover"
+        v-if="
+          this.selected_video == '' && this.$store.state.lesson_data.video == ''
+        "
+      />
       <!-- video  -->
+
+      <!-- update video_cover btn  -->
+      <button
+        :class="`update_video_btn_cover_${
+          this.video_cover_show != '' ? 'show' : 'hidden'
+        }`"
+        @click="update_video_cover"
+      >
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_lesson_update_page.video_cover_btn
+            : this.$store.state.Arabic.dash_lesson_update_page.video_cover_btn
+        }}
+      </button>
+      <!-- update video_cover btn  -->
+
+      <!-- delete video btn  -->
+      <button class="delete_video_btn" @click="delete_video">
+        {{
+          this.$store.state.language == "English"
+            ? this.$store.state.English.dash_lesson_update_page.delete_video_btn
+            : this.$store.state.Arabic.dash_lesson_update_page.delete_video_btn
+        }}
+      </button>
+      <!-- delete video btn  -->
 
       <label for="upload_video" class="video_label">
         <p class="video_btn">
           {{
             this.$store.state.language == "English"
-              ? this.$store.state.English.dash_lesson_create_page.video_btn
-              : this.$store.state.Arabic.dash_lesson_create_page.video_btn
+              ? this.$store.state.English.dash_lesson_update_page.video_btn
+              : this.$store.state.Arabic.dash_lesson_update_page.video_btn
           }}
         </p>
       </label>
@@ -60,8 +130,8 @@
       <label for="english_title">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.english_title
-            : this.$store.state.Arabic.dash_lesson_create_page.english_title
+            ? this.$store.state.English.dash_lesson_update_page.english_title
+            : this.$store.state.Arabic.dash_lesson_update_page.english_title
         }}
 
         <span>{{ this.english_title.length }}</span>
@@ -74,8 +144,8 @@
       <label for="arabic_title">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.arabic_title
-            : this.$store.state.Arabic.dash_lesson_create_page.arabic_title
+            ? this.$store.state.English.dash_lesson_update_page.arabic_title
+            : this.$store.state.Arabic.dash_lesson_update_page.arabic_title
         }}
 
         <span>{{ this.arabic_title.length }}</span>
@@ -88,9 +158,9 @@
       <label for="english_description">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page
+            ? this.$store.state.English.dash_lesson_update_page
                 .english_description
-            : this.$store.state.Arabic.dash_lesson_create_page
+            : this.$store.state.Arabic.dash_lesson_update_page
                 .english_description
         }}
 
@@ -107,9 +177,9 @@
       <label for="arabic_description">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page
+            ? this.$store.state.English.dash_lesson_update_page
                 .arabic_description
-            : this.$store.state.Arabic.dash_lesson_create_page
+            : this.$store.state.Arabic.dash_lesson_update_page
                 .arabic_description
         }}
 
@@ -126,8 +196,8 @@
       <label for="link">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.link
-            : this.$store.state.Arabic.dash_lesson_create_page.link
+            ? this.$store.state.English.dash_lesson_update_page.link
+            : this.$store.state.Arabic.dash_lesson_update_page.link
         }}
 
         <span>{{ this.link.length }}</span>
@@ -140,8 +210,8 @@
       <label for="program">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.program
-            : this.$store.state.Arabic.dash_lesson_create_page.program
+            ? this.$store.state.English.dash_lesson_update_page.program
+            : this.$store.state.Arabic.dash_lesson_update_page.program
         }}
 
         <span>{{ this.program.length }}</span>
@@ -166,8 +236,8 @@
       <label for="level">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.level
-            : this.$store.state.Arabic.dash_lesson_create_page.level
+            ? this.$store.state.English.dash_lesson_update_page.level
+            : this.$store.state.Arabic.dash_lesson_update_page.level
         }}
 
         <span>{{ this.level.length }}</span>
@@ -192,8 +262,8 @@
       <label for="created_at">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.created_at
-            : this.$store.state.Arabic.dash_lesson_create_page.created_at
+            ? this.$store.state.English.dash_lesson_update_page.created_at
+            : this.$store.state.Arabic.dash_lesson_update_page.created_at
         }}
 
         <span>{{ this.created_at.length }}</span>
@@ -206,8 +276,8 @@
       <label
         >{{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.tags
-            : this.$store.state.Arabic.dash_lesson_create_page.tags
+            ? this.$store.state.English.dash_lesson_update_page.tags
+            : this.$store.state.Arabic.dash_lesson_update_page.tags
         }}
         <span>{{ this.tags.length }}</span>
       </label>
@@ -234,8 +304,8 @@
       <label
         >{{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.image_label
-            : this.$store.state.Arabic.dash_lesson_create_page.image_label
+            ? this.$store.state.English.dash_lesson_update_page.image_label
+            : this.$store.state.Arabic.dash_lesson_update_page.image_label
         }}
         <span>{{ this.images.length + this.selected_images_show.length }}</span>
       </label>
@@ -254,6 +324,14 @@
         />
 
         <img
+          v-for="(url, index) in this.$store.state.lesson_data.images"
+          :key="index"
+          :src="url"
+          @click="delete_image_url(index, url)"
+          alt=""
+        />
+
+        <img
           v-for="(url, index) in this.selected_images_show"
           :key="index"
           :src="url"
@@ -263,11 +341,11 @@
       </div>
       <!-- images  -->
 
-      <button class="create_btn" @click="create_lesson">
+      <button class="update_btn" @click="update_lesson">
         {{
           this.$store.state.language == "English"
-            ? this.$store.state.English.dash_lesson_create_page.create_btn
-            : this.$store.state.Arabic.dash_lesson_create_page.create_btn
+            ? this.$store.state.English.dash_lesson_update_page.update_btn
+            : this.$store.state.Arabic.dash_lesson_update_page.update_btn
         }}
       </button>
     </div>
@@ -281,13 +359,13 @@ export default {
   data() {
     return {
       // page's name
-      name: "create-lesson-page",
+      name: "update-lesson-page",
 
       // page status
       page_status: "close",
 
-      // create_btn_status
-      create_btn_status: false,
+      // update_btn_status
+      update_btn_status: false,
 
       // lesson's data
       english_title: "",
@@ -318,11 +396,6 @@ export default {
     };
   },
   mounted() {
-    // chaneg the page's state after 5000 ms
-    setTimeout(() => {
-      this.page_status = "open";
-    }, 500);
-
     //  call to the handleFileChange method on select any image
     this.$refs.selected_images.addEventListener(
       "change",
@@ -333,6 +406,15 @@ export default {
       "change",
       this.handleFileChangeVideo
     );
+
+    // call to the handelFileChange method on select video cover
+    this.$refs.cover.addEventListener(
+      "change",
+      this.handleFileChangeVideoCover
+    );
+
+    // call to get lesson data method
+    this.get_lesson_data();
   },
   methods: {
     // handel selected files
@@ -353,6 +435,14 @@ export default {
 
       // set the selcted video to the selected_video_send
       this.selected_video_send.push(event.target.files[0]);
+    },
+
+    // handel selected file (video)
+    handleFileChangeVideoCover(event) {
+      // call to reader files method
+      this.readerFileVideoCover(event.target.files[0]);
+      // set the selcted video's cover to the video_cover_send
+      this.video_cover_send = event.target.files[0];
     },
 
     // to reade the selected images
@@ -388,6 +478,17 @@ export default {
       this.video_reaction = "";
     },
 
+    // reader selecetd video
+    readerFileVideoCover(video_cover) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.video_cover_show = e.target.result;
+      };
+
+      reader.readAsDataURL(video_cover);
+    },
+
     // remove the seletced image from selected images array method
     remove_seletced_images(index) {
       // delete the clicked image from selcted images to show
@@ -395,6 +496,15 @@ export default {
 
       // delete the clicked image from selcted images to show
       this.selected_images_send.splice(index, 1);
+    },
+
+    // add the old image's url to images_for_delete array and delete it from images array
+    delete_image_url(index, url) {
+      // delete the image's url from lesson's images array
+      this.$store.state.lesson_data.images.splice(index, 1);
+
+      // add the deleted imag's url to images fro delete
+      this.images_for_delete.push(url);
     },
 
     // select the tags method
@@ -411,16 +521,79 @@ export default {
 
     // delete the video method
     delete_video() {
+      // update the video reaction
+      this.video_reaction = "delete";
+
       // rmpty the selected_video
       this.selected_video = "";
+
+      // empty the lesson_data's video
+      this.$store.state.lesson_data.video = "";
 
       // empty the selcted video to send
       this.selected_video_send = [];
     },
 
-    // create the lesson
-    async create_lesson() {
-      console.log("sended");
+    // get lesson data
+    async get_lesson_data() {
+      // start the laoding
+      this.$store.state.loading_status = "open";
+
+      await axios
+        .get(this.$store.state.APIS.lessons.get_one, {
+          params: {
+            lesson_id: this.$route.params.id,
+          },
+        })
+        .then((response) => {
+          // change the page status
+          this.page_status = "open";
+
+          // ste the lesson data to the lesson's filed in data section
+          this.english_title = response.data.lesson_data.english_title;
+          this.arabic_title = response.data.lesson_data.arabic_title;
+          this.english_description =
+            response.data.lesson_data.english_description;
+          this.arabic_description =
+            response.data.lesson_data.arabic_description;
+          this.tags = response.data.lesson_data.tags;
+          this.link = response.data.lesson_data.link;
+          this.images = response.data.lesson_data.images;
+          this.program = response.data.lesson_data.program;
+          this.level = response.data.lesson_data.level;
+          this.created_at = response.data.lesson_data.created_at;
+
+          // stop the laoding
+          this.$store.state.loading_status = "close";
+
+          // set teh geted lesson data to lesson var in store
+          this.$store.state.lesson_data = response.data.lesson_data;
+        })
+        .catch((error) => {
+          // stop the laoding
+          this.$store.state.loading_status = "close";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "😓Error😓",
+              arabic: "😓خطأ😓",
+            },
+            type: "Error",
+            messages: error.response.data.message,
+            status: error.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        });
+    },
+
+    // update the lesson
+    async update_lesson() {
       // change the uploaded_rate in store
       this.$store.state.uploaded_rate = 0;
 
@@ -435,29 +608,57 @@ export default {
       // create a new form data
       this.formData = new FormData();
 
-      // add thre english title
-      this.formData.append("english_title", this.english_title);
+      // add the admin id to form data
+      this.formData.append("admin_id", this.$store.state.admin_data.admin._id);
 
-      // add thre arabic title
-      this.formData.append("arabic_title", this.arabic_title);
+      // add the lesson id to form data
+      this.formData.append("lesson_id", this.$store.state.lesson_data._id);
 
-      // add teh english description
-      this.formData.append("english_description", this.english_description);
+      // check if the english title is change or not and add it to form data
+      if (this.english_title != this.$store.state.lesson_data.english_title) {
+        this.formData.append("english_title", this.english_title);
+      }
 
-      // add the arabic description
-      this.formData.append("arabic_description", this.arabic_description);
+      // check if the arabic title is change or not and add it to form data
+      if (this.arabic_title != this.$store.state.lesson_data.arabic_title) {
+        this.formData.append("arabic_title", this.arabic_title);
+      }
 
-      // add the link
-      this.formData.append("link", this.link);
+      // check if the english description is change or not and add it to form data
+      if (
+        this.english_description !=
+        this.$store.state.lesson_data.english_description
+      ) {
+        this.formData.append("english_description", this.english_description);
+      }
 
-      // add the program
-      this.formData.append("program", this.program);
+      // check if the arabic description is change or not and add it to form data
+      if (
+        this.arabic_description !=
+        this.$store.state.lesson_data.arabic_description
+      ) {
+        this.formData.append("arabic_description", this.arabic_description);
+      }
 
-      // add the level
-      this.formData.append("level", this.level);
+      // check if the linke is change or not
+      if (this.link != this.$store.state.lesson_data.link) {
+        this.formData.append("link", this.link);
+      }
 
-      // add the created at date
-      this.formData.append("created_at", this.created_at);
+      // cgeck if the program is change or not
+      if (this.program != this.$store.state.lesson_data.program) {
+        this.formData.append("program", this.program);
+      }
+
+      // check if the level is changed or not
+      if (this.level != this.$store.state.lesson_data.level) {
+        this.formData.append("level", this.level);
+      }
+
+      // check if the creatd at date is change or not
+      if (this.created_at != this.$store.state.lesson_data.created_at) {
+        this.formData.append("created_at", this.created_at);
+      }
 
       // add the images
       if (this.selected_images_send.length > 0) {
@@ -466,33 +667,46 @@ export default {
         }
       }
 
-      // check if the selected_video_send  length is more than 0
-      if (this.selected_video_send.length > 0) {
+      // check if the video reaction is not delete
+      if (this.video_reaction != "delete") {
         for (const file of this.selected_video_send) {
           this.formData.append("files", file, file.name);
         }
+      } else {
+        this.formData.append("video_reaction", this.video_reaction);
+      }
+
+      // chaneg the images_for_delete's length is more than 0
+      if (this.images_for_delete.length > 0) {
+        // covaert it to staring and add it to formData
+        this.formData.append(
+          "images_for_delete",
+          this.images_for_delete.join("split_here")
+        );
       }
 
       // add the tags
       this.formData.append("tags", this.tags.join("."));
 
       await axios
-        .post(this.$store.state.APIS.lessons.create, this.formData, {
+        .put(this.$store.state.APIS.lessons.update, this.formData, {
           headers,
           onUploadProgress: (progressEvent) => {
-            // create the upload rate
+            // update the upload rate
             this.$store.state.uploaded_rate = `${Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             )}%`;
           },
         })
         .then((response) => {
-          console.log(response);
           // change the uploaded_rate in store to "" to hidden it
           this.$store.state.uploaded_rate = "";
 
           // stop the loading
           this.$store.state.loading_status = "close";
+
+          // update the lesson's data in store
+          this.$store.state.lesson_data = response.data.lesson_data;
 
           // empty the selected_images_send
           this.selected_images_send = [];
@@ -548,6 +762,105 @@ export default {
           this.$store.commit("ChangeMEssageFormStatus");
         });
     },
+
+    //update cover
+    async update_video_cover() {
+      // change the uploaded_rate in store
+      this.$store.state.uploaded_rate = 0;
+
+      // start teh loading
+      this.$store.state.loading_status = "open";
+
+      // create a new form data
+      this.formData = new FormData();
+
+      // create headers
+      const headers = {
+        Authorization: `Bearer ${this.$store.state.admin_data.token}`,
+      };
+
+      // add the admin id to fom data
+      this.formData.append("admin_id", this.$store.state.admin_data.admin._id);
+
+      // add the lesson id to form data
+      this.formData.append("lesson_id", this.$store.state.lesson_data._id);
+
+      // add the cover to form data
+      this.formData.append(
+        "cover",
+        this.video_cover_send,
+        this.video_cover_send.name
+      );
+
+      await axios
+        .put(this.$store.state.APIS.lessons.change_cover, this.formData, {
+          headers,
+          onUploadProgress: (progressEvent) => {
+            // update the upload rate
+            this.$store.state.uploaded_rate = `${Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            )}%`;
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          // change the uploaded_rate in store to "" to hidden it
+          this.$store.state.uploaded_rate = "";
+
+          // stop the loading
+          this.$store.state.loading_status = "close";
+
+          // set the lesson's data from response to lesson_data in store
+          this.$store.state.lesson_data = response.data.lesson_data;
+
+          // empty the video_cover_send
+          this.video_cover_send = "";
+
+          // empty the video_cover_show
+          this.video_cover_show = "";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "🥳Welcome Admin🥳",
+              arabic: "🥳أهلا مدير🥳",
+            },
+            type: "Success",
+            messages: response.data.message,
+            status: response.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        })
+        .catch((error) => {
+          // change the uploaded_rate in store to "" to hidden it
+          this.$store.state.uploaded_rate = "";
+
+          // stop the loading
+          this.$store.state.loading_status = "close";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "😓Error😓",
+              arabic: "😓خطأ😓",
+            },
+            type: "Error",
+            messages: error.response.data.message,
+            status: error.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
+        });
+    },
   },
 };
 </script>
@@ -555,7 +868,7 @@ export default {
 <style lang="scss">
 @import "../../sass/varibels";
 // darck and light English style
-.dash-lesson-create-darck-English-open {
+.dash-lesson-update-darck-English-open {
   direction: ltr;
   width: 100%;
   min-height: 100vh;
@@ -625,7 +938,7 @@ export default {
       border-radius: 5px;
     }
 
-    .create_video_btn_cover_show {
+    .update_video_btn_cover_show {
       width: 100%;
       height: 40px;
       margin: 10px 0px;
@@ -643,12 +956,12 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
       display: none;
     }
 
-    .create_video_btn_cover_show:hover {
+    .update_video_btn_cover_show:hover {
       background-color: $error-green-one;
     }
 
@@ -806,7 +1119,7 @@ export default {
       }
     }
 
-    .create_btn {
+    .update_btn {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -820,14 +1133,14 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_btn:hover {
+    .update_btn:hover {
       background-color: $error-green-one;
     }
   }
 }
 
-.dash-lesson-create-darck-English-close {
-  @extend .dash-lesson-create-darck-English-open;
+.dash-lesson-update-darck-English-close {
+  @extend .dash-lesson-update-darck-English-open;
   padding: 30% 0px 0px 0px;
 
   .cont {
@@ -835,7 +1148,7 @@ export default {
   }
 }
 
-.dash-lesson-create-light-English-open {
+.dash-lesson-update-light-English-open {
   direction: ltr;
   width: 100%;
   min-height: 100vh;
@@ -905,7 +1218,7 @@ export default {
       border-radius: 5px;
     }
 
-    .create_video_btn_cover_show {
+    .update_video_btn_cover_show {
       width: 100%;
       height: 40px;
       margin: 10px 0px;
@@ -923,12 +1236,12 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
       display: none;
     }
 
-    .create_video_btn_cover_show:hover {
+    .update_video_btn_cover_show:hover {
       background-color: $error-green-one;
     }
 
@@ -1086,7 +1399,7 @@ export default {
       }
     }
 
-    .create_btn {
+    .update_btn {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -1100,14 +1413,14 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_btn:hover {
+    .update_btn:hover {
       background-color: $error-green-one;
     }
   }
 }
 
-.dash-lesson-create-light-English-close {
-  @extend .dash-lesson-create-light-English-open;
+.dash-lesson-update-light-English-close {
+  @extend .dash-lesson-update-light-English-open;
   padding: 30% 0px 0px 0px;
 
   .cont {
@@ -1117,7 +1430,7 @@ export default {
 // darck and light English style
 
 // darck and light Arabic style
-.dash-lesson-create-darck-Arabic-open {
+.dash-lesson-update-darck-Arabic-open {
   direction: rtl;
   width: 100%;
   min-height: 100vh;
@@ -1187,7 +1500,7 @@ export default {
       border-radius: 5px;
     }
 
-    .create_video_btn_cover_show {
+    .update_video_btn_cover_show {
       width: 100%;
       height: 40px;
       margin: 10px 0px;
@@ -1205,12 +1518,12 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
       display: none;
     }
 
-    .create_video_btn_cover_show:hover {
+    .update_video_btn_cover_show:hover {
       background-color: $error-green-one;
     }
 
@@ -1368,7 +1681,7 @@ export default {
       }
     }
 
-    .create_btn {
+    .update_btn {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -1382,14 +1695,14 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_btn:hover {
+    .update_btn:hover {
       background-color: $error-green-one;
     }
   }
 }
 
-.dash-lesson-create-darck-Arabic-close {
-  @extend .dash-lesson-create-darck-Arabic-open;
+.dash-lesson-update-darck-Arabic-close {
+  @extend .dash-lesson-update-darck-Arabic-open;
   padding: 30% 0px 0px 0px;
 
   .cont {
@@ -1397,7 +1710,7 @@ export default {
   }
 }
 
-.dash-lesson-create-light-Arabic-open {
+.dash-lesson-update-light-Arabic-open {
   direction: rtl;
   width: 100%;
   min-height: 100vh;
@@ -1467,7 +1780,7 @@ export default {
       border-radius: 5px;
     }
 
-    .create_video_btn_cover_show {
+    .update_video_btn_cover_show {
       width: 100%;
       height: 40px;
       margin: 10px 0px;
@@ -1485,12 +1798,12 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_video_btn_cover_hidden {
-      @extend .create_video_btn_cover_show;
+    .update_video_btn_cover_hidden {
+      @extend .update_video_btn_cover_show;
       display: none;
     }
 
-    .create_video_btn_cover_show:hover {
+    .update_video_btn_cover_show:hover {
       background-color: $error-green-one;
     }
 
@@ -1648,7 +1961,7 @@ export default {
       }
     }
 
-    .create_btn {
+    .update_btn {
       width: 100%;
       height: 40px;
       margin: 5px 0px;
@@ -1662,14 +1975,14 @@ export default {
       transition-duration: 0.5s;
     }
 
-    .create_btn:hover {
+    .update_btn:hover {
       background-color: $error-green-one;
     }
   }
 }
 
-.dash-lesson-create-light-Arabic-close {
-  @extend .dash-lesson-create-light-Arabic-open;
+.dash-lesson-update-light-Arabic-close {
+  @extend .dash-lesson-update-light-Arabic-open;
   padding: 30% 0px 0px 0px;
 
   .cont {

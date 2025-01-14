@@ -1,34 +1,37 @@
 <template>
   <div
-    :class="`delete-work-${this.$store.state.mood}-${this.$store.state.language}-${this.$store.state.delete_work_form_status}`"
+    :class="`delete-work-${this.$store.state.mood}-${this.$store.state.language}-${this.$store.state.delete_lesson_form_status}`"
   >
     <h3>
       {{
         this.$store.state.language == "English"
-          ? this.$store.state.English.delete_work_form.title
-          : this.$store.state.Arabic.delete_work_form.title
+          ? this.$store.state.English.delete_lesson_form.title
+          : this.$store.state.Arabic.delete_lesson_form.title
       }}
     </h3>
     <p>
       {{
         this.$store.state.language == "English"
-          ? this.$store.state.English.delete_work_form.message
-          : this.$store.state.Arabic.delete_work_form.message
+          ? this.$store.state.English.delete_lesson_form.message
+          : this.$store.state.Arabic.delete_lesson_form.message
       }}
     </p>
 
-    <button class="yes" @click="delete_work">
+    <button class="yes" @click="delete_lesson">
       {{
         this.$store.state.language == "English"
-          ? this.$store.state.English.delete_work_form.yes
-          : this.$store.state.Arabic.delete_work_form.yes
+          ? this.$store.state.English.delete_lesson_form.yes
+          : this.$store.state.Arabic.delete_lesson_form.yes
       }}
     </button>
-    <button class="no" @click="this.$store.commit('OpenOrCloseDeleteWorkForm')">
+    <button
+      class="no"
+      @click="this.$store.commit('OpenOrCloseDeleteLessonForm')"
+    >
       {{
         this.$store.state.language == "English"
-          ? this.$store.state.English.delete_work_form.no
-          : this.$store.state.Arabic.delete_work_form.no
+          ? this.$store.state.English.delete_lesson_form.no
+          : this.$store.state.Arabic.delete_lesson_form.no
       }}
     </button>
   </div>
@@ -43,7 +46,7 @@ export default {
     };
   },
   methods: {
-    async delete_work() {
+    async delete_lesson() {
       // start the loading animation
       this.$store.state.loading_status = "open";
       // craete headers
@@ -54,11 +57,11 @@ export default {
       // craete teh body data
       const data = {
         admin_id: this.$store.state.admin_data.admin._id,
-        work_id: this.$store.state.work_id_for_delete,
+        lesson_id: this.$store.state.lesson_id_for_delete,
       };
 
       await axios
-        .delete(this.$store.state.APIS.works.delete, {
+        .delete(this.$store.state.APIS.lessons.delete, {
           headers,
           data,
         })
@@ -66,13 +69,14 @@ export default {
           // stop the loading animation
           this.$store.state.loading_status = "close";
 
-          // filter the works array in store and delete the deleted work by his id
-          this.$store.state.works = this.$store.state.works.filter((work) => {
-            return work._id != this.$store.state.work_id_for_delete;
-          });
+          // filter the lessons_data array in store and delete the deleted lesson by his id
+          this.$store.state.lessons_data =
+            this.$store.state.lessons_data.filter((lesson) => {
+              return lesson._id != this.$store.state.lesson_id_for_delete;
+            });
 
           // close the delete work form
-          this.$store.commit("OpenOrCloseDeleteWorkForm");
+          this.$store.commit("OpenOrCloseDeleteLessonForm");
 
           // set the error to the error_object in store
           this.$store.state.error_object = {
@@ -107,7 +111,7 @@ export default {
           };
 
           // close the delete work form
-          this.$store.commit("OpenOrCloseDeleteWorkForm");
+          this.$store.commit("OpenOrCloseDeleteLessonForm");
 
           // to open the message form
           this.$store.commit("OpenOrCloseMessageForm");
@@ -133,6 +137,7 @@ export default {
   position: fixed;
   bottom: 10px;
   left: 15%;
+  z-index: 10;
   transition-duration: 0.5s;
   padding: 5px;
 
@@ -205,6 +210,7 @@ export default {
   position: fixed;
   bottom: 10px;
   left: 15%;
+  z-index: 10;
   transition-duration: 0.5s;
   padding: 5px;
 
@@ -279,6 +285,7 @@ export default {
   position: fixed;
   bottom: 10px;
   left: 15%;
+  z-index: 10;
   transition-duration: 0.5s;
   padding: 5px;
 
@@ -351,6 +358,7 @@ export default {
   position: fixed;
   bottom: 10px;
   left: 15%;
+  z-index: 10;
   transition-duration: 0.5s;
   padding: 5px;
 

@@ -80,7 +80,7 @@
       </div>
 
       <img
-        v-for="(path, index) in this.$store.state.work_data"
+        v-for="(path, index) in this.$store.state.work_data.images"
         :key="index"
         :src="path"
         alt=""

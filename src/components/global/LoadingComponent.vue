@@ -12,6 +12,9 @@
           : this.$store.state.Arabic.loading
       }}
     </p>
+    <p v-if="this.$store.state.uploaded_rate">
+      {{ this.$store.state.uploaded_rate }}
+    </p>
   </div>
 </template>
 

@@ -28,14 +28,19 @@ import DashBoaredview from "@/views/DashBoaredview.vue";
 // import test
 import TestComponent from "@/components/global/TestComponent.vue";
 // import create work
-import dashCraeteWorksView from "@/views/dash/dashCreateWorksView.vue";
+import dashCraeteWorksView from "@/views/dash/dashCreateWorkView.vue";
 // import dash home page
 import dashinfoView from "@/views/dash/dashinfoView.vue";
 // dash's works page
 import dashWorksView from "@/views/dash/dashWorksView.vue";
 // dash's update work page
 import dashWorkUpdateView from "@/views/dash/dashWorkUpdateView.vue";
-
+// dash's lessons view
+import dashLessonsView from "@/views/dash/dashLessonsView.vue";
+// dash's lesson update page
+import dashLessonUpdateView from "@/views/dash/dashLessonUpdateView.vue";
+// dash's create lesson page
+import dashCreateLessonsView from "@/views/dash/dashCreateLessonsView.vue";
 const routes = [
   {
     path: "/",
@@ -99,37 +104,47 @@ const routes = [
     children: [
       {
         path: "",
-        name: "indo",
+        name: "dash-indo",
         component: dashinfoView,
       },
       {
         path: "works",
-        name: "works",
+        name: "dash-works",
         component: dashWorksView,
       },
       {
         path: "work/create",
-        name: "create-work",
+        name: "dash-create-work",
         component: dashCraeteWorksView,
       },
       {
         path: "work/update:id",
-        name: "update-work",
+        name: "dash-update-work",
         component: dashWorkUpdateView,
       },
       {
+        path: "lessons",
+        name: "dash-lessons",
+        component: dashLessonsView,
+      },
+      {
         path: "lesson/create",
-        name: "test",
-        component: TestComponent,
+        name: "dash-create-lesson",
+        component: dashCreateLessonsView,
+      },
+      {
+        path: "lesson/update:id",
+        name: "dash-update-lesson",
+        component: dashLessonUpdateView,
       },
       {
         path: "skill/create",
-        name: "test",
+        name: "dash-test",
         component: TestComponent,
       },
       {
         path: "cv/update",
-        name: "test",
+        name: "dash-test",
         component: TestComponent,
       },
     ],
