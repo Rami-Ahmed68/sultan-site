@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -41,7 +42,10 @@ export default {
       page_status: "close",
     };
   },
-  mounted() {},
+  mounted() {
+    // call to get skills page status method
+    this.get_skills_page_status();
+  },
   methods: {
     // open or close sid bar method
     OpenOrClose() {
@@ -51,6 +55,20 @@ export default {
       // change the icon type
       this.icon_type =
         this.icon_type == "arrow-right" ? "arrow-left" : "arrow-right";
+    },
+
+    // get skills page status
+    async get_skills_page_status() {
+      await axios
+        .get(this.$store.state.APIS.skills_page_status.get_status)
+        .then((response) => {
+          // set the skills page status
+          this.$store.state.skills_page_status =
+            response.data.skills_page_status.skills_page_status;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
@@ -71,7 +89,7 @@ export default {
   .sid-bar-dash-open {
     position: fixed;
     left: 0%;
-    z-index: 10;
+    z-index: 15;
     width: 30%;
     height: 100vh;
     backdrop-filter: blur(30px);
@@ -150,7 +168,7 @@ export default {
   .sid-bar-dash-open {
     position: fixed;
     left: 0%;
-    z-index: 10;
+    z-index: 15;
     width: 30%;
     height: 100vh;
     backdrop-filter: blur(30px);
@@ -230,7 +248,7 @@ export default {
   .sid-bar-dash-open {
     position: fixed;
     left: 0%;
-    z-index: 10;
+    z-index: 15;
     width: 30%;
     height: 100vh;
     backdrop-filter: blur(30px);
@@ -309,7 +327,7 @@ export default {
   .sid-bar-dash-open {
     position: fixed;
     left: 0%;
-    z-index: 10;
+    z-index: 15;
     width: 30%;
     height: 100vh;
     backdrop-filter: blur(30px);

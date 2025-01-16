@@ -15,6 +15,8 @@ import LogInView from "@/views/LogInView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 // work page
 import WorkView from "@/views/WorkView.vue";
+// contact page
+import ContactView from "@/views/ContactView.vue";
 // Lesson view
 import LessonView from "@/views/LessonView.vue";
 // Cv view
@@ -25,8 +27,6 @@ import InstallAppView from "@/views/InstallAppView.vue";
 import SkillView from "@/views/SkillView.vue";
 // dash board page
 import DashBoaredview from "@/views/DashBoaredview.vue";
-// import test
-import TestComponent from "@/components/global/TestComponent.vue";
 // import create work
 import dashCraeteWorksView from "@/views/dash/dashCreateWorkView.vue";
 // import dash home page
@@ -41,6 +41,14 @@ import dashLessonsView from "@/views/dash/dashLessonsView.vue";
 import dashLessonUpdateView from "@/views/dash/dashLessonUpdateView.vue";
 // dash's create lesson page
 import dashCreateLessonsView from "@/views/dash/dashCreateLessonsView.vue";
+// dash's skills page
+import dashSkillsView from "@/views/dash/dashSkillsView.vue";
+// dash's update skills page
+import dashSkillUpdateView from "@/views/dash/dashSkillUpdateView.vue";
+// dash's craete skill page
+import dashSkillCreateView from "@/views/dash/dashSkillCreateView.vue";
+// dash's cv page
+import dashUpdateCvView from "@/views/dash/dashUpdateCvView.vue";
 const routes = [
   {
     path: "/",
@@ -51,6 +59,11 @@ const routes = [
     path: "/about",
     name: "about me",
     component: AboutView,
+  },
+  {
+    path: "/contact",
+    name: "contact me",
+    component: ContactView,
   },
   {
     path: "/works/:tag_name?",
@@ -138,14 +151,24 @@ const routes = [
         component: dashLessonUpdateView,
       },
       {
+        path: "skills",
+        name: "dash-skills",
+        component: dashSkillsView,
+      },
+      {
         path: "skill/create",
-        name: "dash-test",
-        component: TestComponent,
+        name: "dash-create-skill",
+        component: dashSkillCreateView,
+      },
+      {
+        path: "skill/update:id",
+        name: "dash-update-skill",
+        component: dashSkillUpdateView,
       },
       {
         path: "cv/update",
         name: "dash-test",
-        component: TestComponent,
+        component: dashUpdateCvView,
       },
     ],
   },

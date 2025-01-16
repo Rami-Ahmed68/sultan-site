@@ -1,12 +1,14 @@
 <template>
-  <navcomponent v-if="!$route.path.includes('/dashboard')" />
-  <router-view />
-  <LoadingComponent />
-  <MessageComponent />
-  <SidBarComponent />
-  <WorksFilterComponentVue />
-  <LessonsFilterComponentVue />
-  <ScrollTopComponent @click="scrollToTop" />
+  <div :class="this.$store.state.language">
+    <navcomponent v-if="!$route.path.includes('/dashboard')" />
+    <router-view />
+    <LoadingComponent />
+    <MessageComponent />
+    <SidBarComponent />
+    <WorksFilterComponentVue />
+    <LessonsFilterComponentVue />
+    <ScrollTopComponent @click="scrollToTop" />
+  </div>
 </template>
 
 <script>
@@ -171,4 +173,12 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.English {
+  font-family: "Noto Sans", serif;
+}
+
+.Arabic {
+  font-family: "Noto Kufi Arabic", serif;
+}
+</style>

@@ -29,7 +29,7 @@ export default {
   position: fixed;
   bottom: 10px;
   left: 10px;
-  z-index: 100;
+  z-index: 10;
   transition-duration: 0.5s;
   opacity: 1;
 }
@@ -52,7 +52,7 @@ export default {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  z-index: 100;
+  z-index: 10;
   transition-duration: 0.5s;
   opacity: 1;
 }

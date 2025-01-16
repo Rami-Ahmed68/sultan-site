@@ -48,25 +48,6 @@
       </div>
       <!-- description  -->
 
-      <!-- bio  -->
-      <div class="bio">
-        <h3>
-          {{
-            this.$store.state.language == "English"
-              ? this.$store.state.English.about_page.bio
-              : this.$store.state.Arabic.about_page.bio
-          }}
-        </h3>
-
-        <p>
-          {{
-            this.$store.state.language == "English"
-              ? this.$store.state.admin_info.english_bio
-              : this.$store.state.admin_info.arabic_bio
-          }}
-        </p>
-      </div>
-      <!-- bio  -->
       <FooterComponent />
     </div>
   </div>

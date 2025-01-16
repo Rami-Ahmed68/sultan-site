@@ -55,7 +55,11 @@
         />
       </div>
 
-      <button @click="LogInMethod">
+      <button
+        class="log-in"
+        @click="LogInMethod"
+        v-if="this.$store.state.admin_data == ''"
+      >
         {{
           this.$store.state.language == `English`
             ? this.$store.state.English.Login_page.button
@@ -63,6 +67,17 @@
         }}
       </button>
 
+      <button
+        class="log-out"
+        @click="log_out"
+        v-if="this.$store.state.admin_data != ''"
+      >
+        {{
+          this.$store.state.language == `English`
+            ? this.$store.state.English.Login_page.log_out
+            : this.$store.state.Arabic.Login_page.log_out
+        }}
+      </button>
       <p>
         {{
           this.$store.state.language == "English"
@@ -77,7 +92,6 @@
 
 <script>
 // import axios libbery
-import router from "@/router";
 import axios from "axios";
 
 export default {
@@ -115,6 +129,14 @@ export default {
       // change the password's input status
       this.password_input_status =
         this.password_input_status == "password" ? "text" : "password";
+    },
+
+    // log_out
+    log_out() {
+      window.localStorage.removeItem("sultan-site");
+
+      // move to the home and restart
+      window.location = "/";
     },
 
     // log in method
@@ -162,7 +184,7 @@ export default {
 
           // send the loged in user (admin) to home
           setTimeout(() => {
-            router.push("/");
+            window.location = "/";
           }, 1500);
         })
         .catch((error) => {
@@ -300,16 +322,38 @@ export default {
       width: 90%;
     }
 
-    button {
+    .log-in {
       width: 90%;
       height: 40px;
-      border: none;
       outline: none;
-      background: linear-gradient(to right, $gold-for, $gold-tow, $gold-three);
+      border: 1px solid $error-green-one;
+      background-color: $error-green-tow;
       border-radius: 5px;
       color: $white;
       cursor: pointer;
       margin: 10px 5%;
+      transition-duration: 0.5s;
+    }
+
+    .log-in:hover {
+      background-color: $error-green-one;
+    }
+
+    .log-out {
+      width: 90%;
+      height: 40px;
+      outline: none;
+      border: 1px solid $error-red-one;
+      background-color: $error-red-tow;
+      border-radius: 5px;
+      color: $white;
+      cursor: pointer;
+      margin: 10px 5%;
+      transition-duration: 0.5s;
+    }
+
+    .log-out:hover {
+      background-color: $error-red-one;
     }
 
     p {
@@ -429,16 +473,38 @@ export default {
       width: 90%;
     }
 
-    button {
+    .log-in {
       width: 90%;
       height: 40px;
-      border: none;
       outline: none;
-      background: linear-gradient(to right, $gold-for, $gold-tow, $gold-three);
+      border: 1px solid $error-green-one;
+      background-color: $error-green-tow;
       border-radius: 5px;
       color: $white;
       cursor: pointer;
       margin: 10px 5%;
+      transition-duration: 0.5s;
+    }
+
+    .log-in:hover {
+      background-color: $error-green-one;
+    }
+
+    .log-out {
+      width: 90%;
+      height: 40px;
+      outline: none;
+      border: 1px solid $error-red-one;
+      background-color: $error-red-tow;
+      border-radius: 5px;
+      color: $white;
+      cursor: pointer;
+      margin: 10px 5%;
+      transition-duration: 0.5s;
+    }
+
+    .log-out:hover {
+      background-color: $error-red-one;
     }
 
     p {

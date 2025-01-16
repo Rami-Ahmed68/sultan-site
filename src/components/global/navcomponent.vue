@@ -38,7 +38,16 @@
 
       <!-- language icon -->
       <div class="language" @click="change_language">
-        {{ this.emoji_type }}
+        <img
+          v-if="this.$store.state.language == `English`"
+          src="../../assets/USAFLAG.png"
+          alt="usa-flag"
+        />
+        <img
+          v-if="this.$store.state.language == `Arabic`"
+          src="../../assets/UAEFLAG.png"
+          alt="uae-flag"
+        />
       </div>
       <!-- language icon -->
 
@@ -87,7 +96,6 @@ export default {
   },
 };
 </script>
-;
 
 <style lang="scss">
 @import "../../sass/varibels";
@@ -183,6 +191,11 @@ export default {
       color: $white;
       border: 1px solid $white-one;
       transition-duration: 0.5s;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     .language:hover {
@@ -252,6 +265,11 @@ export default {
       cursor: pointer;
       border: 1px solid $black;
       transition-duration: 0.5s;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     .language:hover {
@@ -378,6 +396,11 @@ export default {
       color: $white;
       border: 1px solid $white-one;
       transition-duration: 0.5s;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     .language:hover {
@@ -447,6 +470,11 @@ export default {
       cursor: pointer;
       border: 1px solid $black;
       transition-duration: 0.5s;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     .language:hover {

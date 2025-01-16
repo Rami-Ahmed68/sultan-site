@@ -13,7 +13,7 @@
       <a :href="this.$store.state.sulta_links.linkedIn" target="_blank">
         <img src="../../assets/linkedin.png" alt="" />
       </a>
-      <a :href="this.$store.state.sulta_links.behanse" target="_blank">
+      <a :href="this.$store.state.sulta_links.behance" target="_blank">
         <img src="../../assets/behanse.png" alt="" />
       </a>
       <a :href="this.$store.state.sulta_links.instgram" target="_blank">

@@ -38,7 +38,6 @@ export default {
   methods: {
     // get admin's cv method
     async et_cv() {
-      console.log("sended the request ...");
       // to start the loading animation
       this.$store.state.loading_status = "open";
 

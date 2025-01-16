@@ -28,7 +28,7 @@ export default createStore({
       },
     ],
     dash_board_links: [
-      { english: "Home", arabic: "الصفحة الرئيسية", path: "/" },
+      { english: "Home", arabic: "الصفحة الرئيسية", path: "" },
       {
         english: "Update Info",
         arabic: "تعديل البيانات",
@@ -53,6 +53,11 @@ export default createStore({
         english: "Craete Lesson",
         arabic: "إنشاء درس",
         path: "dashboard/lesson/create",
+      },
+      {
+        english: "Skills",
+        arabic: "المهارات",
+        path: "dashboard/skills",
       },
       {
         english: "Craete Skill",
@@ -96,7 +101,7 @@ export default createStore({
     // sultan's cv
     cv: "",
     // skills page status
-    skills_page_status: false,
+    skills_page_status: true,
     // sid bars status
     sid_bar_status: "close",
     // works filter component status
@@ -107,6 +112,8 @@ export default createStore({
     delete_work_form_status: "close",
     // delete_lesson_form_status
     delete_lesson_form_status: "close",
+    // delete_skill_form_status
+    delete_skill_form_status: "close",
     // admin info to show it in the home page
     admin_info: "",
     // selected_images
@@ -132,7 +139,7 @@ export default createStore({
     // lesson_id_for_delete
     lesson_id_for_delete: "",
     // skills_id_for_delete
-    skills_id_for_delete: "",
+    skill_id_for_delete: "",
     English: {
       name: "MUHAMED SULTAN",
       Login_page: {
@@ -141,6 +148,7 @@ export default createStore({
         password_label: "Password",
         email_placeholder: "Type your email here",
         password_placeholder: "Type your password here",
+        log_out: "Log out",
         button: "Log In",
       },
       language: {
@@ -216,7 +224,7 @@ export default createStore({
         phone_label: "Phone number",
         telegram_label: "Telegram link",
         facebook_label: "facebook link",
-        instgram_label: "Instgram link",
+        instgram_label: "Instagram link",
         linkedIn_label: "linked In link",
         behance_label: "Behance link",
         email_address_label: "Email address",
@@ -224,6 +232,10 @@ export default createStore({
       },
       dash_works_page: {
         title: "Works events",
+      },
+      dash_skills_page: {
+        title: "Skills events",
+        skills_page_btn: "Skills page",
       },
       dash_work_update_page: {
         title: "Update Work",
@@ -263,6 +275,27 @@ export default createStore({
         created_at: "Created at",
         tags: "Tags",
         update_btn: "Update",
+      },
+      dash_skill_update_page: {
+        title: "Update Skill",
+        english_title: "Title in english",
+        arabic_title: "Title in arabic",
+        english_description: "Description in english",
+        arabic_description: "Description in arabic",
+        created_at: "Created at",
+        delete_icon: "Delete selected icon",
+        update_icon_btn: "Update icon",
+        update_btn: "Update",
+      },
+      dash_skill_create_page: {
+        title: "Create Skill",
+        english_title: "Title in english",
+        arabic_title: "Title in arabic",
+        english_description: "Description in english",
+        arabic_description: "Description in arabic",
+        delete_icon: "Delete Icon",
+        created_at: "Created at",
+        create_btn: "Create",
       },
       dash_work_create_page: {
         title: "Create Work",
@@ -322,6 +355,17 @@ export default createStore({
         yes: "Yes",
         no: "No",
       },
+      delete_skill_form: {
+        title: "Delete Skill",
+        message:
+          "Are you sure that the skill will be deleted with all its contents of photos and videos permanently?",
+        yes: "Yes",
+        no: "No",
+      },
+      update_cv_page: {
+        title: "Update Cv",
+        button: "Update",
+      },
       loading: "Wait please",
       global_message: "Mohamed Sultan",
       home_page: "home page",
@@ -334,6 +378,7 @@ export default createStore({
         password_label: "كلمة المرور",
         email_placeholder: "اكتب الإيميل هنا",
         password_placeholder: "اكتب كلمة المرور هنا",
+        log_out: "تسجيل الخروج",
         button: "تسجيل الدخول",
       },
       language: {
@@ -418,6 +463,10 @@ export default createStore({
       dash_works_page: {
         title: "أحداث الأعمال",
       },
+      dash_skills_page: {
+        title: "أحداث المهارات",
+        skills_page_btn: "صفحة المهارات",
+      },
       dash_work_update_page: {
         title: "تعديل العمل",
         video: "الفيديو",
@@ -456,6 +505,27 @@ export default createStore({
         level: "المستوى",
         tags: "التاغات",
         update_btn: "تعديل",
+      },
+      dash_skill_update_page: {
+        title: "تعديل المهارة",
+        english_title: "العنوان بالإنكليزي",
+        arabic_title: "العنوان بالعربي",
+        english_description: "الوصف بالإنكليزي",
+        arabic_description: "الوصف بالعربي",
+        created_at: "تاريخ الإنشاء",
+        delete_icon: "حذف الأيقونة المحددة",
+        update_icon_btn: "تعديل الأيقونة",
+        update_btn: "تعديل",
+      },
+      dash_skill_create_page: {
+        title: "إنشاء المهارة",
+        english_title: "العنوان بالإنكليزي",
+        arabic_title: "العنوان بالعربي",
+        english_description: "الوصف بالإنكليزي",
+        arabic_description: "الوصف بالعربي",
+        delete_icon: "حذف الأيقونة",
+        created_at: "تاريخ الإنشاء",
+        create_btn: "إنشاء",
       },
       dash_work_create_page: {
         title: "إنشاء العمل",
@@ -515,6 +585,16 @@ export default createStore({
         yes: "نعم",
         no: "لا",
       },
+      delete_skill_form: {
+        title: "حذف المهارة",
+        message: "هل انت متأكد سيتم حذف المهارة بكامل محتوياته بشكل نهائي",
+        yes: "نعم",
+        no: "لا",
+      },
+      update_cv_page: {
+        title: "تعديل السيرة الذاتية",
+        button: "تعديل",
+      },
       loading: "انتظر رجاء",
       global_message: "محمد سلطان",
       home_page: "الصفحة الرئيسية",
@@ -526,12 +606,15 @@ export default createStore({
         get_admin_links:
           "https://sultan-wngg.onrender.com/api/v1/sultan/links/get",
         get_admin_cv: "https://sultan-wngg.onrender.com/api/v1/sultan/cv/get",
+        change_cv: "https://sultan-wngg.onrender.com/api/v1/sultan/cv",
         update_avatar: "https://sultan-wngg.onrender.com/api/v1/sultan/avatar",
         update_info: "https://sultan-wngg.onrender.com/api/v1/sultan/update",
       },
       skills_page_status: {
         get_status:
           "https://sultan-wngg.onrender.com/api/v1/sultan/skills/page/get/status",
+        change_status:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/skills/page/change/status",
       },
       works: {
         get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/work/get/all",
@@ -556,6 +639,8 @@ export default createStore({
       skills: {
         get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/get/all",
         get_one: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/get/one",
+        change_icon:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/skill/change/icon",
         update: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/update",
         delete: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/delete",
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/create",
@@ -762,6 +847,12 @@ export default createStore({
     OpenOrCloseDeleteLessonForm(state) {
       state.delete_lesson_form_status =
         state.delete_lesson_form_status == "close" ? "open" : "close";
+    },
+
+    // chage delete skill's form status
+    OpenOrCloseDeleteSkillForm(state) {
+      state.delete_skill_form_status =
+        state.delete_skill_form_status == "close" ? "open" : "close";
     },
   },
   actions: {},
