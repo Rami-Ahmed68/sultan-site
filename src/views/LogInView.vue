@@ -276,8 +276,9 @@ export default {
       border-radius: 5px;
       outline: none;
       padding: 0px 5px;
-      border: 1px solid $Navy-blue-three;
-      background-color: $ff;
+      border: 1px solid $inputs-border-black;
+      background-color: $inputs-back-black;
+      color: $white;
       margin: 10px 5%;
     }
 
@@ -290,8 +291,8 @@ export default {
       margin: 10px 5%;
       border-radius: 5px;
       position: relative;
-      border: 1px solid $Navy-blue-three;
-      background-color: $ff;
+      border: 1px solid $inputs-border-black;
+      background-color: $inputs-back-black;
 
       input {
         width: 100%;
@@ -301,6 +302,7 @@ export default {
         padding: 0px;
         border-radius: 0px;
         background-color: transparent;
+        color: $white;
       }
 
       #hidd {
@@ -309,6 +311,7 @@ export default {
         margin: 0px 3px;
         cursor: pointer;
         background-color: $white;
+        transition-duration: 0.5s;
       }
 
       #show {
@@ -377,7 +380,7 @@ export default {
   direction: ltr;
   width: 100%;
   min-height: 100vh;
-  background-color: $white-for;
+  background-color: $white-one;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -390,6 +393,7 @@ export default {
     border-radius: 5px;
     opacity: 0;
     transition-duration: 0.5s;
+    background-color: $white-tow;
 
     h1 {
       width: 98%;
@@ -429,6 +433,9 @@ export default {
       padding: 0px 5px;
       border: 1px solid $white-three;
       background-color: $ff;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
+      color: $black;
       margin: 10px 5%;
     }
 
@@ -441,8 +448,8 @@ export default {
       margin: 10px 5%;
       border-radius: 5px;
       position: relative;
-      border: 1px solid $white-three;
-      background-color: $ff;
+      border: 1px solid $inputs-border-white;
+      background-color: $inputs-back-white;
 
       input {
         width: 100%;
@@ -460,6 +467,7 @@ export default {
         margin: 0px 3px;
         cursor: pointer;
         background-color: $white;
+        transition-duration: 0.5s;
       }
 
       #show {
@@ -480,7 +488,7 @@ export default {
       border: 1px solid $error-green-one;
       background-color: $error-green-tow;
       border-radius: 5px;
-      color: $white;
+      color: $black;
       cursor: pointer;
       margin: 10px 5%;
       transition-duration: 0.5s;
@@ -497,7 +505,7 @@ export default {
       border: 1px solid $error-red-one;
       background-color: $error-red-tow;
       border-radius: 5px;
-      color: $white;
+      color: $black;
       cursor: pointer;
       margin: 10px 5%;
       transition-duration: 0.5s;

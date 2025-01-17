@@ -137,7 +137,7 @@ export default {
   direction: ltr;
   width: 100%;
   height: 100vh;
-  background-color: $Navy-blue-for;
+  background-color: $Navy-home;
   overflow: hidden;
   position: relative;
 
@@ -277,7 +277,7 @@ export default {
     min-height: 100vh;
     transition-duration: 0.5s;
     padding-top: 40%;
-    background-color: $gold;
+    background-color: $white-home;
     position: fixed;
     top: 0%;
     left: 0%;

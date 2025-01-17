@@ -230,6 +230,15 @@ export default createStore({
         email_address_label: "Email address",
         update_btn: "Update",
       },
+      contact_page: {
+        title: "Contact page",
+        helping_message:
+          "Hello, here you can contact me by sending me an email by writing your full name, your email address and the message you want to deliver to me, I will contact you as soon as possible",
+        name_label: "Full name",
+        email_label: "Email address",
+        message_label: "You'r message",
+        send_btn: "Send",
+      },
       dash_works_page: {
         title: "Works events",
       },
@@ -459,6 +468,15 @@ export default createStore({
         behance_label: "رابط البيهانس",
         email_address_label: "عنوان البريد الالكتروني",
         update_btn: "تعديل",
+      },
+      contact_page: {
+        title: "صفحة التواصل",
+        helping_message:
+          "مرحبا، هنا يمكنك التواصل معي بارسالك بريد إلكتروني لي من خلال كتابة اسمك الكامل و عنوان البريد الإلكتروني الخاص بك والرسالة التي نريد إيصالها لي ، سأقوم بالتواصل معك بأقرب وقت ممكن",
+        name_label: "الأسم الكامل",
+        email_label: "عنوان البريد الإلكتروني",
+        message_label: "رسالتك",
+        send_btn: "إرسال",
       },
       dash_works_page: {
         title: "أحداث الأعمال",

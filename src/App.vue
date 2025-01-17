@@ -36,31 +36,31 @@ export default {
       title: computed(() => {
         switch (route.name) {
           case "about me":
-            return "Sultan site-about";
+            return "Mohamed Sultan-about";
           case "works":
-            return "Sultan site-works";
+            return "Mohamed Sultan-works";
           case "work":
-            return "Sultan site-work";
+            return "Mohamed Sultan-work";
           case "lessons":
-            return "Sultan site-lessons";
+            return "Mohamed Sultan-lessons";
           case "lesson":
-            return "Sultan site-lesson";
+            return "Mohamed Sultan-lesson";
           case "skills":
-            return "Sultan site-skills";
+            return "Mohamed Sultan-skills";
           case "skill":
-            return "Sultan site-skill";
+            return "Mohamed Sultan-skill";
           case "cv":
-            return "Sultan site-cv";
+            return "Mohamed Sultan-cv";
           case "login":
-            return "Sultan site-login";
+            return "Mohamed Sultan-login";
           case "dashboard":
-            return "Sultan site-dashboard";
+            return "Mohamed Sultan-dashboard";
           case "install":
-            return "Sultan site-install-app";
+            return "Mohamed Sultan-install-app";
           case "notfound":
-            return "Sultan site-notfound";
+            return "Mohamed Sultan-notfound";
           default:
-            return "Sultan site-home-page";
+            return "Mohamed Sultan-home-page";
         }
       }),
       meta: [
@@ -69,29 +69,29 @@ export default {
           content: computed(() => {
             switch (route.name) {
               case "about me":
-                return "Sultan site-about akbar sultan graphic design syria designer about page";
+                return "Mohamed Sultan-about akbar sultan graphic design syria designer about page";
               case "works":
-                return "Sultan site-works akbar sultan graphic design works page";
+                return "Mohamed Sultan-works akbar sultan graphic design works page";
               case "work":
-                return "Sultan site-work akbar sultan graphic design work page";
+                return "Mohamed Sultan-work akbar sultan graphic design work page";
               case "lessons":
-                return "Sultan site-lessons akbar sultan graphic design lessons page";
+                return "Mohamed Sultan-lessons akbar sultan graphic design lessons page";
               case "lesson":
-                return "Sultan site-lesson akbar sultan graphic design lesson page";
+                return "Mohamed Sultan-lesson akbar sultan graphic design lesson page";
               case "skills":
-                return "Sultan site-skills akbar sultan graphic design skills page";
+                return "Mohamed Sultan-skills akbar sultan graphic design skills page";
               case "skill":
-                return "Sultan site-skill akbar sultan graphic design skill page";
+                return "Mohamed Sultan-skill akbar sultan graphic design skill page";
               case "login":
-                return "Sultan site-login akbar sultan graphic design log in page";
+                return "Mohamed Sultan-login akbar sultan graphic design log in page";
               case "dashboard":
-                return "Sultan site-dashboard akbar sultan graphic design dashboard page";
+                return "Mohamed Sultan-dashboard akbar sultan graphic design dashboard page";
               case "install":
-                return "Sultan site-install-app akbar sultan graphic design install the app page";
+                return "Mohamed Sultan-install-app akbar sultan graphic design install the app page";
               case "notfound":
-                return "Sultan site-notfound akbar sultan graphic design not found page";
+                return "Mohamed Sultan-notfound akbar sultan graphic design not found page";
               default:
-                return "Sultan site-home-page akbar sultan graphic design home page";
+                return "Mohamed Sultan-home-page akbar sultan graphic design home page";
             }
           }),
         },
@@ -100,29 +100,29 @@ export default {
           content: computed(() => {
             switch (route.name) {
               case "about me":
-                return "Sultan site-about akbar sultan graphic design syria designer about page";
+                return "Mohamed Sultan-about akbar sultan graphic design syria designer about page";
               case "works":
-                return "Sultan site-works akbar sultan graphic design works page";
+                return "Mohamed Sultan-works akbar sultan graphic design works page";
               case "work":
-                return "Sultan site-work akbar sultan graphic design work page";
+                return "Mohamed Sultan-work akbar sultan graphic design work page";
               case "lessons":
-                return "Sultan site-lessons akbar sultan graphic design lessons page";
+                return "Mohamed Sultan-lessons akbar sultan graphic design lessons page";
               case "lesson":
-                return "Sultan site-lesson akbar sultan graphic design lesson page";
+                return "Mohamed Sultan-lesson akbar sultan graphic design lesson page";
               case "skills":
-                return "Sultan site-skills akbar sultan graphic design skills page";
+                return "Mohamed Sultan-skills akbar sultan graphic design skills page";
               case "skill":
-                return "Sultan site-skill akbar sultan graphic design skill page";
+                return "Mohamed Sultan-skill akbar sultan graphic design skill page";
               case "login":
-                return "Sultan site-login akbar sultan graphic design log in page";
+                return "Mohamed Sultan-login akbar sultan graphic design log in page";
               case "dashboard":
-                return "Sultan site-dashboard akbar sultan graphic design dashboard page";
+                return "Mohamed Sultan-dashboard akbar sultan graphic design dashboard page";
               case "install":
-                return "Sultan site-install-app akbar sultan graphic design install the app page";
+                return "Mohamed Sultan-install-app akbar sultan graphic design install the app page";
               case "notfound":
-                return "Sultan site-notfound akbar sultan graphic design not found page";
+                return "Mohamed Sultan-notfound akbar sultan graphic design not found page";
               default:
-                return "Sultan site-home-page akbar sultan graphic design home page";
+                return "Mohamed Sultan-home-page akbar sultan graphic design home page";
             }
           }),
         },
