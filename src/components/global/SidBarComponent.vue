@@ -25,6 +25,16 @@
         }}</router-link
       >
 
+      <router-link
+        v-if="this.$store.state.admin_data.admin"
+        :to="this.$store.state.dashboard_link.path"
+        >{{
+          this.$store.state.language == "English"
+            ? this.$store.state.dashboard_link.english
+            : this.$store.state.dashboard_link.arabic
+        }}</router-link
+      >
+
       <a :href="`${this.$store.state.developer.href}`" target="_blank"
         >{{
           this.$store.state.language == "English"
