@@ -43,6 +43,11 @@ export default {
     };
   },
   mounted() {
+    // check if the user loged in
+    if (this.$store.state.admin_data.admin == null) {
+      window.location = "/";
+    }
+
     // call to get skills page status method
     this.get_skills_page_status();
   },

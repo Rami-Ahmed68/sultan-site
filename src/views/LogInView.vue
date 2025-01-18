@@ -188,7 +188,6 @@ export default {
           }, 1500);
         })
         .catch((error) => {
-          console.log(error);
           // to close the loading animation
           this.$store.state.loading_status = "close";
 

@@ -229,7 +229,7 @@ export default {
 
 .works-filter-cont-darck-English-close {
   @extend .works-filter-cont-darck-English-open;
-  top: -20%;
+  top: -40%;
   opacity: 0;
 }
 
@@ -312,7 +312,7 @@ export default {
 
 .works-filter-cont-light-English-close {
   @extend .works-filter-cont-light-English-open;
-  top: -20%;
+  top: -40%;
   opacity: 0;
 }
 // darck and light English Style
@@ -397,7 +397,7 @@ export default {
 
 .works-filter-cont-darck-Arabic-close {
   @extend .works-filter-cont-darck-Arabic-open;
-  top: -20%;
+  top: -40%;
   opacity: 0;
 }
 
@@ -480,7 +480,7 @@ export default {
 
 .works-filter-cont-light-Arabic-close {
   @extend .works-filter-cont-light-Arabic-open;
-  top: -20%;
+  top: -40%;
   opacity: 0;
 }
 // darck and light Arabic Style

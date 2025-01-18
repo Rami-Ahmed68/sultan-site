@@ -337,7 +337,7 @@ export default {
 
 .lessosn-filter-cont-darck-English-close {
   @extend .lessosn-filter-cont-darck-English-open;
-  top: -50%;
+  top: -100%;
   opacity: 0;
 }
 
@@ -437,7 +437,7 @@ export default {
 
 .lessosn-filter-cont-light-English-close {
   @extend .lessosn-filter-cont-light-English-open;
-  top: -50%;
+  top: -100%;
   opacity: 0;
 }
 // darck and light English Style
@@ -539,7 +539,7 @@ export default {
 
 .lessosn-filter-cont-darck-Arabic-close {
   @extend .lessosn-filter-cont-darck-Arabic-open;
-  top: -50%;
+  top: -100%;
   opacity: 0;
 }
 
@@ -639,7 +639,7 @@ export default {
 
 .lessosn-filter-cont-light-Arabic-close {
   @extend .lessosn-filter-cont-light-Arabic-open;
-  top: -50%;
+  top: -100%;
   opacity: 0;
 }
 // darck and light Arabic Style

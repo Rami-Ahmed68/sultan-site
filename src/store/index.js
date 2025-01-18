@@ -16,16 +16,6 @@ export default createStore({
       { english: "Lessons", arabic: "الدروس", path: "/lessons" },
       { english: "Cv", arabic: "السيرة الذاتية", path: "/cv" },
       { english: "Install App", arabic: "تنزيل التطبيق", path: "/install" },
-      {
-        english: "Login",
-        arabic: "تسجيل الدخول",
-        path: "/login",
-      },
-      {
-        english: "DashBoard",
-        arabic: "لوحة التحكم",
-        path: "/dashboard",
-      },
     ],
     dash_board_links: [
       { english: "Home", arabic: "الصفحة الرئيسية", path: "" },
@@ -71,6 +61,11 @@ export default createStore({
       },
     ],
     skills_link: { english: "Skills", arabic: "المهارات", path: "/skills" },
+    dashboard_link: {
+      english: "DashBoard",
+      arabic: "لوحة التحكم",
+      path: "/dashboard",
+    },
     developer: {
       english: "Developer",
       arabic: "المبرمج",
@@ -110,6 +105,8 @@ export default createStore({
     lessons_filter_status: "close",
     // delete_work_form_status
     delete_work_form_status: "close",
+    // delete_message_form_status
+    delete_message_form_status: "close",
     // delete_lesson_form_status
     delete_lesson_form_status: "close",
     // delete_skill_form_status
@@ -120,6 +117,14 @@ export default createStore({
     selected_images: [],
     // sulta links
     sulta_links: "",
+    // notifications_count
+    notifications_count: 0,
+    // messages_default_victor_status
+    messages_default_victor_status: "close",
+    // copy_message_status
+    copy_message_status: "close",
+    // messages_data
+    messages_data: [],
     // works data
     works: [],
     // selectd_avatar
@@ -136,6 +141,8 @@ export default createStore({
     skill_data: "",
     // work_id_for_delete
     work_id_for_delete: "",
+    // message_id_for_delete
+    message_id_for_delete: "",
     // lesson_id_for_delete
     lesson_id_for_delete: "",
     // skills_id_for_delete
@@ -233,11 +240,21 @@ export default createStore({
       contact_page: {
         title: "Contact page",
         helping_message:
-          "Hello, here you can contact me by sending me an email by writing your full name, your email address and the message you want to deliver to me, I will contact you as soon as possible",
+          "Hello, here you can contact me by sending me an email by writing your full name, email address, phone number, WhatsApp number and the message you want to send to me, and I will contact you as soon as possible",
         name_label: "Full name",
         email_label: "Email address",
+        phone_number_label: "Phone number",
+        whatsapp_label: "Whatsapp number",
         message_label: "You'r message",
         send_btn: "Send",
+      },
+      messages_page: {
+        title: "Messages's page",
+      },
+      message_component: {
+        email: "Email",
+        phone_number: "Phone",
+        whatsapp_number: "Whatsapp",
       },
       dash_works_page: {
         title: "Works events",
@@ -357,6 +374,12 @@ export default createStore({
         yes: "Yes",
         no: "No",
       },
+      delete_message_form: {
+        title: "Delete Message",
+        message: "Are you sure that the message will be deleted ?",
+        yes: "Yes",
+        no: "No",
+      },
       delete_lesson_form: {
         title: "Delete Lesson",
         message:
@@ -375,6 +398,7 @@ export default createStore({
         title: "Update Cv",
         button: "Update",
       },
+      copied_message: "📑Copied📑",
       loading: "Wait please",
       global_message: "Mohamed Sultan",
       home_page: "home page",
@@ -472,11 +496,21 @@ export default createStore({
       contact_page: {
         title: "صفحة التواصل",
         helping_message:
-          "مرحبا، هنا يمكنك التواصل معي بارسالك بريد إلكتروني لي من خلال كتابة اسمك الكامل و عنوان البريد الإلكتروني الخاص بك والرسالة التي نريد إيصالها لي ، سأقوم بالتواصل معك بأقرب وقت ممكن",
+          "مرحباً، هنا يمكنك التواصل معي عن طريق إرسال بريد إلكتروني لي بكتابة اسمك الكامل وعنوان بريدك الإلكتروني و رقم الهاتف و رقم الواتس آب والرسالة التي تريد توصيلها لي، وسأتواصل معك في أقرب وقت ممكن",
         name_label: "الأسم الكامل",
         email_label: "عنوان البريد الإلكتروني",
+        phone_number_label: "رقم الهاتف",
+        whatsapp_label: "رقم الواتس آب",
         message_label: "رسالتك",
         send_btn: "إرسال",
+      },
+      messages_page: {
+        title: "صفحة الرسائل",
+      },
+      message_component: {
+        email: "الإيميل",
+        phone_number: "الهاتف",
+        whatsapp_number: "الواتس آب",
       },
       dash_works_page: {
         title: "أحداث الأعمال",
@@ -596,6 +630,12 @@ export default createStore({
         yes: "نعم",
         no: "لا",
       },
+      delete_message_form: {
+        title: "حذف الرسالة",
+        message: "هل انت متأكد سيتم حذف الرسالة",
+        yes: "نعم",
+        no: "لا",
+      },
       delete_lesson_form: {
         title: "حذف الدرس",
         message:
@@ -613,6 +653,7 @@ export default createStore({
         title: "تعديل السيرة الذاتية",
         button: "تعديل",
       },
+      copied_message: "📑تم النسخ📑",
       loading: "انتظر رجاء",
       global_message: "محمد سلطان",
       home_page: "الصفحة الرئيسية",
@@ -662,6 +703,13 @@ export default createStore({
         update: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/update",
         delete: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/delete",
         create: "https://sultan-wngg.onrender.com/api/v1/sultan/skill/create",
+      },
+      messages: {
+        create: "https://sultan-wngg.onrender.com/api/v1/sultan/message/create",
+        delete: "https://sultan-wngg.onrender.com/api/v1/sultan/message/delete",
+        get_all: "https://sultan-wngg.onrender.com/api/v1/sultan/message/get",
+        get_count:
+          "https://sultan-wngg.onrender.com/api/v1/sultan/message/get/count",
       },
     },
     tags: [
@@ -861,6 +909,12 @@ export default createStore({
         state.delete_work_form_status == "close" ? "open" : "close";
     },
 
+    // chage delete message's form status
+    OpenOrCloseDeleteMessageForm(state) {
+      state.delete_message_form_status =
+        state.delete_message_form_status == "close" ? "open" : "close";
+    },
+
     // chage delete lesson's form status
     OpenOrCloseDeleteLessonForm(state) {
       state.delete_lesson_form_status =
@@ -871,6 +925,12 @@ export default createStore({
     OpenOrCloseDeleteSkillForm(state) {
       state.delete_skill_form_status =
         state.delete_skill_form_status == "close" ? "open" : "close";
+    },
+
+    // open copy message
+    OpenOrCloseCopyMessage(state) {
+      state.copy_message_status =
+        state.copy_message_status == "close" ? "open" : "close";
     },
   },
   actions: {},

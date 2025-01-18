@@ -25,6 +25,8 @@ import CvView from "@/views/CvView.vue";
 import InstallAppView from "@/views/InstallAppView.vue";
 // Skill page
 import SkillView from "@/views/SkillView.vue";
+// messages page
+import MessagesView from "@/views/MessagesView.vue";
 // dash board page
 import DashBoaredview from "@/views/DashBoaredview.vue";
 // import create work
@@ -94,6 +96,11 @@ const routes = [
     path: "/skill/:id",
     name: "skill",
     component: SkillView,
+  },
+  {
+    path: "/messages",
+    name: "messages",
+    component: MessagesView,
   },
   {
     path: "/cv",

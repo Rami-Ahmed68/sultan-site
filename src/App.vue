@@ -57,6 +57,30 @@ export default {
             return "Mohamed Sultan-dashboard";
           case "install":
             return "Mohamed Sultan-install-app";
+          case "messages":
+            return "Mohamed Sultan-messages";
+
+          case "dashboard/works":
+            return "Mohamed Sultan-dash-works";
+
+          case "dashboard/work/create":
+            return "Mohamed Sultan-dash-works-create";
+
+          case "dashboard/lessons":
+            return "Mohamed Sultan-dash-lessons";
+
+          case "dashboard/lesson/create":
+            return "Mohamed Sultan-dash-lesson-create";
+
+          case "dashboard/skills":
+            return "Mohamed Sultan-dash-skills";
+
+          case "dashboard/skill/create":
+            return "Mohamed Sultan-dash-skill-create";
+
+          case "dashboard/cv/update":
+            return "Mohamed Sultan-dash-cv-update";
+
           case "notfound":
             return "Mohamed Sultan-notfound";
           default:
@@ -69,29 +93,53 @@ export default {
           content: computed(() => {
             switch (route.name) {
               case "about me":
-                return "Mohamed Sultan-about akbar sultan graphic design syria designer about page";
+                return "Find out more about designer Mohamed Sultan on his about-me page.";
               case "works":
-                return "Mohamed Sultan-works akbar sultan graphic design works page";
+                return "Explore the works on the works page of designer Mohamed Sultan's website";
               case "work":
-                return "Mohamed Sultan-work akbar sultan graphic design work page";
+                return "Explore the work on the work page of designer Mohamed Sultan's website";
               case "lessons":
-                return "Mohamed Sultan-lessons akbar sultan graphic design lessons page";
+                return "Explore the lessons on the lessons page of designer Mohamed Sultan's website";
               case "lesson":
-                return "Mohamed Sultan-lesson akbar sultan graphic design lesson page";
+                return "Explore the lesson on the lesson page of designer Mohamed Sultan's website";
               case "skills":
-                return "Mohamed Sultan-skills akbar sultan graphic design skills page";
+                return "Explore the skills on the skills page of designer Mohamed Sultan's website";
               case "skill":
-                return "Mohamed Sultan-skill akbar sultan graphic design skill page";
+                return "Explore the skill on the skill page of designer Mohamed Sultan's website";
               case "login":
-                return "Mohamed Sultan-login akbar sultan graphic design log in page";
+                return "you can login to Mohamed Sultan's website in this page just click it";
               case "dashboard":
-                return "Mohamed Sultan-dashboard akbar sultan graphic design dashboard page";
+                return "This page is a dachBoard to controll all Mohamed Sultan's website data";
+              case "messages":
+                return "You can see all the message here just login";
+
+              case "dashboard/works":
+                return "Control all the work in this section in this view";
+
+              case "dashboard/work/create":
+                return "Control all the work in this section in this view.";
+
+              case "dashboard/lessons":
+                return "Control all the lessons in this section in this view.";
+
+              case "dashboard/lesson/create":
+                return "Control all the lesson in this section in this view.";
+
+              case "dashboard/skills":
+                return "Control all the skills in this section in this view.";
+
+              case "dashboard/skill/create":
+                return "Control all the skill in this section in this view.";
+
+              case "dashboard/cv/update":
+                return "Control all the cv events in this section in this view.";
+
               case "install":
-                return "Mohamed Sultan-install-app akbar sultan graphic design install the app page";
+                return "Download the designer Mohamed Sultan's application from here and explore the world of fantasy and magnificence";
               case "notfound":
-                return "Mohamed Sultan-notfound akbar sultan graphic design not found page";
+                return "Mohamed Sultan-notfound graphic design not found page";
               default:
-                return "Mohamed Sultan-home-page akbar sultan graphic design home page";
+                return "Mohammad Sultan is an Graphic Designer and video editor from Syria living and working in Dubai | Home page of the inspiring designer Mohamed Sultan | Start exploring many beautiful and attractive designs | You can order a design at any time you want";
             }
           }),
         },
@@ -100,29 +148,288 @@ export default {
           content: computed(() => {
             switch (route.name) {
               case "about me":
-                return "Mohamed Sultan-about akbar sultan graphic design syria designer about page";
+                return `General information about designer Mohamed Sultan Here you can explore more about designer Mohamed Sultan info Typography
+Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
               case "works":
-                return "Mohamed Sultan-works akbar sultan graphic design works page";
-              case "work":
-                return "Mohamed Sultan-work akbar sultan graphic design work page";
-              case "lessons":
-                return "Mohamed Sultan-lessons akbar sultan graphic design lessons page";
-              case "lesson":
-                return "Mohamed Sultan-lesson akbar sultan graphic design lesson page";
-              case "skills":
-                return "Mohamed Sultan-skills akbar sultan graphic design skills page";
-              case "skill":
-                return "Mohamed Sultan-skill akbar sultan graphic design skill page";
-              case "login":
-                return "Mohamed Sultan-login akbar sultan graphic design log in page";
-              case "dashboard":
-                return "Mohamed Sultan-dashboard akbar sultan graphic design dashboard page";
-              case "install":
-                return "Mohamed Sultan-install-app akbar sultan graphic design install the app page";
-              case "notfound":
-                return "Mohamed Sultan-notfound akbar sultan graphic design not found page";
+                return `Designer Mohamed Sultan's works page. You can view all of designer Mohamed Sultan's works here Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+              case `work`:
+                return `Designer Mohamed Sultan's works page. You can view all of designer Mohamed Sultan's works here Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+
+              case `lessons`:
+                return `Designer Mohamed Sultan's lessons page. You can view all of designer Mohamed Sultan's lessons here Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+              case `lesson`:
+                return `Designer Mohamed Sultan's lesson's page. You can view all of designer Mohamed Sultan's lesson's here Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+
+              case `skills`:
+                return `Designer Mohamed Sultan's skills page. You can view all of designer Mohamed Sultan's skills here Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+
+              case `skill`:
+                return `Designer Mohamed Sultan's skill's page. You can view all of designer Mohamed Sultan's skill's here Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+
+              case `login`:
+                return `login sigin register تسجيل الدخول اشتراك اشترك هنا `;
+              case `dashboard`:
+                return `Mohamed Sultan-dashboard Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+              case `install`:
+                return `Mohamed Sultan-install-app akbar sultan graphic design install the app page Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
+              case `notfound`:
+                return `Mohamed Sultan-notfound akbar sultan graphic design not found page Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
               default:
-                return "Mohamed Sultan-home-page akbar sultan graphic design home page";
+                return `Designer in Syria, Designers in Syria, Advertising, Designer in Dubai, Designers in Dubai, Advertising Design, Dubai, United Arab Emirates, Designers in Yemen, Advertising Design, Graphic Designer
+Branding
+Layout
+Color theory
+Illustration
+Digital art
+User interface
+Visual communication
+Print design
+Adobe Creative Suite
+Logo design
+Creative process
+Art direction
+Web design
+Motion graphics
+Concept development
+Image editing
+Graphic elements
+Marketing materials
+Infographics
+Portfolio
+Client collaboration
+Design trends
+Visual hierarchy
+Aesthetics`;
             }
           }),
         },
@@ -141,6 +448,10 @@ export default {
   mounted() {
     // call to getb skills page status methods
     this.get_skills_page();
+
+    setInterval(() => {
+      this.get_messages_count();
+    }, 10000);
 
     // call to handel Scroll method on scroll the page (change)
     window.addEventListener("scroll", this.handleScroll);
@@ -162,6 +473,19 @@ export default {
 
     scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+
+    // get message's count
+    async get_messages_count() {
+      await axios
+        .get(this.$store.state.APIS.messages.get_count)
+        .then((response) => {
+          // set the messages's count to messages's count var in stor
+          this.$store.state.notifications_count = response.data.messages_count;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     // scroll method

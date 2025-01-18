@@ -20,28 +20,62 @@
       </p>
 
       <div class="form">
-        <label for="name">{{
-          this.$store.state.language == "English"
-            ? this.$store.state.English.contact_page.name_label
-            : this.$store.state.Arabic.contact_page.name_label
-        }}</label>
+        <label for="name"
+          >{{
+            this.$store.state.language == "English"
+              ? this.$store.state.English.contact_page.name_label
+              : this.$store.state.Arabic.contact_page.name_label
+          }}
+          <span>{{ this.name.length }}</span>
+        </label>
         <input type="text" v-model="this.name" id="name" />
 
-        <label for="email">{{
-          this.$store.state.language == "English"
-            ? this.$store.state.English.contact_page.email_label
-            : this.$store.state.Arabic.contact_page.email_label
-        }}</label>
+        <label for="email"
+          >{{
+            this.$store.state.language == "English"
+              ? this.$store.state.English.contact_page.email_label
+              : this.$store.state.Arabic.contact_page.email_label
+          }}
+          <span>{{ this.email.length }}</span>
+        </label>
         <input type="email" v-model="this.email" id="email" />
 
-        <label for="message">{{
-          this.$store.state.language == "English"
-            ? this.$store.state.English.contact_page.message_label
-            : this.$store.state.Arabic.contact_page.message_label
-        }}</label>
-        <textarea name="" id="message"></textarea>
+        <label for="phone_number"
+          >{{
+            this.$store.state.language == "English"
+              ? this.$store.state.English.contact_page.phone_number_label
+              : this.$store.state.Arabic.contact_page.phone_number_label
+          }}
+          <span>{{ this.phone_number.length }}</span>
+        </label>
+        <input
+          type="phone_number"
+          v-model="this.phone_number"
+          id="phone_number"
+        />
 
-        <button @click="send_email">
+        <label for="whatsapp"
+          >{{
+            this.$store.state.language == "English"
+              ? this.$store.state.English.contact_page.whatsapp_label
+              : this.$store.state.Arabic.contact_page.whatsapp_label
+          }}
+
+          <span>{{ this.whatsapp.length }}</span></label
+        >
+        <input type="whatsapp" v-model="this.whatsapp" id="whatsapp" />
+
+        <label for="message"
+          >{{
+            this.$store.state.language == "English"
+              ? this.$store.state.English.contact_page.message_label
+              : this.$store.state.Arabic.contact_page.message_label
+          }}
+          <span>{{ this.message.length }}</span></label
+        >
+        <textarea name="" id="message" v-model="this.message"></textarea>
+
+        <button @click="send_message">
           {{
             this.$store.state.language == "English"
               ? this.$store.state.English.contact_page.send_btn
@@ -91,10 +125,18 @@ export default {
     return {
       // page status
       page_status: "close",
-      // email
-      email: "",
       // name
       name: "",
+
+      // email
+      email: "",
+
+      // phone number
+      phone_number: "",
+
+      // whatsapp
+      whatsapp: "",
+
       // message
       message: "",
     };
@@ -150,15 +192,70 @@ export default {
         });
     },
 
-    // send email method
-    async send_email() {
+    // send message method
+    async send_message() {
+      // start the loading
+      this.$store.state.loading_status = "open";
+
+      // create body data
+      const body_data = {
+        name: this.name,
+        email: this.email,
+        phone_number: this.phone_number,
+        whatsapp: this.whatsapp,
+        message: this.message,
+      };
+
       await axios
-        .post(this.$store.state.sulta_links.email_address)
+        .post(this.$store.state.APIS.messages.create, body_data)
         .then((response) => {
-          console.log(response);
+          // emptying the data
+          this.name = "";
+          this.email = "";
+          this.phone_number = "";
+          this.whatsapp = "";
+          this.message = "";
+
+          // to close the loading animation
+          this.$store.state.loading_status = "close";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "🥳Created Successfully🥳",
+              arabic: "🥳تم الإنشاء بنجاح🥳",
+            },
+            type: "Success",
+            messages: response.data.message,
+            status: response.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
         })
         .catch((error) => {
-          console.log(error);
+          // to close the loading animation
+          this.$store.state.loading_status = "close";
+
+          // set the error to the error_object in store
+          this.$store.state.error_object = {
+            title: {
+              english: "😓Error😓",
+              arabic: "😓خطأ😓",
+            },
+            type: "Error",
+            messages: error.response.data.message,
+            status: error.status,
+          };
+
+          // to open the message form
+          this.$store.commit("OpenOrCloseMessageForm");
+
+          // call to change the message form status
+          this.$store.commit("ChangeMEssageFormStatus");
         });
     },
   },
@@ -217,6 +314,8 @@ export default {
       padding-top: 20px;
 
       label {
+        display: flex;
+        justify-content: space-between;
         width: 100%;
         height: auto;
         margin: 10px 0px 5px 0px;
@@ -354,6 +453,8 @@ export default {
       padding-top: 20px;
 
       label {
+        display: flex;
+        justify-content: space-between;
         width: 100%;
         height: auto;
         margin: 10px 0px 5px 0px;
@@ -493,6 +594,8 @@ export default {
       padding-top: 20px;
 
       label {
+        display: flex;
+        justify-content: space-between;
         width: 100%;
         height: auto;
         margin: 10px 0px 5px 0px;
@@ -630,6 +733,8 @@ export default {
       padding-top: 20px;
 
       label {
+        display: flex;
+        justify-content: space-between;
         width: 100%;
         height: auto;
         margin: 10px 0px 5px 0px;

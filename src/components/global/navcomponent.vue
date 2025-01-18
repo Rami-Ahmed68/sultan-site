@@ -26,10 +26,33 @@
             : this.$store.state.skills_link.arabic
         }}</router-link
       >
+
+      <router-link
+        v-if="this.$store.state.admin_data.admin"
+        :to="this.$store.state.dashboard_link.path"
+        >{{
+          this.$store.state.language == "English"
+            ? this.$store.state.dashboard_link.english
+            : this.$store.state.dashboard_link.arabic
+        }}</router-link
+      >
     </div>
     <!-- links  -->
 
     <div class="icons-cont">
+      <!-- notifications  -->
+      <router-link
+        id="notifications"
+        to="/messages"
+        v-if="$route.path != '/messages' && this.$store.state.admin_data.admin"
+      >
+        <span v-if="this.$store.state.notifications_count > 0">{{
+          this.$store.state.notifications_count
+        }}</span>
+        <icon icon="bell" />
+      </router-link>
+
+      <!-- Notifications -->
       <!-- mood icon -->
       <div :class="`mood-${this.$store.state.mood}`" @click="change_mood">
         <icon :icon="this.mood_icon_type" />
@@ -159,6 +182,39 @@ export default {
     justify-content: space-around;
     align-items: center;
 
+    @media (max-width: $mobile) {
+      width: 200px;
+    }
+
+    #notifications {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $white;
+      border: 1px solid $white-one;
+      transition-duration: 0.5s;
+      position: relative;
+
+      span {
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $small;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        background-color: $error-red-one;
+        border-radius: 50%;
+        color: $white;
+      }
+    }
+
     .links-icon-bars {
       width: 40px;
       height: 40px;
@@ -244,6 +300,39 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    @media (max-width: $mobile) {
+      width: 200px;
+    }
+
+    #notifications {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $black;
+      border: 1px solid $black;
+      transition-duration: 0.5s;
+      position: relative;
+
+      span {
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $small;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        background-color: $error-red-one;
+        border-radius: 50%;
+        color: $white;
+      }
+    }
 
     .links-icon-bars {
       color: $black;
@@ -364,6 +453,39 @@ export default {
     justify-content: space-around;
     align-items: center;
 
+    @media (max-width: $mobile) {
+      width: 200px;
+    }
+
+    #notifications {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $white;
+      border: 1px solid $white-one;
+      transition-duration: 0.5s;
+      position: relative;
+
+      span {
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $small;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        background-color: $error-red-one;
+        border-radius: 50%;
+        color: $white;
+      }
+    }
+
     .links-icon-bars {
       width: 40px;
       height: 40px;
@@ -449,6 +571,39 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    @media (max-width: $mobile) {
+      width: 200px;
+    }
+
+    #notifications {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      color: $black;
+      border: 1px solid $black;
+      transition-duration: 0.5s;
+      position: relative;
+
+      span {
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $small;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        background-color: $error-red-one;
+        border-radius: 50%;
+        color: $white;
+      }
+    }
 
     .links-icon-bars {
       color: $black;

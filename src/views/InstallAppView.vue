@@ -164,10 +164,16 @@ export default {
       margin: 10px 10%;
       border: none;
       outline: none;
-      background: linear-gradient(to top, $gold-five, $gold-three, $gold-five);
+      transition-duration: 0.5s;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
       color: $white;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: $error-green-one;
     }
   }
 }
@@ -228,10 +234,16 @@ export default {
       margin: 10px 10%;
       border: none;
       outline: none;
-      background: linear-gradient(to top, $gold-five, $gold-three, $gold-five);
+      transition-duration: 0.5s;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
       color: $white;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: $error-green-one;
     }
   }
 }
@@ -294,10 +306,16 @@ export default {
       margin: 10px 10%;
       border: none;
       outline: none;
-      background: linear-gradient(to top, $gold-five, $gold-three, $gold-five);
+      transition-duration: 0.5s;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
       color: $white;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: $error-green-one;
     }
   }
 }
@@ -358,10 +376,16 @@ export default {
       margin: 10px 10%;
       border: none;
       outline: none;
-      background: linear-gradient(to top, $gold-five, $gold-three, $gold-five);
+      transition-duration: 0.5s;
+      background-color: $error-green-tow;
+      border: 1px solid $error-green-one;
       color: $white;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: $error-green-one;
     }
   }
 }
