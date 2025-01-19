@@ -27,7 +27,7 @@
     "util": "^0.12.5",
     "vue": "^3.2.13",
     "vue-cookies": "^1.8.5",
-    "vue-router": "^3.6.5",
+    "vue-router": "^4.0.3",
     "vue-router-sitemap": "^0.0.4",
     "vuex": "^4.0.0"
   },
