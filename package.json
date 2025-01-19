@@ -20,7 +20,8 @@
     "three": "^0.172.0",
     "vue": "^3.2.13",
     "vue-cookies": "^1.8.5",
-    "vue-router": "^4.0.3",
+    "vue-router": "^3.0.1",
+    "vue-router-sitemap": "^0.0.4",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
