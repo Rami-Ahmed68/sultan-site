@@ -10,7 +10,14 @@ module.exports = defineConfig({
         paths: [
           { path: "/", priority: 1 },
           { path: "/about", priority: 0.8 },
+          { path: "/contact", priority: 0.8 },
           { path: "/works", priority: 0.8 },
+          { path: "/work", priority: 0.8 },
+          { path: "/lessons", priority: 0.8 },
+          { path: "/lesson", priority: 0.8 },
+          { path: "/cv", priority: 0.8 },
+          { path: "/skills", priority: 0.8 },
+          { path: "/dashboard", priority: 0.8 },
           // ... إضافة مسارات أخرى
         ],
       }),
