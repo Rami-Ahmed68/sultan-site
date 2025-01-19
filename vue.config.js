@@ -17,6 +17,9 @@ module.exports = defineConfig({
           { path: "/lesson", priority: 0.8 },
           { path: "/cv", priority: 0.8 },
           { path: "/skills", priority: 0.8 },
+          { path: "/skill", priority: 0.8 },
+          { path: "/install", priority: 0.8 },
+          { path: "/messages", priority: 0.8 },
           { path: "/dashboard", priority: 0.8 },
           // ... إضافة مسارات أخرى
         ],
