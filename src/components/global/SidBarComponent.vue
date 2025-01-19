@@ -28,6 +28,7 @@
       <router-link
         v-if="this.$store.state.admin_data.admin"
         :to="this.$store.state.dashboard_link.path"
+        @click="this.$store.commit('chnage_sid_bar_status')"
         >{{
           this.$store.state.language == "English"
             ? this.$store.state.dashboard_link.english

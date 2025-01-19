@@ -12,6 +12,7 @@ export default createStore({
     links: [
       { english: "Home", arabic: "الصفحة الرئيسية", path: "/" },
       { english: "About", arabic: "عني", path: "/about" },
+      { english: "Contact", arabic: "تواصل", path: "/contact" },
       { english: "Works", arabic: "الأعمال", path: "/works" },
       { english: "Lessons", arabic: "الدروس", path: "/lessons" },
       { english: "Cv", arabic: "السيرة الذاتية", path: "/cv" },
