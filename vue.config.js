@@ -6,12 +6,13 @@ module.exports = defineConfig({
   configureWebpack: {
     plugins: [
       new SitemapPlugin({
-        base: "https://example.com",
-        // paths: [
-        //   { path: '/', priority: 0.9 },
-        //   { path: '/about', priority: 0.8 },
-        //   // ... إضافة مسارات أخرى
-        // ]
+        base: "https://sultan-site.onrender.com/",
+        paths: [
+          { path: "/", priority: 1 },
+          { path: "/about", priority: 0.8 },
+          { path: "/works", priority: 0.8 },
+          // ... إضافة مسارات أخرى
+        ],
       }),
     ],
   },
