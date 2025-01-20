@@ -148,287 +148,287 @@ export default {
           content: computed(() => {
             switch (route.name) {
               case "about me":
-                return `General information about designer Mohamed Sultan Here you can explore more about designer Mohamed Sultan info Typography
-Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+                return `General, information, about ,designer, Mohamed Sultan, designer Mohamed Sultan info, Typography
+Branding,
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
               case "works":
-                return `Designer Mohamed Sultan's works page. You can view all of designer Mohamed Sultan's works here Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+                return `Designer Mohamed Sultan's ,works page. , designer Mohamed Sultan's works, here Branding
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
               case `work`:
-                return `Designer Mohamed Sultan's works page. You can view all of designer Mohamed Sultan's works here Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
-Aesthetics`;
+                return `Designer Mohamed Sultan's, works page, designer Mohamed Sultan's, Branding
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
+Aesthetics,`;
 
               case `lessons`:
-                return `Designer Mohamed Sultan's lessons page. You can view all of designer Mohamed Sultan's lessons here Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+                return `Designer Mohamed Sultan's, lessons page, designer Mohamed Sultan's, lessons,Branding
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
               case `lesson`:
-                return `Designer Mohamed Sultan's lesson's page. You can view all of designer Mohamed Sultan's lesson's here Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+                return `Designer Mohamed Sultan's, lesson's page, designer Mohamed Sultan's lesson's , Branding
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
 
               case `skills`:
                 return `Designer Mohamed Sultan's skills page. You can view all of designer Mohamed Sultan's skills here Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
 
               case `skill`:
                 return `Designer Mohamed Sultan's skill's page. You can view all of designer Mohamed Sultan's skill's here Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
 
               case `login`:
                 return `login sigin register تسجيل الدخول اشتراك اشترك هنا `;
               case `dashboard`:
                 return `Mohamed Sultan-dashboard Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
               case `install`:
                 return `Mohamed Sultan-install-app akbar sultan graphic design install the app page Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
               case `notfound`:
                 return `Mohamed Sultan-notfound akbar sultan graphic design not found page Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
               default:
                 return `Designer in Syria, Designers in Syria, Advertising, Designer in Dubai, Designers in Dubai, Advertising Design, Dubai, United Arab Emirates, Designers in Yemen, Advertising Design, Graphic Designer
 Branding
-Layout
-Color theory
-Illustration
-Digital art
-User interface
-Visual communication
-Print design
-Adobe Creative Suite
-Logo design
-Creative process
-Art direction
-Web design
-Motion graphics
-Concept development
-Image editing
-Graphic elements
-Marketing materials
-Infographics
-Portfolio
-Client collaboration
-Design trends
-Visual hierarchy
+Layout,
+Color theory,
+Illustration,
+Digital art,
+User interface,
+Visual communication,
+Print design,
+Adobe Creative Suite,
+Logo design,
+Creative process,
+Art direction,
+Web design,
+Motion graphics,
+Concept development,
+Image editing,
+Graphic elements,
+Marketing materials,
+Infographics,
+Portfolio,
+Client collaboration,
+Design trends,
+Visual hierarchy,
 Aesthetics`;
             }
           }),
