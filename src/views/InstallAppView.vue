@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     async install() {
-      alert("hi rami");
       if (this.deferredPrompt) {
         await this.deferredPrompt.prompt();
 
