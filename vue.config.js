@@ -21,7 +21,6 @@ module.exports = defineConfig({
           { path: "/install", priority: 0.8 },
           { path: "/messages", priority: 0.8 },
           { path: "/dashboard", priority: 0.8 },
-          // ... إضافة مسارات أخرى
         ],
       }),
     ],

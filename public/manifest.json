@@ -1,6 +1,6 @@
 {
   "name": "Mohamed Sultan",
-  "short_name": "sultan designer",
+  "short_name": "Sultan designer",
   "description": "Mohamed Sultan's app",
   "start_url": "/",
   "display": "standalone",
@@ -8,7 +8,7 @@
   "theme_color": "#3367D6",
   "icons": [
     {
-      "src": "/public/img/icons/android-chrome-192x192.png",
+      "src": "../public/img/icons/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
