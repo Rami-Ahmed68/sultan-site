@@ -41,6 +41,11 @@ export default {
     };
   },
   mounted() {
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      this.deferredPrompt = event;
+    });
+
     // change the page status afet 0.5s
     setTimeout(() => {
       this.page_status = "open";
@@ -48,67 +53,79 @@ export default {
   },
   methods: {
     install() {
-      // start the loading animation
-      this.$store.state.loading_status = "open";
-
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        this.deferredPrompt = e;
-      });
-
       if (this.deferredPrompt) {
         this.deferredPrompt.prompt();
 
-        // stop the loading animation
-        this.$store.state.loading_status = "close";
-
-        // set the error to the error_object in store
-        this.$store.state.error_object = {
-          title: {
-            english: "🥳Is down🥳",
-            arabic: "🥳تم التنزيل🥳",
-          },
-          type: "Success",
-          messages: {
-            english: "Ap installed successfully",
-            arabic: "تم تنزيل التطبيق بنجاح",
-          },
-          status: 200,
-        };
-
-        // to open the message form
-        this.$store.commit("OpenOrCloseMessageForm");
-
-        // to open the message form
-        this.$store.commit("OpenOrCloseMessageForm");
-
-        // call to change the message form status
-        this.$store.commit("ChangeMEssageFormStatus");
-      } else {
-        // stop the loading animation
-        this.$store.state.loading_status = "close";
-
-        // set the error to the error_object in store
-        this.$store.state.error_object = {
-          title: {
-            english: "😓Error😓",
-            arabic: "😓خطأ😓",
-          },
-          type: "Error",
-          messages: {
-            english: "Sorry, cann't install the app",
-            arabic: "عذرا لا يمكن تنزيل التطبيق",
-          },
-          status: 403,
-        };
-
-        // to open the message form
-        this.$store.commit("OpenOrCloseMessageForm");
-
-        // call to change the message form status
-        this.$store.commit("ChangeMEssageFormStatus");
+        if (this.deferredPrompt) {
+          this.deferredPrompt = null;
+        }
       }
     },
+
+    // install() {
+    //   // start the loading animation
+    //   this.$store.state.loading_status = "open";
+
+    //   window.addEventListener("beforeinstallprompt", (e) => {
+    //     e.preventDefault();
+    //     this.deferredPrompt = e;
+    //   });
+
+    //   if (this.deferredPrompt) {
+    //     this.deferredPrompt.prompt();
+
+    //     // stop the loading animation
+    //     this.$store.state.loading_status = "close";
+
+    //     // set the error to the error_object in store
+    //     this.$store.state.error_object = {
+    //       title: {
+    //         english: "🥳Is down🥳",
+    //         arabic: "🥳تم التنزيل🥳",
+    //       },
+    //       type: "Success",
+    //       messages: {
+    //         english: "Ap installed successfully",
+    //         arabic: "تم تنزيل التطبيق بنجاح",
+    //       },
+    //       status: 200,
+    //     };
+
+    //     // to open the message form
+    //     this.$store.commit("OpenOrCloseMessageForm");
+
+    //     // to open the message form
+    //     this.$store.commit("OpenOrCloseMessageForm");
+
+    //     // call to change the message form status
+    //     this.$store.commit("ChangeMEssageFormStatus");
+
+    //     this.deferredPrompt = null;
+    //   } else {
+    //     // stop the loading animation
+    //     this.$store.state.loading_status = "close";
+
+    //     // set the error to the error_object in store
+    //     this.$store.state.error_object = {
+    //       title: {
+    //         english: "😓Error😓",
+    //         arabic: "😓خطأ😓",
+    //       },
+    //       type: "Error",
+    //       messages: {
+    //         english: "Sorry, cann't install the app",
+    //         arabic: "عذرا لا يمكن تنزيل التطبيق",
+    //       },
+    //       status: 403,
+    //     };
+
+    //     // to open the message form
+    //     this.$store.commit("OpenOrCloseMessageForm");
+
+    //     // call to change the message form status
+    //     this.$store.commit("ChangeMEssageFormStatus");
+    //   }
+    // },
   },
 };
 </script>
