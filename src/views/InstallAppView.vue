@@ -42,6 +42,7 @@ export default {
   },
   mounted() {
     window.addEventListener("beforeinstallprompt", (e) => {
+      console.log(this.deferredPrompt);
       e.preventDefault();
       this.deferredPrompt = e;
     });
@@ -84,6 +85,8 @@ export default {
 
         // call to change the message form status
         this.$store.commit("ChangeMEssageFormStatus");
+
+        this.deferredPrompt = null;
       } else {
         // stop the loading animation
         this.$store.state.loading_status = "close";
