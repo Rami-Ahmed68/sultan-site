@@ -41,78 +41,24 @@ export default {
     };
   },
   mounted() {
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      this.deferredPrompt = event;
+    });
+
     // change the page status afet 0.5s
     setTimeout(() => {
       this.page_status = "open";
     }, 500);
   },
-  created() {
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      this.deferredPrompt = e;
-    });
-  },
   methods: {
     install() {
       if (this.deferredPrompt) {
-        this.$store.state.loading_status = "open";
         this.deferredPrompt.prompt();
 
-        this.deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === "accepted") {
-            console.log("User accepted the A2HS prompt");
-            // Show success message (if needed)
-            this.$store.state.error_object = {
-              title: {
-                english: "🥳Is down🥳",
-                arabic: "🥳تم التنزيل🥳",
-              },
-              type: "Success",
-              messages: {
-                english: "App installed successfully",
-                arabic: "تم تنزيل التطبيق بنجاح",
-              },
-              status: 200,
-            };
-          } else {
-            console.log("User dismissed the A2HS prompt");
-            // Show error message (if needed)
-            this.$store.state.error_object = {
-              title: {
-                english: "😓Error😓",
-                arabic: "😓خطأ😓",
-              },
-              type: "Error",
-              messages: {
-                english: "Sorry, cann't install the app",
-                arabic: "عذرا لا يمكن تنزيل التطبيق",
-              },
-              status: 403,
-            };
-          }
-          this.$store.state.loading_status = "close";
-          this.$store.commit("OpenOrCloseMessageForm");
-          this.$store.commit("ChangeMEssageFormStatus");
+        if (this.deferredPrompt) {
           this.deferredPrompt = null;
-        });
-      } else {
-        // Handle case where deferredPrompt is not available
-        console.warn("deferredPrompt is not available");
-        // Show error message to the user
-        this.$store.state.error_object = {
-          title: {
-            english: "😓Error😓",
-            arabic: "😓خطأ😓",
-          },
-          type: "Error",
-          messages: {
-            english: "Sorry, cann't install the app",
-            arabic: "عذرا لا يمكن تنزيل التطبيق",
-          },
-          status: 403,
-        };
-        this.$store.commit("OpenOrCloseMessageForm");
-        this.$store.commit("ChangeMEssageFormStatus");
+        }
       }
     },
   },
