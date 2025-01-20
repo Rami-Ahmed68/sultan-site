@@ -41,23 +41,22 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("beforeinstallprompt", (event) => {
-      event.preventDefault();
-      this.deferredPrompt = event;
-    });
-
     // change the page status afet 0.5s
     setTimeout(() => {
       this.page_status = "open";
     }, 500);
   },
+  created() {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      this.deferredPrompt = e;
+    });
+  },
   methods: {
     install() {
       // start the loading animation
       this.$store.state.loading_status = "open";
-
-      // update the deferredPrompt's status
-      this.deferredPrompt = true;
 
       if (this.deferredPrompt) {
         this.deferredPrompt.prompt();
