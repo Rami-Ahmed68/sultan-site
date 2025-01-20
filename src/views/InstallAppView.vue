@@ -49,77 +49,71 @@ export default {
   created() {
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
-      // Stash the event so it can be triggered later.
       this.deferredPrompt = e;
     });
   },
   methods: {
     install() {
-      // start the loading animation
-      this.$store.state.loading_status = "open";
-
       if (this.deferredPrompt) {
+        this.$store.state.loading_status = "open";
         this.deferredPrompt.prompt();
 
-        // stop the loading animation
-        this.$store.state.loading_status = "close";
-
-        // set the error to the error_object in store
+        this.deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === "accepted") {
+            console.log("User accepted the A2HS prompt");
+            // Show success message (if needed)
+            this.$store.state.error_object = {
+              title: {
+                english: "🥳Is down🥳",
+                arabic: "🥳تم التنزيل🥳",
+              },
+              type: "Success",
+              messages: {
+                english: "App installed successfully",
+                arabic: "تم تنزيل التطبيق بنجاح",
+              },
+              status: 200,
+            };
+          } else {
+            console.log("User dismissed the A2HS prompt");
+            // Show error message (if needed)
+            this.$store.state.error_object = {
+              title: {
+                english: "😓Error😓",
+                arabic: "😓خطأ😓",
+              },
+              type: "Error",
+              messages: {
+                english: "Sorry, cann't install the app",
+                arabic: "عذرا لا يمكن تنزيل التطبيق",
+              },
+              status: 403,
+            };
+          }
+          this.$store.state.loading_status = "close";
+          this.$store.commit("OpenOrCloseMessageForm");
+          this.$store.commit("ChangeMEssageFormStatus");
+          this.deferredPrompt = null;
+        });
+      } else {
+        // Handle case where deferredPrompt is not available
+        console.warn("deferredPrompt is not available");
+        // Show error message to the user
         this.$store.state.error_object = {
           title: {
-            english: "🥳Is down🥳",
-            arabic: "🥳تم التنزيل🥳",
+            english: "😓Error😓",
+            arabic: "😓خطأ😓",
           },
-          type: "Success",
+          type: "Error",
           messages: {
-            english: "Ap installed successfully",
-            arabic: "تم تنزيل التطبيق بنجاح",
+            english: "Sorry, cann't install the app",
+            arabic: "عذرا لا يمكن تنزيل التطبيق",
           },
-          status: 200,
+          status: 403,
         };
-
-        // to open the message form
         this.$store.commit("OpenOrCloseMessageForm");
-
-        // to open the message form
-        this.$store.commit("OpenOrCloseMessageForm");
-
-        // call to change the message form status
         this.$store.commit("ChangeMEssageFormStatus");
-
-        if (this.deferredPrompt) {
-          this.deferredPrompt = null;
-        }
       }
-
-      // if (this.deferredPrompt) {
-      //   this.deferredPrompt.prompt();
-
-      //   this.deferredPrompt = null;
-      // } else {
-      //   // stop the loading animation
-      //   this.$store.state.loading_status = "close";
-
-      //   // set the error to the error_object in store
-      //   this.$store.state.error_object = {
-      //     title: {
-      //       english: "😓Error😓",
-      //       arabic: "😓خطأ😓",
-      //     },
-      //     type: "Error",
-      //     messages: {
-      //       english: "Sorry, cann't install the app",
-      //       arabic: "عذرا لا يمكن تنزيل التطبيق",
-      //     },
-      //     status: 403,
-      //   };
-
-      //   // to open the message form
-      //   this.$store.commit("OpenOrCloseMessageForm");
-
-      //   // call to change the message form status
-      //   this.$store.commit("ChangeMEssageFormStatus");
-      // }
     },
   },
 };
