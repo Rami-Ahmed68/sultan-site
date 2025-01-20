@@ -90,7 +90,7 @@ export default {
   methods: {
     // change page method
     change_page() {
-      window.location = "/about";
+      this.$router.push("/about");
     },
 
     async get_admin_links() {
