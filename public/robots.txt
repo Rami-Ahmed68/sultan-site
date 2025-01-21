@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://sultan-site.onrender.com/sitemap.xml
