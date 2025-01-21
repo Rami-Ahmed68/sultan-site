@@ -21,11 +21,6 @@ export default createStore({
     dash_board_links: [
       { english: "Home", arabic: "الصفحة الرئيسية", path: "" },
       {
-        english: "Update Info",
-        arabic: "تعديل البيانات",
-        path: "dashboard/info/update",
-      },
-      {
         english: "Works",
         arabic: "الأعمال",
         path: "dashboard/works",

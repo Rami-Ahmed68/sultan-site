@@ -4,13 +4,13 @@
   >
     <div :class="`cont-${this.page_status}`">
       <!-- message one -->
-      <div class="message-one">
+      <h1 class="message-one">
         {{
           this.$store.state.language == "English"
             ? this.$store.state.English.messages.about_message_one
             : this.$store.state.Arabic.messages.about_message_one
         }}
-      </div>
+      </h1>
       <!-- message one -->
 
       <div class="avatar-name-cont">
