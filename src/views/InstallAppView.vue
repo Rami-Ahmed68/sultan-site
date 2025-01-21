@@ -41,11 +41,6 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("beforeinstallprompt", (event) => {
-      event.preventDefault();
-      this.deferredPrompt = event;
-    });
-
     // change the page status afet 0.5s
     setTimeout(() => {
       this.page_status = "open";
@@ -53,11 +48,21 @@ export default {
   },
   methods: {
     async install() {
+      // start the loading
+      this.$store.state.loading_status = "open";
+
+      window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        this.deferredPrompt = event;
+      });
+
       if (this.deferredPrompt) {
         await this.deferredPrompt.prompt();
 
         if (this.deferredPrompt) {
           this.deferredPrompt = null;
+          // stop the loading
+          this.$store.state.loading_status = "open";
         }
       }
     },
