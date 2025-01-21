@@ -45,7 +45,7 @@
             <img src="../assets/email.png" alt="" />
           </router-link>
           <a
-            :href="`https://wa.me/${this.$store.state.sulta_links.whattsapp}`"
+            :href="`https://wa.me/${this.$store.state.sulta_links.whatsapp}`"
             target="_blank"
           >
             <img src="../assets/whattsapp.png" alt="" />

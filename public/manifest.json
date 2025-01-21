@@ -4,8 +4,8 @@
   "description": "Mohamed Sultan's app",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#3367D6",
+  "background_color": "#000000",
+  "theme_color": "#141328",
   "icons": [
     {
       "src": "../public/img/icons/android-chrome-192x192.png",
