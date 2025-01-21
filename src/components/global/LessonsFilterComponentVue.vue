@@ -27,7 +27,7 @@
         }}
       </h5>
       <p
-        v-for="(tag, index) in this.$store.state.tags"
+        v-for="(tag, index) in this.$store.state.tags.slice(0, 3)"
         :key="index"
         :class="
           !this.selected_tags.includes(tag.english_title)

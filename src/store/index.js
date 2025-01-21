@@ -167,7 +167,7 @@ export default createStore({
       },
       note: "Never stop learning and gaining experience.",
       messages: {
-        about_message_one: "👋 Hi, welcome to designer Mohammed Sultan's site.",
+        about_message_one: "👋 Hi, welcome to designer Muhammad Sultan's site.",
       },
       work_page: {
         title: "Work's page",

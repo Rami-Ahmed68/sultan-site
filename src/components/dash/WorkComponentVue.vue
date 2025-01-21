@@ -69,7 +69,11 @@
       </p>
       <!-- description  -->
 
-      <p class="tag" v-for="(tag, index) in this.work_data.tags" :key="index">
+      <p
+        class="tag"
+        v-for="(tag, index) in this.work_data.tags.slice(0, 3)"
+        :key="index"
+      >
         {{ tag }}
       </p>
 
@@ -219,6 +223,10 @@ export default {
       border-radius: 4px;
       background-color: $Navy-blue-one;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -373,6 +381,10 @@ export default {
       border-radius: 4px;
       background-color: $white-for;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -512,6 +524,10 @@ export default {
       border-radius: 4px;
       background-color: $Navy-blue-one;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -668,6 +684,10 @@ export default {
       border-radius: 4px;
       background-color: $white-for;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {

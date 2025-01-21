@@ -76,7 +76,11 @@
       </p>
       <!-- description  -->
 
-      <p class="tag" v-for="(tag, index) in this.lesson_data.tags" :key="index">
+      <p
+        class="tag"
+        v-for="(tag, index) in this.lesson_data.tags.slice(0, 3)"
+        :key="index"
+      >
         {{ tag }}
       </p>
 
@@ -137,6 +141,7 @@ export default {
     padding: 4px;
     border-radius: 4px;
     color: $white;
+    font-size: $x-small;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
     position: absolute;
@@ -145,7 +150,7 @@ export default {
     z-index: 5;
 
     @media (max-width: $mobile) {
-      font-size: $x-small;
+      font-size: $xx-small;
     }
   }
 
@@ -203,12 +208,16 @@ export default {
 
     .tag {
       width: auto;
-      font-size: $x-small;
       color: $white;
+      font-size: $x-small;
       padding: 4px;
       border-radius: 4px;
       background-color: $Navy-blue-one;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -239,6 +248,7 @@ export default {
   .level-advanced {
     padding: 4px;
     border-radius: 4px;
+    font-size: $x-small;
     color: $black;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
@@ -312,6 +322,10 @@ export default {
       border-radius: 4px;
       background-color: $white-for;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -341,6 +355,7 @@ export default {
   .level-advanced {
     padding: 4px;
     border-radius: 4px;
+    font-size: $x-small;
     color: $white;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
@@ -416,6 +431,10 @@ export default {
       border-radius: 4px;
       background-color: $Navy-blue-one;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -443,6 +462,7 @@ export default {
   .level-advanced {
     padding: 4px;
     border-radius: 4px;
+    font-size: $x-small;
     color: $black;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
@@ -467,24 +487,6 @@ export default {
     border: 1px solid $error-green-one;
     background-color: $error-green-tow;
   }
-
-  // .image-cont {
-  //   width: 90%;
-  //   height: 180px;
-  //   border-radius: 5px;
-  //   margin: 10px 5%;
-  //   overflow: hidden;
-
-  //   img {
-  //     width: 100%;
-  //     height: 100%;
-  //     transition-duration: 0.5s;
-  //   }
-
-  //   img:hover {
-  //     transform: scale(1.1);
-  //   }
-  // }
 
   .image-cont {
     width: 150px;
@@ -535,6 +537,10 @@ export default {
       border-radius: 4px;
       background-color: $white-for;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -568,6 +574,7 @@ export default {
     padding: 4px;
     border-radius: 4px;
     color: $white;
+    font-size: $x-small;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
     position: absolute;
@@ -640,6 +647,10 @@ export default {
       border-radius: 4px;
       background-color: $Navy-blue-one;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -671,6 +682,7 @@ export default {
     padding: 4px;
     border-radius: 4px;
     color: $black;
+    font-size: $x-small;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
     position: absolute;
@@ -743,6 +755,10 @@ export default {
       border-radius: 4px;
       background-color: $white-for;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -773,6 +789,7 @@ export default {
     padding: 4px;
     border-radius: 4px;
     color: $white;
+    font-size: $x-small;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
     position: absolute;
@@ -847,6 +864,10 @@ export default {
       border-radius: 4px;
       background-color: $Navy-blue-one;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {
@@ -875,6 +896,7 @@ export default {
     padding: 4px;
     border-radius: 4px;
     color: $black;
+    font-size: $x-small;
     border: 1px solid $error-red-one;
     background-color: $error-red-tow;
     position: absolute;
@@ -968,6 +990,10 @@ export default {
       border-radius: 4px;
       background-color: $white-for;
       margin: 3px;
+
+      @media (max-width: $mobile) {
+        font-size: $xx-small;
+      }
     }
 
     .date {

@@ -36,55 +36,55 @@ export default {
       title: computed(() => {
         switch (route.name) {
           case "about me":
-            return "Mohamed Sultan-about";
+            return "Muhammad Sultan-about";
           case "works":
-            return "Mohamed Sultan-works";
+            return "Muhammad Sultan-works";
           case "work":
-            return "Mohamed Sultan-work";
+            return "Muhammad Sultan-work";
           case "lessons":
-            return "Mohamed Sultan-lessons";
+            return "Muhammad Sultan-lessons";
           case "lesson":
-            return "Mohamed Sultan-lesson";
+            return "Muhammad Sultan-lesson";
           case "skills":
-            return "Mohamed Sultan-skills";
+            return "Muhammad Sultan-skills";
           case "skill":
-            return "Mohamed Sultan-skill";
+            return "Muhammad Sultan-skill";
           case "cv":
-            return "Mohamed Sultan-cv";
+            return "Muhammad Sultan-cv";
           case "login":
-            return "Mohamed Sultan-login";
+            return "Muhammad Sultan-login";
           case "dashboard":
-            return "Mohamed Sultan-dashboard";
+            return "Muhammad Sultan-dashboard";
           case "install":
-            return "Mohamed Sultan-install-app";
+            return "Muhammad Sultan-install-app";
           case "messages":
-            return "Mohamed Sultan-messages";
+            return "Muhammad Sultan-messages";
 
           case "dashboard/works":
-            return "Mohamed Sultan-dash-works";
+            return "Muhammad Sultan-dash-works";
 
           case "dashboard/work/create":
-            return "Mohamed Sultan-dash-works-create";
+            return "Muhammad Sultan-dash-works-create";
 
           case "dashboard/lessons":
-            return "Mohamed Sultan-dash-lessons";
+            return "Muhammad Sultan-dash-lessons";
 
           case "dashboard/lesson/create":
-            return "Mohamed Sultan-dash-lesson-create";
+            return "Muhammad Sultan-dash-lesson-create";
 
           case "dashboard/skills":
-            return "Mohamed Sultan-dash-skills";
+            return "Muhammad Sultan-dash-skills";
 
           case "dashboard/skill/create":
-            return "Mohamed Sultan-dash-skill-create";
+            return "Muhammad Sultan-dash-skill-create";
 
           case "dashboard/cv/update":
-            return "Mohamed Sultan-dash-cv-update";
+            return "Muhammad Sultan-dash-cv-update";
 
           case "notfound":
-            return "Mohamed Sultan-notfound";
+            return "Muhammad Sultan-notfound";
           default:
-            return "Mohamed Sultan-home-page";
+            return "Muhammad Sultan-home-page";
         }
       }),
       meta: [
@@ -93,23 +93,23 @@ export default {
           content: computed(() => {
             switch (route.name) {
               case "about me":
-                return "Find out more about designer Mohamed Sultan on his about-me page.";
+                return "Find out more about designer Muhammad Sultan on his about-me page.";
               case "works":
-                return "Explore the works on the works page of designer Mohamed Sultan's website";
+                return "Explore the works on the works page of designer Muhammad Sultan's website";
               case "work":
-                return "Explore the work on the work page of designer Mohamed Sultan's website";
+                return "Explore the work on the work page of designer Muhammad Sultan's website";
               case "lessons":
-                return "Explore the lessons on the lessons page of designer Mohamed Sultan's website";
+                return "Explore the lessons on the lessons page of designer Muhammad Sultan's website";
               case "lesson":
-                return "Explore the lesson on the lesson page of designer Mohamed Sultan's website";
+                return "Explore the lesson on the lesson page of designer Muhammad Sultan's website";
               case "skills":
-                return "Explore the skills on the skills page of designer Mohamed Sultan's website";
+                return "Explore the skills on the skills page of designer Muhammad Sultan's website";
               case "skill":
-                return "Explore the skill on the skill page of designer Mohamed Sultan's website";
+                return "Explore the skill on the skill page of designer Muhammad Sultan's website";
               case "login":
-                return "you can login to Mohamed Sultan's website in this page just click it";
+                return "you can login to Muhammad Sultan's website in this page just click it";
               case "dashboard":
-                return "This page is a dachBoard to controll all Mohamed Sultan's website data";
+                return "This page is a dachBoard to controll all Muhammad Sultan's website data";
               case "messages":
                 return "You can see all the message here just login";
 
@@ -135,11 +135,11 @@ export default {
                 return "Control all the cv events in this section in this view.";
 
               case "install":
-                return "Download the designer Mohamed Sultan's application from here and explore the world of fantasy and magnificence";
+                return "Download the designer Muhammad Sultan's application from here and explore the world of fantasy and magnificence";
               case "notfound":
-                return "Mohamed Sultan-notfound graphic design not found page";
+                return "Muhammad Sultan-notfound graphic design not found page";
               default:
-                return "Mohammad Sultan is an Graphic Designer and video editor from Syria living and working in Dubai | Home page of the inspiring designer Mohamed Sultan | Start exploring many beautiful and attractive designs | You can order a design at any time you want";
+                return "Mohammad Sultan is an Graphic Designer and video editor from Syria living and working in Dubai | Home page of the inspiring designer Muhammad Sultan | Start exploring many beautiful and attractive designs | You can order a design at any time you want";
             }
           }),
         },
@@ -148,7 +148,7 @@ export default {
           content: computed(() => {
             switch (route.name) {
               case "about me":
-                return `General, information, about ,designer, Mohamed Sultan, designer Mohamed Sultan info, Typography
+                return `General, information, about ,designer, Muhammad Sultan, designer Muhammad Sultan info, Typography
 Branding,
 Layout,
 Color theory,
@@ -174,7 +174,7 @@ Design trends,
 Visual hierarchy,
 Aesthetics`;
               case "works":
-                return `Designer Mohamed Sultan's ,works page. , designer Mohamed Sultan's works, here Branding
+                return `Designer Muhammad Sultan's ,works page. , designer Muhammad Sultan's works, here Branding
 Layout,
 Color theory,
 Illustration,
@@ -199,7 +199,7 @@ Design trends,
 Visual hierarchy,
 Aesthetics`;
               case `work`:
-                return `Designer Mohamed Sultan's, works page, designer Mohamed Sultan's, Branding
+                return `Designer Muhammad Sultan's, works page, designer Muhammad Sultan's, Branding
 Layout,
 Color theory,
 Illustration,
@@ -225,7 +225,7 @@ Visual hierarchy,
 Aesthetics,`;
 
               case `lessons`:
-                return `Designer Mohamed Sultan's, lessons page, designer Mohamed Sultan's, lessons,Branding
+                return `Designer Muhammad Sultan's, lessons page, designer Muhammad Sultan's, lessons,Branding
 Layout,
 Color theory,
 Illustration,
@@ -250,7 +250,7 @@ Design trends,
 Visual hierarchy,
 Aesthetics`;
               case `lesson`:
-                return `Designer Mohamed Sultan's, lesson's page, designer Mohamed Sultan's lesson's , Branding
+                return `Designer Muhammad Sultan's, lesson's page, designer Muhammad Sultan's lesson's , Branding
 Layout,
 Color theory,
 Illustration,
@@ -276,7 +276,7 @@ Visual hierarchy,
 Aesthetics`;
 
               case `skills`:
-                return `Designer Mohamed Sultan's skills page. You can view all of designer Mohamed Sultan's skills here Branding
+                return `Designer Muhammad Sultan's skills page. You can view all of designer Muhammad Sultan's skills here Branding
 Layout,
 Color theory,
 Illustration,
@@ -302,7 +302,7 @@ Visual hierarchy,
 Aesthetics`;
 
               case `skill`:
-                return `Designer Mohamed Sultan's skill's page. You can view all of designer Mohamed Sultan's skill's here Branding
+                return `Designer Muhammad Sultan's skill's page. You can view all of designer Muhammad Sultan's skill's here Branding
 Layout,
 Color theory,
 Illustration,
@@ -330,7 +330,7 @@ Aesthetics`;
               case `login`:
                 return `login sigin register تسجيل الدخول اشتراك اشترك هنا `;
               case `dashboard`:
-                return `Mohamed Sultan-dashboard Branding
+                return `Muhammad Sultan-dashboard Branding
 Layout,
 Color theory,
 Illustration,
@@ -355,7 +355,7 @@ Design trends,
 Visual hierarchy,
 Aesthetics`;
               case `install`:
-                return `Mohamed Sultan-install-app akbar sultan graphic design install the app page Branding
+                return `Muhammad Sultan-install-app akbar sultan graphic design install the app page Branding
 Layout,
 Color theory,
 Illustration,
@@ -380,7 +380,7 @@ Design trends,
 Visual hierarchy,
 Aesthetics`;
               case `notfound`:
-                return `Mohamed Sultan-notfound akbar sultan graphic design not found page Branding
+                return `Muhammad Sultan-notfound akbar sultan graphic design not found page Branding
 Layout,
 Color theory,
 Illustration,
